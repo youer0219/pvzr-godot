@@ -1,0 +1,9 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c2d8q4ugcpfq3"]
+
+[ext_resource type="PackedScene" uid="uid://dti4eb31aamys" path="res://场景/地图/water/water.tscn" id="1_gpdsu"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_mxawk"]
+scenes/1/scene = ExtResource("1_gpdsu")
+
+[resource]
+sources/4 = SubResource("TileSetScenesCollectionSource_mxawk")

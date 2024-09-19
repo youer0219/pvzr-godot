@@ -1,0 +1,12 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bl87a5h6mbo76"]
+
+[ext_resource type="Texture2D" uid="uid://duib21j0ivl12" path="res://场景/地图/测试地图/草土石.png" id="1_op35o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lgsvo"]
+texture = ExtResource("1_op35o")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_lgsvo")

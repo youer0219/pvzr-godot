@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dti4eb31aamys"]
+
+[ext_resource type="Shader" path="res://着色器/水动画.gdshader" id="1_f0oxg"]
+[ext_resource type="Texture2D" uid="uid://db5oykn5cfnsv" path="res://艺术资产/瓦片地图/水.png" id="2_asm4v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xp11u"]
+shader = ExtResource("1_f0oxg")
+shader_parameter/speed = 0.3
+
+[node name="Water" type="Sprite2D"]
+material = SubResource("ShaderMaterial_xp11u")
+texture = ExtResource("2_asm4v")
+vframes = 32
