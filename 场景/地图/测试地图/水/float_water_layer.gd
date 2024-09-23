@@ -4,7 +4,7 @@ var should_up:bool = true
 var is_move:bool = false
 
 @export var move_distance:float = 6.0
-@export var gap_time:float = 1.0
+@export var gap_time:float = 0.8
 @export var is_up:bool = false
 
 func _ready() -> void:
