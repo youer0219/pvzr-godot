@@ -35,10 +35,9 @@ shader_parameter/add_margins = true
 [node name="Test" type="Node2D"]
 
 [node name="测试戴夫" parent="." instance=ExtResource("6_k6k4w")]
-scale = Vector2(4, 4)
 
 [node name="Camera2D" type="Camera2D" parent="测试戴夫"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 

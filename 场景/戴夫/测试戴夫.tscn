@@ -7,7 +7,7 @@
 size = Vector2(9.4, 25.2)
 
 [node name="测试戴夫" type="CharacterBody2D"]
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
 script = ExtResource("1_ubvng")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,3 +16,7 @@ texture = ExtResource("2_heisa")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.3, 2.6)
 shape = SubResource("RectangleShape2D_a06su")
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+position = Vector2(0, 9.5)
+target_position = Vector2(10, -0.25)
