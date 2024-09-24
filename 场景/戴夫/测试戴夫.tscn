@@ -10,7 +10,8 @@ size = Vector2(9.4, 25.2)
 scale = Vector2(4, 4)
 script = ExtResource("1_ubvng")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Image" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("2_heisa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,5 +19,10 @@ position = Vector2(-0.3, 2.6)
 shape = SubResource("RectangleShape2D_a06su")
 
 [node name="WallCheck" type="RayCast2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 9.5)
 target_position = Vector2(10, -0.25)
+
+[node name="LateralMovementTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
