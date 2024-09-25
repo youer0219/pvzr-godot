@@ -11,32 +11,42 @@ var current_jump_times:int = jump_times
 @onready var lateral_movement_timer: Timer = %LateralMovementTimer
 @onready var image: Sprite2D = %Image
 @onready var wall_check: RayCast2D = %WallCheck
+@onready var ladder_check: RayCast2D = %LadderCheck
 
 @export var speed:float = 400
 @export var speed_acceleration:float = 300
 @export var lateral_small_jump:float = 100
 @export var lateral_common_jump:float = 250
 var is_lateral_moving:bool
+@export var clamp_velocity:float = 225
+
+enum move_state {COMMON,LADDER,WATER} ## 暂时留着
+var is_clamping:bool 
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += 1500 * delta
-
+	
 	var lateral_direction := Input.get_axis("move_left", "move_right")
 	lateral_movement(lateral_direction,delta)
 	
 	if can_reset_jump_times():
 		current_jump_times = jump_times
-
-	if Input.is_action_just_pressed("move_up") and current_jump_times > 0:
-		lengthwise_move(delta)
+	
+	if ladder_check.is_colliding() and Input.is_action_pressed("move_up"):
+		climb_ladder(delta)
+		is_clamping = true
+	elif Input.is_action_just_pressed("move_up") and current_jump_times > 0:
+		big_jump(delta)
+		is_clamping = false
+	else:
+		is_clamping = false
+	
+	if not is_on_floor() and !is_clamping:
+		velocity.y += 1500 * delta
 	
 	move_and_slide()
 
 
-
-#region 横移函数 
+#region 横移移动 
 
 func lateral_movement(lateral_direction:int,delta:float):
 	
@@ -46,10 +56,11 @@ func lateral_movement(lateral_direction:int,delta:float):
 		wall_check.scale = Vector2(1,1) if lateral_direction == 1 else Vector2(-1,-1)
 		
 		# 偏转角度，先判断是否有障碍，如有，回正（遇到障碍的回正似乎是上面先接触，然后下面再靠过来）
+		var deflection_factor:float = 1.0 if !ladder_check.is_colliding() else 0.3
 		if wall_check.is_colliding():
 			rotation_degrees = move_toward(rotation_degrees,0,100*delta)
 		else:
-			rotation_degrees = move_toward(rotation_degrees,move_rotation_degrees * lateral_direction,100*delta)
+			rotation_degrees = move_toward(rotation_degrees,move_rotation_degrees * lateral_direction * deflection_factor,100*delta)
 		
 		# 如果刚刚开始，就开始计时，并小跳小移动
 		if !is_lateral_moving:
@@ -62,7 +73,6 @@ func lateral_movement(lateral_direction:int,delta:float):
 		elif is_lateral_moving and lateral_movement_timer.time_left <= 0.05:
 			lateral_jump(lateral_common_jump)
 			velocity.x = move_toward(velocity.x, lateral_direction * speed, speed_acceleration)
-		# 当其处于梯子和水中时，这些又会发生变化--梯子几乎没有偏转，水还没测
 		
 	else:
 		is_lateral_moving = false
@@ -74,8 +84,17 @@ func lateral_jump(jump_force:float):
 		velocity.y = -jump_force
 #endregion
 
-#region 纵向函数
-func lengthwise_move(delta:float):
+#region 纵向移动
+func lengthwise_move(delta:float):  ## 暂时舍弃
+	if ladder_check.is_colliding():
+		climb_ladder(delta)
+	else:
+		big_jump(delta)
+
+func climb_ladder(delta:float):
+	velocity.y = -clamp_velocity
+
+func big_jump(delta:float):
 	velocity.y = JUMP_VELOCITY
 	if current_jump_times == 1:
 		if !wall_check.is_colliding():
@@ -85,6 +104,8 @@ func lengthwise_move(delta:float):
 
 func can_reset_jump_times()->bool:
 	if is_on_floor():
+		return true
+	if ladder_check.is_colliding():
 		return true
 	
 	return false

@@ -1,8 +1,32 @@
-[gd_scene load_steps=2 format=4 uid="uid://00v48shn7dsy"]
+[gd_scene load_steps=7 format=4 uid="uid://cqv1838xbwbt0"]
 
-[ext_resource type="TileSet" uid="uid://c2d8q4ugcpfq3" path="res://场景/地图/测试地图/测试水.tres" id="1_eeh63"]
+[ext_resource type="Shader" path="res://着色器/水动画.gdshader" id="1_akeb7"]
+[ext_resource type="Texture2D" uid="uid://db5oykn5cfnsv" path="res://场景/地图/water/素材/水.png" id="2_fosac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xp11u"]
+shader = ExtResource("1_akeb7")
+shader_parameter/speed = 0.3
+
+[sub_resource type="PackedScene" id="PackedScene_hdtv1"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Water", "Sprite2D", "material", "texture", "vframes"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0),
+"variants": [SubResource("ShaderMaterial_xp11u"), ExtResource("2_fosac"), 32],
+"version": 3
+}
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_mxawk"]
+scenes/1/scene = SubResource("PackedScene_hdtv1")
+
+[sub_resource type="TileSet" id="TileSet_1s51d"]
+sources/4 = SubResource("TileSetScenesCollectionSource_mxawk")
 
 [node name="测试水" type="TileMapLayer"]
 scale = Vector2(5, 5)
 tile_map_data = PackedByteArray("AAADAAAABAAAAAAAAQACAAEABAAAAAAAAQABAAIABAAAAAAAAQABAAMABAAAAAAAAQACAAMABAAAAAAAAQADAAMABAAAAAAAAQAEAAMABAAAAAAAAQAFAAMABAAAAAAAAQAGAAMABAAAAAAAAQAHAAMABAAAAAAAAQAHAAEABAAAAAAAAQAIAAIABAAAAAAAAQAIAAMABAAAAAAAAQAGAAAABAAAAAAAAQAEAP//BAAAAAAAAQAFAP//BAAAAAAAAQADAAEABAAAAAAAAQAGAAEABAAAAAAAAQA=")
-tile_set = ExtResource("1_eeh63")
+tile_set = SubResource("TileSet_1s51d")

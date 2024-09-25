@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhdgkxhyss35t"]
 
-[ext_resource type="PackedScene" uid="uid://h17utawmy0c0" path="res://场景/地图/测试地图/水/anima_water.tscn" id="1_p6cy8"]
+[ext_resource type="PackedScene" uid="uid://h17utawmy0c0" path="res://场景/地图/water/场景/anima_water.tscn" id="1_p6cy8"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yj8bx"]
 scenes/1/scene = ExtResource("1_p6cy8")

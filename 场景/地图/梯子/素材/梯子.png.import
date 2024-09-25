@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3g7a0ja1ekr6"
-path="res://.godot/imported/梯子块.png-8c2e1b3eeb5baac72a81ef207ed34966.ctex"
+uid="uid://do7vut7jdeb3j"
+path="res://.godot/imported/梯子.png-5c09b8161da481da6bbf7415b06e5b36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://艺术资产/瓦片地图/梯子块.png"
-dest_files=["res://.godot/imported/梯子块.png-8c2e1b3eeb5baac72a81ef207ed34966.ctex"]
+source_file="res://场景/地图/梯子/素材/梯子.png"
+dest_files=["res://.godot/imported/梯子.png-5c09b8161da481da6bbf7415b06e5b36.ctex"]
 
 [params]
 
