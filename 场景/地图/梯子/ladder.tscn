@@ -9,6 +9,7 @@ size = Vector2(14, 16)
 [node name="Ladder" type="Sprite2D"]
 texture = ExtResource("1_6tgos")
 hframes = 3
+frame = 2
 script = ExtResource("2_uvju0")
 
 [node name="Area2D" type="Area2D" parent="."]

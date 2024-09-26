@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd0aauk3m14w5"]
+[gd_scene load_steps=5 format=3 uid="uid://bd0aauk3m14w5"]
 
 [ext_resource type="Script" path="res://场景/戴夫/移动测试.gd" id="1_ubvng"]
 [ext_resource type="Texture2D" uid="uid://ck8w1qlnq7yr6" path="res://艺术资产/实体/戴夫/大佬戴夫.png" id="2_heisa"]
+[ext_resource type="Script" path="res://场景/移动/move.gd" id="3_6xfo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a06su"]
 size = Vector2(9.4, 25.2)
@@ -18,21 +19,37 @@ texture = ExtResource("2_heisa")
 position = Vector2(-0.3, 2.6)
 shape = SubResource("RectangleShape2D_a06su")
 
-[node name="WallCheck" type="RayCast2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, 9.5)
-target_position = Vector2(10, -0.25)
-
 [node name="LateralMovementTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.1
 
-[node name="LadderCheck" type="RayCast2D" parent="."]
+[node name="Move" type="Node2D" parent="." node_paths=PackedStringArray("char_body")]
+script = ExtResource("3_6xfo8")
+char_body = NodePath("..")
+
+[node name="MoveCast" type="Node2D" parent="Move"]
+
+[node name="WallCheck" type="RayCast2D" parent="Move/MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, 9.5)
+target_position = Vector2(10, -0.25)
+
+[node name="LadderCheck" type="RayCast2D" parent="Move/MoveCast"]
 unique_name_in_owner = true
 position = Vector2(0, 10)
 exclude_parent = false
 target_position = Vector2(0, 8)
 collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="WaterCheck" type="RayCast2D" parent="Move/MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, 10)
+exclude_parent = false
+target_position = Vector2(0, 8)
+collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false

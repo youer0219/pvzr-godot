@@ -1,7 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://h17utawmy0c0"]
+[gd_scene load_steps=37 format=3 uid="uid://h17utawmy0c0"]
 
 [ext_resource type="Texture2D" uid="uid://db5oykn5cfnsv" path="res://场景/地图/water/素材/水.png" id="1_u1gf7"]
 [ext_resource type="Script" path="res://场景/地图/water/场景/anima_water.gd" id="2_k8hmr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg81q"]
+size = Vector2(16.5, 16.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e7qqf"]
 atlas = ExtResource("1_u1gf7")
@@ -235,7 +238,17 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="AnimaWater" type="AnimatedSprite2D"]
+[node name="AnimaWater" type="Node2D"]
+script = ExtResource("2_k8hmr")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tg81q")
+
+[node name="Image" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_sy4em")
 autoplay = "default"
-script = ExtResource("2_k8hmr")

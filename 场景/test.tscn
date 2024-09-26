@@ -5,8 +5,8 @@
 [ext_resource type="Shader" path="res://着色器/描边/CanvasGroupOutline.gdshader" id="1_n8kdf"]
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://场景/地图/测试地图/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://场景/戴夫/测试戴夫.tscn" id="6_k6k4w"]
-[ext_resource type="PackedScene" uid="uid://c35r2057aw4pt" path="res://场景/地图/测试地图/ladder.tscn" id="6_khhop"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://场景/地图/water/场景/water_layer.tscn" id="6_mf0wt"]
+[ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://场景/地图/梯子/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="Texture2D" uid="uid://kitbpay12n5e" path="res://艺术资产/瓦片地图/池砖.png" id="7_h606o"]
 [ext_resource type="Script" path="res://场景/地图/water/场景/float_water_layer.gd" id="7_tkfmw"]
 
@@ -76,9 +76,9 @@ tile_map_data = PackedByteArray("AAAAAAkAAQAAAAAAAAABAAkAAQAAAAAAAAACAAkAAQAAAAA
 
 [node name="Ladder" type="Node2D" parent="地图"]
 
-[node name="Ladder" parent="地图/Ladder" instance=ExtResource("6_khhop")]
+[node name="LadderLayer" parent="地图/Ladder" instance=ExtResource("6_wg3l6")]
 scale = Vector2(4.62, 4.62)
-tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAUAAAAAAAAAAQADAAQAAAAAAAAAAQADAAMAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAMAAAAAAAAAAQADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQA=")
 
 [node name="water" type="Node2D" parent="地图"]
 
@@ -88,13 +88,17 @@ scale = Vector2(4.62, 4.62)
 tile_map_data = PackedByteArray("AAD4/wYAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wYAAAAAAAAAAAD7/wYAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAD7/wcAAAAAAAAAAAD6/wcAAAAAAAAAAAD5/wcAAAAAAAAAAAD4/wcAAAAAAAAAAAD4/wgAAAAAAAAAAAD5/wgAAAAAAAAAAAD6/wgAAAAAAAAAAAD8/wgAAAAAAAAAAAD7/wgAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_4e2vc")
 
-[node name="OuterWaterLayer" parent="地图/water" instance=ExtResource("6_mf0wt")]
-modulate = Color(1, 1, 1, 0.458824)
-scale = Vector2(4.62, 4.62)
-tile_map_data = PackedByteArray("AAD4/wYAAAAAAAAAAQD5/wYAAAAAAAAAAQD6/wYAAAAAAAAAAQD7/wYAAAAAAAAAAQD8/wYAAAAAAAAAAQA=")
-script = ExtResource("7_tkfmw")
-
 [node name="WaterLayer" parent="地图/water" instance=ExtResource("6_mf0wt")]
-modulate = Color(1, 1, 1, 0.458824)
+modulate = Color(1, 1, 1, 0.698039)
 scale = Vector2(4.62, 4.62)
 tile_map_data = PackedByteArray("AAD8/wgAAAAAAAAAAQD7/wgAAAAAAAAAAQD6/wgAAAAAAAAAAQD5/wgAAAAAAAAAAQD4/wgAAAAAAAAAAQD4/wcAAAAAAAAAAQD5/wcAAAAAAAAAAQD6/wcAAAAAAAAAAQD7/wcAAAAAAAAAAQD8/wcAAAAAAAAAAQA=")
+
+[node name="OuterWaterLayer" parent="地图/water" instance=ExtResource("6_mf0wt")]
+visible = false
+modulate = Color(1, 1, 1, 0.698039)
+scale = Vector2(4.62, 4.62)
+tile_map_data = PackedByteArray("AAD5/wYAAAAAAAAAAQD6/wYAAAAAAAAAAQD7/wYAAAAAAAAAAQD8/wYAAAAAAAAAAQD4/wYAAAAAAAAAAQA=")
+script = ExtResource("7_tkfmw")
+move_distance = 5.0
+gap_time = 0.8
+is_up = false

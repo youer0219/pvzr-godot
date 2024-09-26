@@ -2,16 +2,18 @@ extends CharacterBody2D
 
 
 const SPEED = 400.0
-const JUMP_VELOCITY = -700.0
-@export var jump_times:int = 2
-var current_jump_times:int = jump_times
-@export var move_rotation_degrees:int = 10
-@export var rotation_change_speed:float = 40
+const JUMP_VELOCITY = -650.0
 
 @onready var lateral_movement_timer: Timer = %LateralMovementTimer
 @onready var image: Sprite2D = %Image
 @onready var wall_check: RayCast2D = %WallCheck
 @onready var ladder_check: RayCast2D = %LadderCheck
+@onready var water_check: RayCast2D = %WaterCheck
+
+@export var jump_times:int = 2
+var current_jump_times:int = jump_times
+@export var move_rotation_degrees:int = 10
+@export var rotation_change_speed:float = 40
 
 @export var speed:float = 400
 @export var speed_acceleration:float = 300
@@ -21,7 +23,7 @@ var is_lateral_moving:bool
 @export var clamp_velocity:float = 225
 
 enum move_state {COMMON,LADDER,WATER} ## 暂时留着
-var is_clamping:bool 
+var is_clamping:bool
 
 func _physics_process(delta: float) -> void:
 	
@@ -44,6 +46,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += 1500 * delta
 	
 	move_and_slide()
+
 
 
 #region 横移移动 
@@ -76,7 +79,7 @@ func lateral_movement(lateral_direction:int,delta:float):
 		
 	else:
 		is_lateral_moving = false
-		velocity.x = move_toward(velocity.x, 0, 80)
+		velocity.x = move_toward(velocity.x, 0, 50)
 		rotation_degrees = move_toward(rotation_degrees,0,100*delta)
 
 func lateral_jump(jump_force:float):
