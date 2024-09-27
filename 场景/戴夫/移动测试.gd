@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -650.0
 @onready var wall_check: RayCast2D = %WallCheck
 @onready var ladder_check: RayCast2D = %LadderCheck
 @onready var water_check: RayCast2D = %WaterCheck
+var water_layer 
 
 @export var jump_times:int = 2
 var current_jump_times:int = jump_times
@@ -24,26 +25,19 @@ var is_lateral_moving:bool
 
 enum move_state {COMMON,LADDER,WATER} ## 暂时留着
 var is_clamping:bool
+var in_water:bool
+var is_first_in_water:bool
+var top_water:AnimaWater
+
+func _ready() -> void:
+	water_layer = get_tree().get_first_node_in_group("water_layer")
 
 func _physics_process(delta: float) -> void:
 	
 	var lateral_direction := Input.get_axis("move_left", "move_right")
 	lateral_movement(lateral_direction,delta)
 	
-	if can_reset_jump_times():
-		current_jump_times = jump_times
-	
-	if ladder_check.is_colliding() and Input.is_action_pressed("move_up"):
-		climb_ladder(delta)
-		is_clamping = true
-	elif Input.is_action_just_pressed("move_up") and current_jump_times > 0:
-		big_jump(delta)
-		is_clamping = false
-	else:
-		is_clamping = false
-	
-	if not is_on_floor() and !is_clamping:
-		velocity.y += 1500 * delta
+	lengthwise_move(delta)
 	
 	move_and_slide()
 
@@ -59,7 +53,7 @@ func lateral_movement(lateral_direction:int,delta:float):
 		wall_check.scale = Vector2(1,1) if lateral_direction == 1 else Vector2(-1,-1)
 		
 		# 偏转角度，先判断是否有障碍，如有，回正（遇到障碍的回正似乎是上面先接触，然后下面再靠过来）
-		var deflection_factor:float = 1.0 if !ladder_check.is_colliding() else 0.3
+		var deflection_factor:float = 1.0 if (!ladder_check.is_colliding() or water_check.is_colliding()) else 0.3
 		if wall_check.is_colliding():
 			rotation_degrees = move_toward(rotation_degrees,0,100*delta)
 		else:
@@ -89,10 +83,39 @@ func lateral_jump(jump_force:float):
 
 #region 纵向移动
 func lengthwise_move(delta:float):  ## 暂时舍弃
-	if ladder_check.is_colliding():
+	if can_reset_jump_times():
+		current_jump_times = jump_times
+	
+	if ladder_check.is_colliding() and Input.is_action_pressed("move_up"):
 		climb_ladder(delta)
-	else:
+		is_clamping = true
+	elif Input.is_action_just_pressed("move_up") and current_jump_times > 0:
 		big_jump(delta)
+		is_clamping = false
+	else:
+		is_clamping = false
+	
+	in_water = water_check.is_colliding()
+	if in_water and !top_water:
+		top_water = water_layer.find_top_water(water_check.get_collider().owner)
+	elif !in_water:
+		top_water = null
+	
+	if not is_on_floor() and !is_clamping and !in_water:
+		velocity.y += 1500 * delta
+	#elif in_water and top_water:
+		#float_in_water(delta)
+
+#func float_in_water(delta:float):
+	#var center_horizon:float = top_water.global_position.y
+	#print("center_horizon:",center_horizon)
+	#print("global_position:",global_position.y)
+	#var offect_distance:float = 40
+	#if self.global_position.y + offect_distance<= center_horizon :
+		#velocity.y = 40
+	#else:
+		#velocity.y = -40
+	#
 
 func climb_ladder(delta:float):
 	velocity.y = -clamp_velocity
@@ -115,7 +138,7 @@ func can_reset_jump_times()->bool:
 
 func make_turn():
 	var tween = get_tree().create_tween()
-	tween.tween_property(image,"rotation_degrees",360 * wall_check.scale.x ,0.3)
+	tween.tween_property(image,"rotation_degrees",360 * wall_check.scale.x ,0.25)
 	image.rotation_degrees = 0
 
 #endregion

@@ -9,6 +9,6 @@ scenes/1/scene = ExtResource("1_p6cy8")
 [sub_resource type="TileSet" id="TileSet_01rqk"]
 sources/0 = SubResource("TileSetScenesCollectionSource_yj8bx")
 
-[node name="WaterLayer" type="TileMapLayer"]
+[node name="WaterLayer" type="TileMapLayer" groups=["water_layer"]]
 tile_set = SubResource("TileSet_01rqk")
 script = ExtResource("2_q6bvd")
