@@ -102,3 +102,5 @@ script = ExtResource("7_tkfmw")
 move_distance = 5.0
 gap_time = 0.8
 is_up = false
+
+[connection signal="child_order_changed" from="地图/Ladder/LadderLayer" to="地图/Ladder/LadderLayer" method="_on_child_order_changed"]
