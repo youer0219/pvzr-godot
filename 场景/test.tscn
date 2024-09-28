@@ -43,7 +43,7 @@ sources/0 = SubResource("TileSetAtlasSource_ecbsv")
 [node name="Test" type="Node2D"]
 
 [node name="测试戴夫" parent="." instance=ExtResource("6_k6k4w")]
-position = Vector2(-185, 350)
+position = Vector2(-353, 588)
 
 [node name="Camera2D" type="Camera2D" parent="测试戴夫"]
 scale = Vector2(4, 4)

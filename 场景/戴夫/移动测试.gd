@@ -53,12 +53,14 @@ func lateral_movement(lateral_direction:int,delta:float):
 		wall_check.scale = Vector2(1,1) if lateral_direction == 1 else Vector2(-1,-1)
 		
 		# 偏转角度，先判断是否有障碍，如有，回正（遇到障碍的回正似乎是上面先接触，然后下面再靠过来）
-		var deflection_factor:float = 1.0 if (!ladder_check.is_colliding() or water_check.is_colliding()) else 0.3
+		var deflection_factor:float = 1.0 if (!is_clamping and !water_check.is_colliding()) else 0.5
 		if wall_check.is_colliding():
 			rotation_degrees = move_toward(rotation_degrees,0,100*delta)
 		else:
 			rotation_degrees = move_toward(rotation_degrees,move_rotation_degrees * lateral_direction * deflection_factor,100*delta)
 		
+		# 水的影响
+		var water_move_foctor = 0.75 if water_check.is_colliding() else 1.0
 		# 如果刚刚开始，就开始计时，并小跳小移动
 		if !is_lateral_moving:
 			lateral_movement_timer.start(0.2)
@@ -69,7 +71,7 @@ func lateral_movement(lateral_direction:int,delta:float):
 		# 如果计时超过时间，就大跳，直到横移结束归0
 		elif is_lateral_moving and lateral_movement_timer.time_left <= 0.05:
 			lateral_jump(lateral_common_jump)
-			velocity.x = move_toward(velocity.x, lateral_direction * speed, speed_acceleration)
+			velocity.x = move_toward(velocity.x, lateral_direction * speed * water_move_foctor, speed_acceleration)
 		
 	else:
 		is_lateral_moving = false
@@ -95,7 +97,12 @@ func lengthwise_move(delta:float):  ## 暂时舍弃
 	else:
 		is_clamping = false
 	
+	if !in_water and water_check.is_colliding():
+		velocity.y *= 0.1
+		current_jump_times = 0
+	
 	in_water = water_check.is_colliding()
+	
 	if in_water and !top_water:
 		top_water = water_layer.find_top_water(water_check.get_collider().owner)
 	elif !in_water:
@@ -103,19 +110,17 @@ func lengthwise_move(delta:float):  ## 暂时舍弃
 	
 	if not is_on_floor() and !is_clamping and !in_water:
 		velocity.y += 1500 * delta
-	#elif in_water and top_water:
-		#float_in_water(delta)
+	elif in_water and top_water:
+		float_in_water(delta)
 
-#func float_in_water(delta:float):
-	#var center_horizon:float = top_water.global_position.y
-	#print("center_horizon:",center_horizon)
-	#print("global_position:",global_position.y)
-	#var offect_distance:float = 40
-	#if self.global_position.y + offect_distance<= center_horizon :
-		#velocity.y = 40
-	#else:
-		#velocity.y = -40
-	#
+func float_in_water(delta:float):
+	var center_horizon:float = top_water.global_position.y
+	var offect_distance:float = 40
+	velocity.y += 150 * delta
+	if global_position.y + offect_distance > center_horizon:
+		velocity.y = -75
+		current_jump_times = jump_times
+
 
 func climb_ladder(delta:float):
 	velocity.y = -clamp_velocity
