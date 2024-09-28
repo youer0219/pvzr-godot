@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd0aauk3m14w5"]
 
-[ext_resource type="Script" path="res://场景/戴夫/移动测试.gd" id="1_ubvng"]
+[ext_resource type="Script" path="res://场景/戴夫/移动戴夫.gd" id="1_ubvng"]
 [ext_resource type="Texture2D" uid="uid://ck8w1qlnq7yr6" path="res://艺术资产/实体/戴夫/大佬戴夫.png" id="2_heisa"]
 [ext_resource type="Script" path="res://场景/移动/move.gd" id="3_6xfo8"]
 
