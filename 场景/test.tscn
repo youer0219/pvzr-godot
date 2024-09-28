@@ -43,7 +43,7 @@ sources/0 = SubResource("TileSetAtlasSource_ecbsv")
 [node name="Test" type="Node2D"]
 
 [node name="测试戴夫" parent="." instance=ExtResource("6_k6k4w")]
-position = Vector2(-353, 588)
+position = Vector2(-174, 355)
 
 [node name="Camera2D" type="Camera2D" parent="测试戴夫"]
 scale = Vector2(4, 4)
@@ -78,7 +78,7 @@ tile_map_data = PackedByteArray("AAAAAAkAAQAAAAAAAAABAAkAAQAAAAAAAAACAAkAAQAAAAA
 
 [node name="LadderLayer" parent="地图/Ladder" instance=ExtResource("6_wg3l6")]
 scale = Vector2(4.62, 4.62)
-tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAMAAAAAAAAAAQADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAMAAAAAAAAAAQADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQD8/wUAAAAAAAAAAQD8/wQAAAAAAAAAAQD8/wMAAAAAAAAAAQD8/wIAAAAAAAAAAQA=")
 
 [node name="water" type="Node2D" parent="地图"]
 

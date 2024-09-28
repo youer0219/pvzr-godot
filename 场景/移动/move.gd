@@ -11,7 +11,7 @@ const JUMP_VELOCITY = -650.0
 @onready var wall_check: RayCast2D = %WallCheck
 @onready var ladder_check: RayCast2D = %LadderCheck
 @onready var water_check: RayCast2D = %WaterCheck
-var water_layer 
+var water_layer
 
 @export var jump_times:int = 2
 var current_jump_times:int = jump_times
@@ -30,6 +30,7 @@ var in_water:bool
 var has_balloon:bool
 var top_water:AnimaWater
 var velocity:Vector2
+var can_clamp:bool = true
 
 func _ready() -> void:
 	water_layer = get_tree().get_first_node_in_group("water_layer")
@@ -50,6 +51,9 @@ func _physics_process(delta: float) -> void:
 #region 横移移动 
 
 func lateral_movement(lateral_direction:int,delta:float):
+	if has_balloon:
+		lateral_move_with_ballon(delta)
+		return
 	
 	if lateral_direction:
 		# 设置图像等方向
@@ -85,15 +89,28 @@ func lateral_movement(lateral_direction:int,delta:float):
 func lateral_jump(jump_force:float):
 	if char_body.is_on_floor() and !wall_check.is_colliding():
 		velocity.y = -jump_force
+
+func lateral_move_with_ballon(delta:float):
+	# 维持
+	pass
+
 #endregion
 
 #region 纵向移动
 func lengthwise_move(delta:float):
+	if has_balloon:
+		velocity.y = -300
+		return
 	
 	if can_reset_jump_times():
 		current_jump_times = jump_times
-	
-	if ladder_check.is_colliding() and Input.is_action_pressed("move_up"):
+
+	if !in_water and water_check.is_colliding():
+		velocity.y *= 0.1
+		current_jump_times = 0
+		can_clamp = false
+
+	if ladder_check.is_colliding() and Input.is_action_pressed("move_up") and can_clamp:
 		climb_ladder(delta)
 		is_clamping = true
 	elif Input.is_action_just_pressed("move_up") and current_jump_times > 0:
@@ -101,10 +118,6 @@ func lengthwise_move(delta:float):
 		is_clamping = false
 	else:
 		is_clamping = false
-	
-	if !in_water and water_check.is_colliding():
-		velocity.y *= 0.1
-		current_jump_times = 0
 	
 	in_water = water_check.is_colliding()
 	
@@ -125,6 +138,7 @@ func float_in_water(delta:float):
 	if global_position.y + offect_distance > center_horizon:
 		velocity.y = -75
 		current_jump_times = jump_times
+		can_clamp = true
 
 
 func climb_ladder(delta:float):
@@ -141,7 +155,7 @@ func big_jump(delta:float):
 func can_reset_jump_times()->bool:
 	if char_body.is_on_floor():
 		return true
-	if ladder_check.is_colliding():
+	if ladder_check.is_colliding() and !in_water:
 		return true
 	
 	return false
