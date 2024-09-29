@@ -117,8 +117,8 @@ func lateral_jump(jump_force:float):
 	if char_body.is_on_floor() and !wall_check.is_colliding():
 		velocity.y = -jump_force
 
+# 保留给气球用
 func lateral_move_with_ballon(delta:float):
-	# 维持
 	pass
 
 #endregion
