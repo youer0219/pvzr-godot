@@ -54,7 +54,7 @@ var can_clamp:bool = true
 @export var water_down_speed:float = 200
 @export var water_up_speed:float = 120
 ## 图像中心点偏移量
-@export var water_sprite_offect_distance:float = 40
+@export var water_sprite_offect_distance:float = -30
 var in_water:bool
 var has_balloon:bool
 
