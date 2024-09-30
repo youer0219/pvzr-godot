@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cknm1c8h412me"
-path="res://.godot/imported/普通僵尸-首.png-2ff89f1b2fdfe861ff4b08640977b764.ctex"
+path="res://.godot/imported/普通僵尸-首.png-4271d7796728c0acfa4f668a2450daf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://艺术资产/实体/僵尸/普通僵尸/普通僵尸-首.png"
-dest_files=["res://.godot/imported/普通僵尸-首.png-2ff89f1b2fdfe861ff4b08640977b764.ctex"]
+source_file="res://场景/僵尸/head/assets/普通僵尸-首.png"
+dest_files=["res://.godot/imported/普通僵尸-首.png-4271d7796728c0acfa4f668a2450daf9.ctex"]
 
 [params]
 

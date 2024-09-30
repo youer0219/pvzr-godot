@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://场景/地图/测试地图/内层地图.tscn" id="1_f0sft"]
 [ext_resource type="Shader" path="res://着色器/描边/CanvasGroupOutline.gdshader" id="1_n8kdf"]
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://场景/地图/测试地图/外层地图.tscn" id="1_whx1j"]
-[ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://场景/戴夫/测试戴夫.tscn" id="6_k6k4w"]
+[ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://场景/戴夫/戴夫.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://场景/地图/water/场景/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://场景/地图/梯子/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="Texture2D" uid="uid://kitbpay12n5e" path="res://艺术资产/瓦片地图/池砖.png" id="7_h606o"]
@@ -42,10 +42,10 @@ sources/0 = SubResource("TileSetAtlasSource_ecbsv")
 
 [node name="Test" type="Node2D"]
 
-[node name="测试戴夫" parent="." instance=ExtResource("6_k6k4w")]
+[node name="戴夫" parent="." instance=ExtResource("6_k6k4w")]
 position = Vector2(-174, 355)
 
-[node name="Camera2D" type="Camera2D" parent="测试戴夫"]
+[node name="Camera2D" type="Camera2D" parent="戴夫"]
 scale = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
