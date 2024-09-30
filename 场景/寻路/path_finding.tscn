@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsdedraxldsao"]
+
+[ext_resource type="Script" path="res://场景/寻路/path_finding.gd" id="1_j3e8l"]
+
+[node name="PathFinding" type="Node"]
+script = ExtResource("1_j3e8l")
