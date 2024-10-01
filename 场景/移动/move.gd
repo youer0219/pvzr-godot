@@ -33,6 +33,8 @@ var is_lateral_moving:bool
 @export var move_rotation_degrees:int = 10
 ## 偏转改变速度
 @export var rotation_change_speed:float = 40
+## 旋转一圈的时间
+@export var turn_time:float = 0.3
 
 @export_group("LengthwiseMove")
 ## 下落速度
@@ -51,7 +53,7 @@ var can_clamp:bool = true
 
 @export_group("Water")
 ## 在水中的下落速度
-@export var water_down_speed:float = 200
+@export var water_down_speed:float = 180
 @export var water_up_speed:float = 120
 ## 图像中心点偏移量
 @export var water_sprite_offect_distance:float = -30
@@ -167,7 +169,6 @@ func float_in_water(delta:float):
 		current_jump_times = jump_times
 		can_clamp = true
 
-
 func climb_ladder(delta:float):
 	velocity.y = -clamp_velocity
 
@@ -189,7 +190,7 @@ func can_reset_jump_times()->bool:
 
 func make_turn():
 	var tween = get_tree().create_tween()
-	tween.tween_property(char_body.image,"rotation_degrees",360 * wall_check.scale.x ,0.25)
+	tween.tween_property(char_body.image,"rotation_degrees",360 * wall_check.scale.x ,turn_time)
 	char_body.image.rotation_degrees = 0
 
 #endregion
