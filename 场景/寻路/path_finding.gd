@@ -215,6 +215,6 @@ func GetPointInfo(tile:Vector2i)->PointInfo:
 
 # 考虑到“水”和外层地图的position一致，其map_to_local相等
 func map_to_local(tile:Vector2i)->Vector2:
-	return outer_tilemap_layer.map_to_local(tile) * outer_tilemap_layer.scale.x
+	return outer_tilemap_layer.map_to_local(tile)
 
 #endregion

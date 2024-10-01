@@ -18,13 +18,13 @@ var velocity:Vector2
 
 @export_group("LateralMove")
 ## 横向移动最大速度
-@export var speed:float = 400
+@export var speed:float = 100
 ## 横向移动加速度
-@export var speed_acceleration:float = 300
+@export var speed_acceleration:float = 100
 ## 横向移动小小跳
-@export var lateral_small_jump:float = 100
+@export var lateral_small_jump:float = 30
 ## 横向移动小跳
-@export var lateral_common_jump:float = 250
+@export var lateral_common_jump:float = 80
 @export_range(0.05,0.18) var lateral_input_gap_time:float = 0.15
 var lateral_input_max_time:float = 0.2
 var is_lateral_moving:bool
@@ -38,16 +38,17 @@ var is_lateral_moving:bool
 
 @export_group("LengthwiseMove")
 ## 下落速度
-@export var length_down_speed:float = 1500
+@export var length_down_speed:float = 300
 @export_subgroup("Jump")
 ## 可跳跃次数
 @export var jump_times:int = 2
+@export var jump_lateral_move:float = 200
 var current_jump_times:int = jump_times
 ## 跳跃速度
-@export var jump_velocity:float = 650
+@export var jump_velocity:float = 200
 @export_subgroup("Clamp")
 ## 攀爬速度
-@export var clamp_velocity:float = 225
+@export var clamp_velocity:float = 70
 var is_clamping:bool
 var can_clamp:bool = true
 
@@ -176,7 +177,7 @@ func big_jump(delta:float):
 	velocity.y = -jump_velocity
 	if current_jump_times == 1:
 		if !wall_check.is_colliding():
-			velocity.x += 600 * wall_check.scale.x
+			velocity.x += jump_lateral_move * wall_check.scale.x
 		make_turn()
 	current_jump_times -= 1
 
