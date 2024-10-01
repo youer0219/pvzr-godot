@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ck8w1qlnq7yr6" path="res://艺术资产/实体/戴夫/大佬戴夫.png" id="2_heisa"]
 [ext_resource type="Script" path="res://场景/移动/move.gd" id="3_6xfo8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a06su"]
-size = Vector2(9.4, 25.2)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t70m5"]
+radius = 5.0
+height = 28.0
 
 [node name="Dave" type="CharacterBody2D"]
 script = ExtResource("1_d2ren")
@@ -16,8 +17,8 @@ position = Vector2(0, -14.75)
 texture = ExtResource("2_heisa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.3, -12.5)
-shape = SubResource("RectangleShape2D_a06su")
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_t70m5")
 
 [node name="Move" type="Node2D" parent="." node_paths=PackedStringArray("char_body")]
 script = ExtResource("3_6xfo8")
