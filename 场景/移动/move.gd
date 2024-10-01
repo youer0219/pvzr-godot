@@ -54,10 +54,10 @@ var can_clamp:bool = true
 
 @export_group("Water")
 ## 在水中的下落速度
-@export var water_down_speed:float = 180
-@export var water_up_speed:float = 120
+@export var water_down_speed:float = 75
+@export var water_up_speed:float = 40
 ## 图像中心点偏移量
-@export var water_sprite_offect_distance:float = -30
+@export var water_sprite_offect_distance:float = -8
 var in_water:bool
 var has_balloon:bool
 
@@ -76,6 +76,8 @@ func _physics_process(delta: float) -> void:
 	
 	char_body.velocity = velocity
 	char_body.move_and_slide()
+	
+	position = position.round() # 防止抖动，但效果不大
 
 
 #region 横移移动 

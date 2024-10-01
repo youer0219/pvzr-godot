@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=3 uid="uid://h17utawmy0c0"]
 
-[ext_resource type="Texture2D" uid="uid://db5oykn5cfnsv" path="res://场景/地图/water/素材/水.png" id="1_u1gf7"]
-[ext_resource type="Script" path="res://场景/地图/water/场景/anima_water.gd" id="2_k8hmr"]
+[ext_resource type="Texture2D" uid="uid://db5oykn5cfnsv" path="res://场景/地图/water/assets/水.png" id="1_u1gf7"]
+[ext_resource type="Script" path="res://场景/地图/water/scene/anima_water.gd" id="2_k8hmr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg81q"]
 size = Vector2(16.5, 16.5)

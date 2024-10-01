@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://场景/main.gd" id="1_y4jx2"]
 [ext_resource type="Script" path="res://场景/camera_2d.gd" id="3_yfryg"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://场景/戴夫/戴夫.tscn" id="6_k6k4w"]
-[ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://场景/地图/water/场景/water_layer.tscn" id="6_mf0wt"]
+[ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://场景/地图/water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://场景/地图/梯子/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="Texture2D" uid="uid://kitbpay12n5e" path="res://艺术资产/瓦片地图/池砖.png" id="7_h606o"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://场景/寻路/path_finding.tscn" id="9_73auh"]

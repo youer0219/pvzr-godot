@@ -20,7 +20,7 @@ bool check(sampler2D sampler, vec2 uv, vec2 pixel_size, vec2 offset, bool _insid
 	return (c1.a > 0.0) == false && (c2.a > 0.0) == true;
 }
 
-void fragment() 
+void fragment()
 {
 	bool b_top         = check(TEXTURE, UV, TEXTURE_PIXEL_SIZE, vec2(+0,-1), inside) && top;
 	bool b_left        = check(TEXTURE, UV, TEXTURE_PIXEL_SIZE, vec2(-1,+0), inside) && left;
@@ -30,7 +30,7 @@ void fragment()
 	bool b_topright    = check(TEXTURE, UV, TEXTURE_PIXEL_SIZE, vec2(+1,-1), inside) && topright;
 	bool b_bottomleft  = check(TEXTURE, UV, TEXTURE_PIXEL_SIZE, vec2(-1,+1), inside) && bottomleft;
 	bool b_bottomright = check(TEXTURE, UV, TEXTURE_PIXEL_SIZE, vec2(+1,+1), inside) && bottomright;
-	
+
 	if (b_top || b_left || b_right || b_bottom || b_topleft || b_topright || b_bottomleft || b_bottomright)
 	{
 		COLOR.rgb = color.rgb;

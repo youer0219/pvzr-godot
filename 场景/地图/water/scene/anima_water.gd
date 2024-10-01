@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var image: AnimatedSprite2D = %Image
 @export var gap_time:float = 0.8
-@export var move_distance:float = 6
+@export var move_distance:float = 2
 
 var is_top:bool = false:
 	set(value):

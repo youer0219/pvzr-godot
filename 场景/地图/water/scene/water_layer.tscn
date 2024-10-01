@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhdgkxhyss35t"]
 
-[ext_resource type="PackedScene" uid="uid://h17utawmy0c0" path="res://场景/地图/water/场景/anima_water.tscn" id="1_p6cy8"]
-[ext_resource type="Script" path="res://场景/地图/water/场景/water_layer.gd" id="2_q6bvd"]
+[ext_resource type="PackedScene" uid="uid://h17utawmy0c0" path="res://场景/地图/water/scene/anima_water.tscn" id="1_p6cy8"]
+[ext_resource type="Script" path="res://场景/地图/water/scene/water_layer.gd" id="2_q6bvd"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yj8bx"]
 scenes/1/scene = ExtResource("1_p6cy8")

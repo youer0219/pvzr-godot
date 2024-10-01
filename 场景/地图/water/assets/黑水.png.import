@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db5oykn5cfnsv"
-path="res://.godot/imported/水.png-51e4c550d7d538473335d6775bfacb9b.ctex"
+uid="uid://cjeg8a1hb6fw8"
+path="res://.godot/imported/黑水.png-a9e505eabb9ee70e1c06e1e0e525bdd8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://场景/地图/water/素材/水.png"
-dest_files=["res://.godot/imported/水.png-51e4c550d7d538473335d6775bfacb9b.ctex"]
+source_file="res://场景/地图/water/assets/黑水.png"
+dest_files=["res://.godot/imported/黑水.png-a9e505eabb9ee70e1c06e1e0e525bdd8.ctex"]
 
 [params]
 
