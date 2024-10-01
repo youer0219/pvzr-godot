@@ -6,8 +6,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	## 处理相机抖动——似乎无大用
-	position = position.round()
-	force_update_scroll()
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta: float) -> void:
+	### 处理相机抖动——似乎无大用
+	#position = position.round()
+	#force_update_scroll()

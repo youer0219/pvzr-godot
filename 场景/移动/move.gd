@@ -11,6 +11,7 @@ extends Node2D
 
 ## 移动实体
 @export var char_body:CharacterBody2D
+@export var can_move:bool = true
 var water_layer
 var top_water:AnimaWater
 var velocity:Vector2
@@ -18,9 +19,9 @@ var velocity:Vector2
 
 @export_group("LateralMove")
 ## 横向移动最大速度
-@export var speed:float = 100
+@export var speed:float = 200
 ## 横向移动加速度
-@export var speed_acceleration:float = 100
+@export var speed_acceleration:float = 120
 ## 横向移动小小跳
 @export var lateral_small_jump:float = 30
 ## 横向移动小跳
@@ -67,22 +68,24 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	velocity = char_body.velocity
+	if can_move:
+		velocity = char_body.velocity
+		
+		var lateral_direction := Input.get_axis("move_left", "move_right")
+		lateral_move(lateral_direction,delta)
+		
+		lengthwise_move(delta)
+		#print(velocity)
+		char_body.velocity = velocity
+		char_body.move_and_slide()
 	
-	var lateral_direction := Input.get_axis("move_left", "move_right")
-	lateral_movement(lateral_direction,delta)
-	
-	lengthwise_move(delta)
-	
-	char_body.velocity = velocity
-	char_body.move_and_slide()
-	
-	position = position.round() # 防止抖动，但效果不大
+	#position = position.round() # 防止抖动，但效果不大
+	pass
 
 
 #region 横移移动 
 
-func lateral_movement(lateral_direction:int,delta:float):
+func lateral_move(lateral_direction:int,delta:float):
 	if has_balloon:
 		lateral_move_with_ballon(delta)
 		return
@@ -106,16 +109,18 @@ func lateral_movement(lateral_direction:int,delta:float):
 			lateral_movement_timer.start(lateral_input_max_time)
 			is_lateral_moving = true
 			lateral_jump(lateral_small_jump)
-			velocity.x = move_toward(velocity.x, lateral_direction * speed * 0.2, speed_acceleration)
+			#velocity.x = move_toward(velocity.x, lateral_direction * speed * 0.2, speed_acceleration)
+			velocity.x = lateral_direction * speed * 0.2
 			
 		# 如果计时超过时间，就大跳，直到横移结束归0
 		elif is_lateral_moving and lateral_movement_timer.time_left <= lateral_input_max_time - lateral_input_gap_time:
 			lateral_jump(lateral_common_jump)
-			velocity.x = move_toward(velocity.x, lateral_direction * speed * water_move_foctor, speed_acceleration)
+			#velocity.x = move_toward(velocity.x, lateral_direction * speed * water_move_foctor, speed_acceleration)
+			velocity.x = lateral_direction * speed * water_move_foctor
 		
 	else:
 		is_lateral_moving = false
-		velocity.x = move_toward(velocity.x, 0, 50)
+		velocity.x = move_toward(velocity.x, 0, 500*delta)
 		char_body.rotation_degrees = move_toward(char_body.rotation_degrees,0,100*delta)
 
 func lateral_jump(jump_force:float):

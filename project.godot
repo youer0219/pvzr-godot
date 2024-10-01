@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 window/size/viewport_width=1510
 window/size/viewport_height=845
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [input]
 

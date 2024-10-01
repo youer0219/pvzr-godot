@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd0aauk3m14w5"]
 
-[ext_resource type="Script" path="res://场景/戴夫/移动戴夫.gd" id="1_ubvng"]
+[ext_resource type="Script" path="res://场景/戴夫/dave.gd" id="1_d2ren"]
 [ext_resource type="Texture2D" uid="uid://ck8w1qlnq7yr6" path="res://艺术资产/实体/戴夫/大佬戴夫.png" id="2_heisa"]
 [ext_resource type="Script" path="res://场景/移动/move.gd" id="3_6xfo8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a06su"]
 size = Vector2(9.4, 25.2)
 
-[node name="测试戴夫" type="CharacterBody2D"]
-script = ExtResource("1_ubvng")
+[node name="Dave" type="CharacterBody2D"]
+script = ExtResource("1_d2ren")
 
 [node name="Image" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -32,7 +32,7 @@ target_position = Vector2(10, -0.25)
 
 [node name="LadderCheck" type="RayCast2D" parent="Move/MoveCast"]
 unique_name_in_owner = true
-position = Vector2(0, -4.75)
+position = Vector2(0, -4)
 exclude_parent = false
 target_position = Vector2(0, 8)
 collision_mask = 2
@@ -42,7 +42,7 @@ collide_with_bodies = false
 
 [node name="WaterCheck" type="RayCast2D" parent="Move/MoveCast"]
 unique_name_in_owner = true
-position = Vector2(0, -4.75)
+position = Vector2(0, -4)
 exclude_parent = false
 target_position = Vector2(0, 8)
 collision_mask = 4

@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=16 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://场景/地图/测试地图/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://场景/地图/测试地图/内层地图.tscn" id="1_f0sft"]
 [ext_resource type="Shader" path="res://着色器/描边/CanvasGroupOutline.gdshader" id="1_n8kdf"]
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://场景/地图/测试地图/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://场景/main.gd" id="1_y4jx2"]
-[ext_resource type="Script" path="res://场景/camera_2d.gd" id="3_yfryg"]
-[ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://场景/戴夫/戴夫.tscn" id="6_k6k4w"]
+[ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://场景/戴夫/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://场景/地图/water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://场景/地图/梯子/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="Texture2D" uid="uid://kitbpay12n5e" path="res://艺术资产/瓦片地图/池砖.png" id="7_h606o"]
@@ -50,10 +49,6 @@ script = ExtResource("1_y4jx2")
 position = Vector2(-233, 131)
 
 [node name="Camera2D" type="Camera2D" parent="戴夫"]
-zoom = Vector2(4.6, 4.6)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
-script = ExtResource("3_yfryg")
 
 [node name="地图" type="Node2D" parent="."]
 
