@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=20 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://场景/地图/测试地图/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://场景/地图/测试地图/内层地图.tscn" id="1_f0sft"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://场景/地图/梯子/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="Texture2D" uid="uid://kitbpay12n5e" path="res://艺术资产/瓦片地图/池砖.png" id="7_h606o"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://场景/寻路/path_finding.tscn" id="9_73auh"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_fkyvf"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="11_q87m8"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_lt0ah"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
 shader = ExtResource("1_n8kdf")
@@ -42,13 +45,17 @@ texture = ExtResource("7_h606o")
 [sub_resource type="TileSet" id="TileSet_4e2vc"]
 sources/0 = SubResource("TileSetAtlasSource_ecbsv")
 
+[sub_resource type="Resource" id="Resource_emh2h"]
+script = ExtResource("12_lt0ah")
+duration = 1.0
+transition = 0
+ease = 2
+
 [node name="Test" type="Node2D"]
 script = ExtResource("1_y4jx2")
 
 [node name="戴夫" parent="." instance=ExtResource("6_k6k4w")]
 position = Vector2(-233, 131)
-
-[node name="Camera2D" type="Camera2D" parent="戴夫"]
 
 [node name="地图" type="Node2D" parent="."]
 
@@ -93,6 +100,23 @@ tile_map_data = PackedByteArray("AAD8/wgAAAAAAAAAAQD7/wgAAAAAAAAAAQD6/wgAAAAAAAA
 [node name="PathFinding" parent="." node_paths=PackedStringArray("outer_tilemap_layer", "water_tilemap_layer") instance=ExtResource("9_73auh")]
 outer_tilemap_layer = NodePath("../地图/Outer/外层地图")
 water_tilemap_layer = NodePath("../地图/water/Water/WaterLayer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(-233, 131)
+zoom = Vector2(4, 4)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("11_q87m8")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector2(-233, 131)
+script = ExtResource("11_fkyvf")
+follow_mode = 2
+follow_target = NodePath("../戴夫")
+zoom = Vector2(4, 4)
+tween_resource = SubResource("Resource_emh2h")
+draw_limits = true
 
 [connection signal="child_order_changed" from="地图/Ladder/LadderLayer" to="地图/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="地图/water/Water/WaterLayer" to="地图/water/Water/WaterLayer" method="_on_child_order_changed"]

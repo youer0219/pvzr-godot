@@ -19,7 +19,7 @@ var velocity:Vector2
 
 @export_group("LateralMove")
 ## 横向移动最大速度
-@export var speed:float = 200
+@export var speed:float = 100
 ## 横向移动加速度
 @export var speed_acceleration:float = 120
 ## 横向移动小小跳
