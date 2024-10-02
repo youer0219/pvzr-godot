@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ed7dwlynndds"]
+
+[ext_resource type="Texture2D" uid="uid://cknm1c8h412me" path="res://Scenes/Entity/Zoom/Head/assets/普通僵尸-首.png" id="1_5bjos"]
+[ext_resource type="Script" path="res://Scenes/Entity/Zoom/Head/scene/projectile.gd" id="1_7jsl0"]
+
+[sub_resource type="Curve2D" id="Curve2D_iha16"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqewb"]
+radius = 7.0
+
+[node name="Head" type="CharacterBody2D"]
+script = ExtResource("1_7jsl0")
+curve = SubResource("Curve2D_iha16")
+
+[node name="Image" type="Sprite2D" parent="."]
+texture = ExtResource("1_5bjos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -5)
+shape = SubResource("CircleShape2D_pqewb")

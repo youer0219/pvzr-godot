@@ -1,9 +1,0 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bw31yf68r6w6g"]
-
-[ext_resource type="PackedScene" uid="uid://w88h6kq0nln3" path="res://场景/地图/梯子/ladder.tscn" id="1_uc4lj"]
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_onoav"]
-scenes/1/scene = ExtResource("1_uc4lj")
-
-[resource]
-sources/0 = SubResource("TileSetScenesCollectionSource_onoav")

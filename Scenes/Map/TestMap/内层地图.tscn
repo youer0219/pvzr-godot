@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy3xilxuhhnw0"]
+
+[ext_resource type="TileSet" uid="uid://drscld376sn3v" path="res://Scenes/Map/TestMap/内层地图.tres" id="1_jc2i8"]
+
+[node name="内层地图" type="TileMapLayer"]
+self_modulate = Color(0.780392, 0.780392, 0.780392, 1)
+tile_set = ExtResource("1_jc2i8")

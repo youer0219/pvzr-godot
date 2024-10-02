@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bq20xiahi11xh"]
-
-[ext_resource type="TileSet" uid="uid://bl87a5h6mbo76" path="res://场景/地图/测试地图/背景地图.tres" id="1_qqc23"]
-
-[node name="背景地图" type="TileMapLayer"]
-scale = Vector2(2, 2)
-tile_set = ExtResource("1_qqc23")

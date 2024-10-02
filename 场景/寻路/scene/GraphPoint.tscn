@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://luttaoxvcvfn"]
-
-[ext_resource type="Texture2D" uid="uid://dud4fd78r3yoc" path="res://场景/寻路/assets/GraphPoint.png" id="1_sfbp3"]
-
-[node name="GraphPoint" type="Sprite2D"]
-texture = ExtResource("1_sfbp3")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd0aauk3m14w5"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Dave/dave.gd" id="1_d2ren"]
+[ext_resource type="Texture2D" uid="uid://ck8w1qlnq7yr6" path="res://assets/实体/戴夫/大佬戴夫.png" id="2_heisa"]
+[ext_resource type="Script" path="res://Scenes/Func/Move/move.gd" id="3_6xfo8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t70m5"]
+radius = 5.0
+height = 28.0
+
+[node name="Dave" type="CharacterBody2D"]
+script = ExtResource("1_d2ren")
+
+[node name="Image" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -14.75)
+texture = ExtResource("2_heisa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_t70m5")
+
+[node name="Move" type="Node2D" parent="." node_paths=PackedStringArray("char_body")]
+script = ExtResource("3_6xfo8")
+char_body = NodePath("..")
+
+[node name="MoveCast" type="Node2D" parent="Move"]
+
+[node name="WallCheck" type="RayCast2D" parent="Move/MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+target_position = Vector2(10, -0.25)
+
+[node name="LadderCheck" type="RayCast2D" parent="Move/MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+exclude_parent = false
+target_position = Vector2(0, 8)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="WaterCheck" type="RayCast2D" parent="Move/MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+exclude_parent = false
+target_position = Vector2(0, 8)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="LateralMovementTimer" type="Timer" parent="Move"]
+unique_name_in_owner = true
+wait_time = 0.1

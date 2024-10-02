@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PVZR-Godot"
-run/main_scene="res://场景/test.tscn"
+run/main_scene="res://Scenes/test.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
