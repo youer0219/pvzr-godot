@@ -89,7 +89,7 @@ func AddLeftEdgePoint(tile:Vector2i):
 	if !TileTwoAboveEmpty(tile):
 		return
 	
-	if TileEmpty(tile + Vector2i(-1,0)) or !TileEmpty(tile + Vector2i(-1,-1)):
+	if TileEmpty(tile + Vector2i(-1,0)) or isTileWall(tile + Vector2i(-1,0)):
 		var tileAbove = Vector2i(0,-1) + tile
 		var existingPointId:int = TileAlreadyExistInGraph(tileAbove)
 		
@@ -109,7 +109,7 @@ func AddRightEdgePoint(tile:Vector2i):
 	if !TileTwoAboveEmpty(tile):
 		return
 	
-	if TileEmpty(tile + Vector2i(1,0)) or !TileEmpty(tile + Vector2i(1,-1)):
+	if TileEmpty(tile + Vector2i(1,0)) or isTileWall(tile + Vector2i(1,0)):
 		var tileAbove = Vector2i(0,-1) + tile
 		var existingPointId:int = TileAlreadyExistInGraph(tileAbove)
 		
@@ -297,22 +297,29 @@ func GetPointInfo(tile:Vector2i)->PointInfo:
 		if point_info.Position == map_to_local(tile):
 			return point_info
 	return null
-#region 判断边缘点是否被阻挡
+
+#region 判断边缘点是否是wall
 func isLeftEdgeWithoutWall(p1:PointInfo)->bool:
 	if !p1.isLeftEdge:
 		return false
-	var tile = local_to_map(p1.Position)
-	if !TileEmpty(tile + Vector2i(-1,1)):
+	var tile = local_to_map(p1.Position) + Vector2i(0,1)
+	if isTileWall(tile + Vector2i(-1,0)):
 		return false
 	return true
 
 func isRightEdgeWithoutWall(p1:PointInfo)->bool:
 	if !p1.isRightEdge:
 		return false
-	var tile = local_to_map(p1.Position)
-	if !TileEmpty(tile + Vector2i(1,1)):
+	var tile = local_to_map(p1.Position) + Vector2i(0,1)
+	if isTileWall(tile + Vector2i(1,0)):
 		return false
 	return true
+
+func isTileWall(tile:Vector2i)->bool:
+	if !TileEmpty(tile) and !TileTwoAboveEmpty(tile):
+		return true
+	return false
+
 #endregion
 # 考虑到“水”和外层地图的position一致，其map_to_local相等
 func map_to_local(tile:Vector2i)->Vector2:
