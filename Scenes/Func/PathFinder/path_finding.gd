@@ -38,6 +38,7 @@ var _astarGraph:AStar2D = AStar2D.new()
 var _usedTiles:Array[Vector2i]
 var _pointInfoList:Array[PointInfo]
 
+enum FallDirType {LEFT,RIGHT}
 
 func _ready():
 	
@@ -80,7 +81,8 @@ func AddGraphPoints():
 	for tile in _usedTiles:
 		AddLeftEdgePoint(tile)
 		AddRightEdgePoint(tile)
-		AddFallPoint(tile)
+		AddLeftFallPoint(tile)
+		AddRightFallPoint(tile)
 
 # 添加【左边缘点】
 func AddLeftEdgePoint(tile:Vector2i):
@@ -122,11 +124,10 @@ func AddRightEdgePoint(tile:Vector2i):
 			FilterListByID(existingPointId).isRightEdge = true
 			AddVisualPoint(tileAbove,Color("#ffcd75"))
 
-# 添加【坠落点】
-func AddFallPoint(tile:Vector2i):
-	var fallTile:Vector2i = FindFallPoint(tile)
+# 添加左边的【坠落点】
+func AddLeftFallPoint(tile:Vector2i):
+	var fallTile:Vector2i = FindFallPoint(tile,FallDirType.LEFT)
 	if fallTile == VECTOR2I_NULL :return
-	#if !TileTwoAboveEmpty(fallTile):return
 	var fallTileLocal = Vector2i(map_to_local(fallTile))
 	
 	var existingPointId = TileAlreadyExistInGraph(fallTile)
@@ -142,9 +143,28 @@ func AddFallPoint(tile:Vector2i):
 		FilterListByID(existingPointId).isFallTile = true
 		AddVisualPoint(fallTile,Color("#ef7d57"),0.6)
 
-#region 添加【坠落点】的辅助函数
+# 添加右边的【坠落点】
+func AddRightFallPoint(tile:Vector2i):
+	var fallTile:Vector2i = FindFallPoint(tile,FallDirType.RIGHT)
+	if fallTile == VECTOR2I_NULL :return
+	var fallTileLocal = Vector2i(map_to_local(fallTile))
+	
+	var existingPointId = TileAlreadyExistInGraph(fallTile)
+	
+	if existingPointId == -1:
+		var pointId:int = _astarGraph.get_available_point_id()
+		var pointInfo = PointInfo.createPointInfo(pointId,fallTileLocal)
+		pointInfo.isFallTile = true
+		_pointInfoList.append(pointInfo)
+		_astarGraph.add_point(pointId,fallTileLocal)
+		AddVisualPoint(fallTile,Color(1,0.35,0.1,1),0.7)
+	else:
+		FilterListByID(existingPointId).isFallTile = true
+		AddVisualPoint(fallTile,Color("#ef7d57"),0.6)
+
+#region 寻找【坠落点】的辅助函数
 # 获取开始坠落的点
-func GetStartScanTileForFallPoint(tile:Vector2i)->Vector2i:
+func GetStartScanTileForFallPoint(tile:Vector2i,dir:FallDirType)->Vector2i:
 	var tileAbove = tile + Vector2i(0,-1)
 	var point = GetPointInfo(tileAbove)
 	
@@ -152,15 +172,16 @@ func GetStartScanTileForFallPoint(tile:Vector2i)->Vector2i:
 	
 	var tileScan = VECTOR2I_NULL
 	
-	if isLeftEdgeWithoutWall(point):
+	if isLeftEdgeWithoutWall(point) and dir == FallDirType.LEFT:
 		tileScan = tile + Vector2i(-1,-1)
-	elif isRightEdgeWithoutWall(point):
+	elif isRightEdgeWithoutWall(point) and dir == FallDirType.RIGHT:
 		tileScan = tile + Vector2i(1,-1)
 	return tileScan
 
+
 # 从开始坠落的点下坠直到平台
-func FindFallPoint(tile:Vector2i)->Vector2i:
-	var scan = GetStartScanTileForFallPoint(tile)
+func FindFallPoint(tile:Vector2i,dir:FallDirType)->Vector2i:
+	var scan = GetStartScanTileForFallPoint(tile,dir)
 	if scan == VECTOR2I_NULL :
 		return VECTOR2I_NULL
 	
@@ -219,15 +240,24 @@ func ConnectFallPoints(p1:PointInfo):
 		var tilePos = local_to_map(p1.Position)
 		tilePos.y += 1
 		
-		var fallPoint:Vector2i = FindFallPoint(tilePos)
-		if fallPoint != VECTOR2I_NULL:
-			var pointInfo = GetPointInfo(fallPoint)
+		var fallLeftPoint:Vector2i = FindFallPoint(tilePos,FallDirType.LEFT)
+		var fallRightPoint:Vector2i = FindFallPoint(tilePos,FallDirType.RIGHT)
+
+		if fallLeftPoint != VECTOR2I_NULL:
+			var pointInfo = GetPointInfo(fallLeftPoint)
 			var p2Map:Vector2 = local_to_map(p1.Position)
 			var p1Map:Vector2 = local_to_map(pointInfo.Position)
 			
 			_astarGraph.connect_points(p1.PointID,pointInfo.PointID,false)
 			DrawDebugLine(p1.Position,pointInfo.Position,Color(1,1,0,1))
 
+		if fallRightPoint != VECTOR2I_NULL:
+			var pointInfo = GetPointInfo(fallRightPoint)
+			var p2Map:Vector2 = local_to_map(p1.Position)
+			var p1Map:Vector2 = local_to_map(pointInfo.Position)
+			
+			_astarGraph.connect_points(p1.PointID,pointInfo.PointID,false)
+			DrawDebugLine(p1.Position,pointInfo.Position,Color(1,1,0,1))
 #endregion
 
 #region 辅助函数
