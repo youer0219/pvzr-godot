@@ -23,4 +23,3 @@ void fragment() {
 	vec4 original_color = texture(TEXTURE,UV);
 	COLOR = mix(outline , original_color , original_color.a);
 }
-

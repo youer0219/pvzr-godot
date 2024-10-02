@@ -1,5 +1,12 @@
 extends Node2D
 
-#func _ready() -> void:
-	#print($"地图/water/Water/WaterLayer".map_to_local(Vector2i(1,1)))
-	#print($"地图/Outer/外层地图".map_to_local(Vector2i(1,1)))
+func _ready() -> void:
+	#print($PathFinding.TileTwoAboveEmpty(Vector2i(-34,11)))
+	var test:TransversePathFinder.PointInfo = $PathFinding.GetPointInfo(Vector2i(-34,8))
+	print("test.isFallTile:",test.isFallTile)
+	print("test.isLeftEdge:",test.isLeftEdge)
+	print("test.isRightEdge:",test.isRightEdge)
+
+
+
+	pass
