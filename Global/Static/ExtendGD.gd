@@ -1,4 +1,4 @@
-class_name ExtendGD
+class_name ExtendGDScript
 
 
 # 堆栈
