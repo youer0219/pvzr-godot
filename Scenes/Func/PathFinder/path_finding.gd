@@ -126,7 +126,8 @@ func AddRightEdgePoint(tile:Vector2i):
 
 # 添加左边的【坠落点】
 func AddLeftFallPoint(tile:Vector2i):
-	var fallTile:Vector2i = FindFallPoint(tile,FallDirType.LEFT)
+	var scan:Vector2i = GetStartScanTileForFallPoint(tile,FallDirType.LEFT)
+	var fallTile:Vector2i = FindFallPoint(scan)
 	if fallTile == VECTOR2I_NULL :return
 	var fallTileLocal = Vector2i(map_to_local(fallTile))
 	
@@ -145,7 +146,8 @@ func AddLeftFallPoint(tile:Vector2i):
 
 # 添加右边的【坠落点】
 func AddRightFallPoint(tile:Vector2i):
-	var fallTile:Vector2i = FindFallPoint(tile,FallDirType.RIGHT)
+	var scan:Vector2i = GetStartScanTileForFallPoint(tile,FallDirType.RIGHT)
+	var fallTile:Vector2i = FindFallPoint(scan)
 	if fallTile == VECTOR2I_NULL :return
 	var fallTileLocal = Vector2i(map_to_local(fallTile))
 	
@@ -180,8 +182,7 @@ func GetStartScanTileForFallPoint(tile:Vector2i,dir:FallDirType)->Vector2i:
 
 
 # 从开始坠落的点下坠直到平台
-func FindFallPoint(tile:Vector2i,dir:FallDirType)->Vector2i:
-	var scan = GetStartScanTileForFallPoint(tile,dir)
+func FindFallPoint(scan:Vector2i)->Vector2i:
 	if scan == VECTOR2I_NULL :
 		return VECTOR2I_NULL
 	
@@ -240,15 +241,17 @@ func ConnectFallPoints(p1:PointInfo):
 		var tilePos = local_to_map(p1.Position)
 		tilePos.y += 1
 		
-		var fallLeftPoint:Vector2i = FindFallPoint(tilePos,FallDirType.LEFT)
-		var fallRightPoint:Vector2i = FindFallPoint(tilePos,FallDirType.RIGHT)
-
+		var left_scan:Vector2i = GetStartScanTileForFallPoint(tilePos,FallDirType.LEFT)
+		var fallLeftPoint:Vector2i = FindFallPoint(left_scan)
+		var right_scan:Vector2i = GetStartScanTileForFallPoint(tilePos,FallDirType.RIGHT)
+		var fallRightPoint:Vector2i = FindFallPoint(right_scan)
+		
 		if fallLeftPoint != VECTOR2I_NULL:
 			var pointInfo = GetPointInfo(fallLeftPoint)
 			var p2Map:Vector2 = local_to_map(p1.Position)
 			var p1Map:Vector2 = local_to_map(pointInfo.Position)
 			
-			_astarGraph.connect_points(p1.PointID,pointInfo.PointID,false)
+			_astarGraph.connect_points(p1.PointID,pointInfo.PointID)
 			DrawDebugLine(p1.Position,pointInfo.Position,Color(1,1,0,1))
 
 		if fallRightPoint != VECTOR2I_NULL:
@@ -256,8 +259,63 @@ func ConnectFallPoints(p1:PointInfo):
 			var p2Map:Vector2 = local_to_map(p1.Position)
 			var p1Map:Vector2 = local_to_map(pointInfo.Position)
 			
-			_astarGraph.connect_points(p1.PointID,pointInfo.PointID,false)
+			_astarGraph.connect_points(p1.PointID,pointInfo.PointID)
 			DrawDebugLine(p1.Position,pointInfo.Position,Color(1,1,0,1))
+#endregion
+
+#region 寻找路径
+func GetPlaform2DPath(startPos:Vector2,endPos:Vector2)->ExtendGDScript.Stack:
+	var pathStack = ExtendGDScript.Stack.new()
+
+	var idPath = _astarGraph.get_id_path(_astarGraph.get_closest_point(startPos),_astarGraph.get_closest_point(endPos))
+
+	if idPath.size() <= 0:return pathStack
+	
+	var startPoint = GetPointInfoAtPosition(startPos)
+	var endPoint = GetPointInfoAtPosition(endPos)
+	var numPointsInPath = idPath.size()
+	
+	for i in numPointsInPath:
+		var currPoint = FilterListByID(idPath[i])
+		#pathStack.push(currPoint)
+		
+		if numPointsInPath == 1:
+			continue
+		
+		if i == 0 && numPointsInPath >= 2:
+			var secondPathPoint = FilterListByID(idPath[i+1])
+			
+			if startPoint.Position.distance_to(secondPathPoint.Position) < currPoint.Position.distance_to(secondPathPoint.Position):
+				pathStack.push(startPoint)
+				continue
+		elif i == numPointsInPath - 1 && numPointsInPath >= 2:
+			var penultimatePoint = FilterListByID(idPath[i - 1])
+			
+			if endPoint.Position.distance_to(penultimatePoint.Position) < currPoint.Position.distance_to(penultimatePoint.Position):
+				continue
+			else:
+				pathStack.push(currPoint)
+				break
+		pathStack.push(currPoint)
+	pathStack.push(endPoint)
+	return ExtendGDScript.Stack.ReversePathStack(pathStack)
+
+# 与原先不同的是，我要达到的目的是找到最下面的一个点，这在游戏中肯定存在（不过最好写上不存在的处理方法）
+func GetPointInfoAtPosition(position:Vector2)->PointInfo:
+	var tile:Vector2i = local_to_map(position)
+	# 找到下面的坠落点
+	var fallTile = FindFallPoint(tile)
+	var existingPointId = TileAlreadyExistInGraph(fallTile)
+	# 如果这个点不存在
+	if existingPointId == -1:
+		var fallTileLocal = Vector2i(map_to_local(fallTile))
+		var newInfoPoint = PointInfo.createPointInfo(-10000,fallTileLocal)
+		newInfoPoint.isFallTile = true
+		return newInfoPoint
+	# 如果这个点存在
+	else:
+		return FilterListByID(existingPointId)
+
 #endregion
 
 #region 辅助函数

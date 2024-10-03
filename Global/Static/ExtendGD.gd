@@ -33,6 +33,9 @@ class Stack:
 	func size():
 		return _stack.size()
 	
+	func stack_print():
+		print(_stack)
+	
 	# 堆栈翻转
 	static func ReversePathStack(rawStack:Stack)->Stack:
 		var pathStackReversed:Stack = Stack.new()
