@@ -231,7 +231,7 @@ func HorizontalConnectionCannotBeMade(p1:Vector2i,p2:Vector2i)->bool:
 	var endScan = local_to_map(p2)
 	
 	for i in range(startScan.x,endScan.x):
-		if !TileEmpty(Vector2i(i,startScan.y)) || TileEmpty(Vector2i(i,startScan.y + 1)):
+		if !TileEmpty(Vector2i(i,startScan.y)) || TileEmpty(Vector2i(i,startScan.y + 1)) || !TileEmpty(Vector2i(i,startScan.y -1)):
 			return true
 	return false
 
