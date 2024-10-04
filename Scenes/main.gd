@@ -19,6 +19,6 @@ func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	var start_pos:Vector2 = path_finding.map_to_local(Vector2i(-24,5))
 	var end_pos:Vector2 = path_finding.map_to_local(Vector2i(-17,8))
-	var path = path_finding.GetPlaform2DPath(start_pos,end_pos)
+	var path = path_finding.get_plaform_2d_path(start_pos,end_pos)
 	path.stack_print()
 	pass
