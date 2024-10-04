@@ -9,6 +9,7 @@ radius = 5.0
 height = 28.0
 
 [node name="Dave" type="CharacterBody2D"]
+scale = Vector2(0.9, 0.9)
 script = ExtResource("1_d2ren")
 
 [node name="Image" type="Sprite2D" parent="."]

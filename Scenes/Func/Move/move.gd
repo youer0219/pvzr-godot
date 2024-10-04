@@ -39,14 +39,14 @@ var is_lateral_moving:bool
 
 @export_group("LengthwiseMove")
 ## 下落速度
-@export var length_down_speed:float = 300
+@export var length_down_speed:float = 280
 @export_subgroup("Jump")
 ## 可跳跃次数
 @export var jump_times:int = 2
-@export var jump_lateral_move:float = 200
+@export var jump_lateral_move:float = 120
 var current_jump_times:int = jump_times
 ## 跳跃速度
-@export var jump_velocity:float = 200
+@export var jump_velocity:float = 120
 @export_subgroup("Clamp")
 ## 攀爬速度
 @export var clamp_velocity:float = 70
@@ -55,7 +55,8 @@ var can_clamp:bool = true
 
 @export_group("Water")
 ## 在水中的下落速度
-@export var water_down_speed:float = 75
+@export var water_init_speed:float = 4
+@export var water_down_speed:float = 30
 @export var water_up_speed:float = 40
 ## 图像中心点偏移量
 @export var water_sprite_offect_distance:float = -8
@@ -143,7 +144,7 @@ func lengthwise_move(delta:float):
 		current_jump_times = jump_times
 
 	if !in_water and water_check.is_colliding():
-		velocity.y = 10 
+		velocity.y = water_init_speed 
 		current_jump_times = 0
 		can_clamp = false
 

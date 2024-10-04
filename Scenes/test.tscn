@@ -46,16 +46,14 @@ sources/0 = SubResource("TileSetAtlasSource_ecbsv")
 script = ExtResource("1_y4jx2")
 
 [node name="戴夫" parent="." instance=ExtResource("6_k6k4w")]
-position = Vector2(-411, 142)
+position = Vector2(205, 60)
 
 [node name="Camera2D" type="Camera2D" parent="戴夫"]
 physics_interpolation_mode = 1
-zoom = Vector2(4, 4)
+zoom = Vector2(4.7, 4.7)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 
 [node name="地图" type="Node2D" parent="."]
 
