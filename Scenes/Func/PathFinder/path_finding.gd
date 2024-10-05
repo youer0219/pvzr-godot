@@ -5,13 +5,20 @@ class PointInfo:
 	var isFallTile:bool
 	var isLeftEdge:bool
 	var isRightEdge:bool
-	#var isLeftWall:bool
-	#var isRightWall:bool
-	var isLeftWater:bool
-	var isRightWater:bool
 	var isPositionPoint:bool
 	var PointID:int
 	var Position:Vector2
+	
+	enum SetType {FALL,LEFT_EDGE,RIGHT_EDGE}
+	
+	func set_type(type:SetType):
+		match type:
+			SetType.FALL:
+				isFallTile = true
+			SetType.LEFT_EDGE:
+				isLeftEdge = true
+			SetType.RIGHT_EDGE:
+				isRightEdge = true
 	
 	static func createPointInfo(pointID:int,position:Vector2i)->PointInfo:
 		var new_point_info = PointInfo.new()
@@ -24,16 +31,15 @@ class PointInfo:
 @export var outer_tilemap_layer:TileMapLayer
 ## 水地图
 @export var water_tilemap_layer:TileMapLayer
-## 地图数组  暂时不需要加入这个变量
-#@export var tilemap_array:Array[TileMapLayer]
+
 ## 寻路单位所占格数
 @export var unit_cells:int = 2
 @export_category("Visual")
-## 是否显示路径
-@export var ShowDebugGraph:bool = true
+## 是否显示路径 
+@export var is_show_debug_graph:bool = true
 
 const CELL_IS_EMPTY = -1
-const MAX_TILE_FALL_SCAN_DEPTH = 300
+const MAX_TILE_FALL_SCAN_DEPTH = 200
 const VECTOR2I_NULL = Vector2i(-10008,-10008)
 const GRAPH_POINT = preload("res://Scenes/Func/PathFinder/scene/GraphPoint.tscn")
 
@@ -41,251 +47,218 @@ var _astar_graph:AStar2D = AStar2D.new()
 var _used_cells:Array[Vector2i]
 var _point_info_array:Array[PointInfo]
 
-enum FallDirType {LEFT,RIGHT}
-
 func _ready():
-	
-	_used_cells = outer_tilemap_layer.get_used_cells() + water_tilemap_layer.get_used_cells() # 理论上两者不会有交集
-	
-	BuildGraph()
+	build_astar_graph()
 
-func BuildGraph():
-	AddGraphPoints()
+func build_astar_graph():
+	init_path_finder()
 	
-	if !ShowDebugGraph:
-		ConnectPoints()
+	add_astar_graph_points()
+	
+	if !is_show_debug_graph:
+		connect_points()
 
 #region 视觉
 func _draw():
-	if ShowDebugGraph:
-		ConnectPoints()
+	if is_show_debug_graph:
+		connect_points()
 
-# 显示【点】
-func AddVisualPoint(tile:Vector2i,color:Color = Color.ALICE_BLUE ,scale:float = 1.0):
-	if !ShowDebugGraph:
+# 显示【点】 
+func add_visual_point(tile:Vector2i,color:Color = Color.ALICE_BLUE,point_scale:float = 1.0):
+	if !is_show_debug_graph:
 		return
 	
-	var visualPoint:Sprite2D = GRAPH_POINT.instantiate() as Sprite2D
-	visualPoint.modulate = color
-	if scale != 1.0 && scale > 0.1:
-		visualPoint.scale *= scale
+	var visual_point_scene:Sprite2D = GRAPH_POINT.instantiate() as Sprite2D
+	visual_point_scene.modulate = color
+	if point_scale != 1.0 && point_scale > 0.1:
+		visual_point_scene.scale *= point_scale
 	
-	visualPoint.position = map_to_local(tile)
-	add_child(visualPoint)
+	visual_point_scene.position = map_to_local(tile)
+	add_child(visual_point_scene)
 
-func DrawDebugLine(to:Vector2,from:Vector2,color:Color):
-	if ShowDebugGraph:
+# 显示【线】
+func draw_debug_line(to:Vector2,from:Vector2,color:Color):
+	if is_show_debug_graph:
 		draw_line(from,to,color)
 		queue_redraw()
+
 #endregion
 
-#region 添加点
-func AddGraphPoints():
+#region 添加点 
+func add_astar_graph_points():
 	for tile in _used_cells:
-		AddLeftEdgePoint(tile)
-		AddRightEdgePoint(tile)
-		AddLeftFallPoint(tile)
-		AddRightFallPoint(tile)
+		if !can_unit_pass(tile):
+			continue
+		add_left_edge_point(tile)
+		add_right_edge_point(tile)
+	for edge_point in _point_info_array:
+		add_fall_point(edge_point)
 
 # 添加【左边缘点】
-func AddLeftEdgePoint(tile:Vector2i):
-	if !can_unit_pass(tile):
+func add_left_edge_point(tile:Vector2i):
+	if is_cell_empty(tile + Vector2i.LEFT) or is_cell_wall(tile + Vector2i.LEFT):
+		var tileAbove = Vector2i.UP + tile
+		add_point_by_cell(tileAbove,PointInfo.SetType.LEFT_EDGE,Color("#73eff7"))
+
+# 添加【右边缘点】 
+func add_right_edge_point(tile:Vector2i):
+	if is_cell_empty(tile + Vector2i.RIGHT) or is_cell_wall(tile + Vector2i.RIGHT):
+		var tileAbove = Vector2i.UP + tile
+		add_point_by_cell(tileAbove,PointInfo.SetType.RIGHT_EDGE,Color("#ffcd75"))
+
+func add_fall_point(edge_point:PointInfo):
+	var point_tile_cell = local_to_map(edge_point.Position) + Vector2i.DOWN
+	# 左边找点
+	if is_left_edge_without_wall(edge_point):
+		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.LEFT
+		var fall_point_cell:Vector2i = find_fall_point_info_cell(scan_cell)
+		add_point_by_cell(fall_point_cell,PointInfo.SetType.FALL,Color(1,0.35,0.1,1),0.7)
+	# 右边找点
+	if is_right_edge_without_wall(edge_point):
+		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.RIGHT
+		var fall_point_cell:Vector2i = find_fall_point_info_cell(scan_cell)
+		add_point_by_cell(fall_point_cell,PointInfo.SetType.FALL,Color(1,0.35,0.1,1),0.7)
+
+func add_point_by_cell(cell:Vector2i,type:PointInfo.SetType,color:Color = Color.ALICE_BLUE ,point_scale:float = 1.0):
+	if cell == VECTOR2I_NULL:
 		return
-	
-	if is_cell_empty(tile + Vector2i(-1,0)) or isTileWall(tile + Vector2i(-1,0)):
-		var tileAbove = Vector2i(0,-1) + tile
-		var existingPointId:int = is_cell_already_exist_in_graph(tileAbove)
-		
-		if existingPointId == CELL_IS_EMPTY: # 如果这个点没有添加，就添加为【左边缘点】
-			var pointId:int = _astar_graph.get_available_point_id()
-			var pointInfo = PointInfo.createPointInfo(pointId,Vector2i(map_to_local(tileAbove)))
-			pointInfo.isLeftEdge = true
-			_point_info_array.append(pointInfo)
-			_astar_graph.add_point(pointId,Vector2i(map_to_local(tileAbove)))
-			AddVisualPoint(tileAbove)
-		else:
-			get_point_info_by_id(existingPointId).isLeftEdge = true
-			AddVisualPoint(tileAbove,Color("#73eff7"))
-
-# 添加【右边缘点】
-func AddRightEdgePoint(tile:Vector2i):
-	if !can_unit_pass(tile):
-		return
-	
-	if is_cell_empty(tile + Vector2i(1,0)) or isTileWall(tile + Vector2i(1,0)):
-		var tileAbove = Vector2i(0,-1) + tile
-		var existingPointId:int = is_cell_already_exist_in_graph(tileAbove)
-		
-		if existingPointId == CELL_IS_EMPTY: # 如果这个点没有添加，就添加为【左边缘点】
-			var pointId:int = _astar_graph.get_available_point_id()
-			var pointInfo = PointInfo.createPointInfo(pointId,Vector2i(map_to_local(tileAbove)))
-			pointInfo.isRightEdge = true
-			_point_info_array.append(pointInfo)
-			_astar_graph.add_point(pointId,Vector2i(map_to_local(tileAbove)))
-			AddVisualPoint(tileAbove,Color("#94b0c2"))
-		else:
-			get_point_info_by_id(existingPointId).isRightEdge = true
-			AddVisualPoint(tileAbove,Color("#ffcd75"))
-
-# 添加左边的【坠落点】
-func AddLeftFallPoint(tile:Vector2i):
-	var scan:Vector2i = get_start_scan_cell_for_fall_point(tile,FallDirType.LEFT)
-	var fallTile:Vector2i = find_fall_point_info_cell(scan)
-	if fallTile == VECTOR2I_NULL :return
-	var fallTileLocal = Vector2i(map_to_local(fallTile))
-	
-	var existingPointId = is_cell_already_exist_in_graph(fallTile)
-	
-	if existingPointId == CELL_IS_EMPTY:
-		var pointId:int = _astar_graph.get_available_point_id()
-		var pointInfo = PointInfo.createPointInfo(pointId,fallTileLocal)
-		pointInfo.isFallTile = true
-		_point_info_array.append(pointInfo)
-		_astar_graph.add_point(pointId,fallTileLocal)
-		AddVisualPoint(fallTile,Color(1,0.35,0.1,1),0.7)
+	var point_pos = Vector2i(map_to_local(cell))
+	var existing_point_id:int = is_cell_already_exist_in_graph(cell)
+	if existing_point_id == CELL_IS_EMPTY:
+		var point_id:int = _astar_graph.get_available_point_id()
+		var new_point_info:PointInfo = PointInfo.createPointInfo(point_id,point_pos)
+		new_point_info.set_type(type)
+		_point_info_array.append(new_point_info)
+		_astar_graph.add_point(point_id,point_pos)
 	else:
-		get_point_info_by_id(existingPointId).isFallTile = true
-		AddVisualPoint(fallTile,Color("#ef7d57"),0.6)
-
-# 添加右边的【坠落点】
-func AddRightFallPoint(tile:Vector2i):
-	var scan:Vector2i = get_start_scan_cell_for_fall_point(tile,FallDirType.RIGHT)
-	var fallTile:Vector2i = find_fall_point_info_cell(scan)
-	if fallTile == VECTOR2I_NULL :return
-	var fallTileLocal = Vector2i(map_to_local(fallTile))
-	
-	var existingPointId = is_cell_already_exist_in_graph(fallTile)
-	
-	if existingPointId == CELL_IS_EMPTY:
-		var pointId:int = _astar_graph.get_available_point_id()
-		var pointInfo = PointInfo.createPointInfo(pointId,fallTileLocal)
-		pointInfo.isFallTile = true
-		_point_info_array.append(pointInfo)
-		_astar_graph.add_point(pointId,fallTileLocal)
-		AddVisualPoint(fallTile,Color(1,0.35,0.1,1),0.7)
-	else:
-		get_point_info_by_id(existingPointId).isFallTile = true
-		AddVisualPoint(fallTile,Color("#ef7d57"),0.6)
-
-
+		get_point_info_by_id(existing_point_id).set_type(type)
+	add_visual_point(cell,color,point_scale)
 
 #endregion 
 
-#region 连接点
-func ConnectPoints():
-	for p1 in _point_info_array:
-		ConnectHorizontalPoints(p1)
-		ConnectFallPoints(p1)
+#region 连接点 
+func connect_points():
+	for point_info in _point_info_array:
+		connect_horizontal_points(point_info)
+		connect_fall_points(point_info)
 
-func ConnectHorizontalPoints(p1:PointInfo):
-	if p1.isLeftEdge  || p1.isFallTile:
-		var closest:PointInfo = null
+func connect_horizontal_points(front_point:PointInfo):
+	if front_point.isLeftEdge  || front_point.isFallTile:
+		var closest_point:PointInfo = null
 		
 		for p2 in _point_info_array:
-			if p1.PointID == p2.PointID:continue
-			if (p2.isRightEdge || p2.isFallTile) && p2.Position.y == p1.Position.y && p2.Position.x > p1.Position.x:
-				if closest == null:
-					closest = PointInfo.createPointInfo(p2.PointID,p2.Position)
-				if p2.Position.x < closest.Position.x:
-					closest.Position = p2.Position
-					closest.PointID = p2.PointID
+			if front_point.PointID == p2.PointID:continue
+			if (p2.isRightEdge || p2.isFallTile) && p2.Position.y == front_point.Position.y && p2.Position.x > front_point.Position.x:
+				if closest_point == null:
+					closest_point = PointInfo.createPointInfo(p2.PointID,p2.Position)
+				if p2.Position.x < closest_point.Position.x:
+					closest_point.Position = p2.Position
+					closest_point.PointID = p2.PointID
 		
-		if closest != null:
-			if !HorizontalConnectionCannotBeMade(Vector2i(p1.Position),Vector2i(closest.Position)):
-				_astar_graph.connect_points(p1.PointID,closest.PointID)
-				DrawDebugLine(p1.Position,closest.Position,Color(0,1,0,1))
+		if closest_point != null:
+			if !is_not_horizontal_connection_can_be_made(Vector2i(front_point.Position),Vector2i(closest_point.Position)):
+				connect_two_point(front_point,closest_point,Color(0,1,0,1))
 
-func HorizontalConnectionCannotBeMade(p1:Vector2i,p2:Vector2i)->bool:
-	var startScan = local_to_map(p1)
-	var endScan = local_to_map(p2)
+# 是否允许两点之间横向连线 
+func is_not_horizontal_connection_can_be_made(p1:Vector2i,p2:Vector2i)->bool:
+	var start_scan_cell = local_to_map(p1)
+	var end_scan_cell = local_to_map(p2)
 	
-	for i in range(startScan.x,endScan.x):
-		if !is_cell_empty(Vector2i(i,startScan.y)) || is_cell_empty(Vector2i(i,startScan.y + 1)) || !is_cell_empty(Vector2i(i,startScan.y -1)):
+	for i in range(start_scan_cell.x,end_scan_cell.x):
+		if !is_cell_empty(Vector2i(i,start_scan_cell.y)) || is_cell_empty(Vector2i(i,start_scan_cell.y + 1)) || !is_cell_empty(Vector2i(i,start_scan_cell.y -1)):
 			return true
 	return false
 
-func ConnectFallPoints(p1:PointInfo):
-	if (isLeftEdgeWithoutWall(p1)) || (isRightEdgeWithoutWall(p1)):
-		var tilePos = local_to_map(p1.Position)
-		tilePos.y += 1
-		
-		var left_scan:Vector2i = get_start_scan_cell_for_fall_point(tilePos,FallDirType.LEFT)
-		var fallLeftPoint:Vector2i = find_fall_point_info_cell(left_scan)
-		var right_scan:Vector2i = get_start_scan_cell_for_fall_point(tilePos,FallDirType.RIGHT)
-		var fallRightPoint:Vector2i = find_fall_point_info_cell(right_scan)
-		
-		if fallLeftPoint != VECTOR2I_NULL:
-			var pointInfo = get_point_info_by_cell(fallLeftPoint)
-			var p2Map:Vector2 = local_to_map(p1.Position)
-			var p1Map:Vector2 = local_to_map(pointInfo.Position)
-			
-			_astar_graph.connect_points(p1.PointID,pointInfo.PointID)
-			DrawDebugLine(p1.Position,pointInfo.Position,Color(1,1,0,1))
+func connect_fall_points(point_info:PointInfo):
+	# 左边寻找
+	if is_left_edge_without_wall(point_info):
+		var point_tile_cell = local_to_map(point_info.Position) + Vector2i.DOWN
+		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.LEFT
+		var fall_point_cell:Vector2i = find_fall_point_info_cell(scan_cell)
+		if fall_point_cell != VECTOR2I_NULL:
+			var fall_point_info = get_point_info_by_cell(fall_point_cell)
+			connect_two_point(point_info,fall_point_info,Color(1,1,0,1))
+	# 右边寻找
+	if is_right_edge_without_wall(point_info):
+		var point_tile_cell = local_to_map(point_info.Position) + Vector2i.DOWN
+		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.RIGHT
+		var fall_point_cell:Vector2i = find_fall_point_info_cell(scan_cell)
+		if fall_point_cell != VECTOR2I_NULL:
+			var fall_point_info = get_point_info_by_cell(fall_point_cell)
+			connect_two_point(point_info,fall_point_info,Color(1,1,0,1))
 
-		if fallRightPoint != VECTOR2I_NULL:
-			var pointInfo = get_point_info_by_cell(fallRightPoint)
-			var p2Map:Vector2 = local_to_map(p1.Position)
-			var p1Map:Vector2 = local_to_map(pointInfo.Position)
-			
-			_astar_graph.connect_points(p1.PointID,pointInfo.PointID)
-			DrawDebugLine(p1.Position,pointInfo.Position,Color(1,1,0,1))
+
+func connect_two_point(front_point:PointInfo,back_point:PointInfo,line_color:Color):
+	_astar_graph.connect_points(front_point.PointID,back_point.PointID)
+	draw_debug_line(front_point.Position,back_point.Position,line_color)
+
 #endregion
 
 #region 寻找路径 
-func get_plaform_2d_path(startPos:Vector2,endPos:Vector2)->ExtendGDScript.Stack:
-	var pathStack = ExtendGDScript.Stack.new()
+func get_plaform_2d_path(start_pos:Vector2,end_pos:Vector2)->ExtendGDScript.Stack:
+	var path_stack = ExtendGDScript.Stack.new()
 
-	var idPath = _astar_graph.get_id_path(_astar_graph.get_closest_point(startPos),_astar_graph.get_closest_point(endPos))
+	var id_path_array = _astar_graph.get_id_path(_astar_graph.get_closest_point(start_pos),_astar_graph.get_closest_point(end_pos),true)
 
-	if idPath.size() <= 0:return pathStack
+	if id_path_array.size() <= 0:return path_stack
 	
-	var startPoint = get_bottom_point_info_by_position(startPos)
-	var endPoint = get_bottom_point_info_by_position(endPos)
-	var numPointsInPath = idPath.size()
+	var start_point = get_bottom_point_info_by_position(start_pos)
+	var end_point = get_bottom_point_info_by_position(end_pos)
+	var id_path_array_size = id_path_array.size()
 	
-	for i in numPointsInPath:
-		var currPoint = get_point_info_by_id(idPath[i])
+	for i in id_path_array_size:
+		var curr_point = get_point_info_by_id(id_path_array[i])
 		
-		if numPointsInPath == 1:
+		if id_path_array_size == 1:
 			continue
 		
-		if i == 0 && numPointsInPath >= 2:
-			var secondPathPoint = get_point_info_by_id(idPath[i+1])
+		if i == 0 && id_path_array_size >= 2:
+			var second_path_point = get_point_info_by_id(id_path_array[i+1])
 			
-			if startPoint.Position.distance_to(secondPathPoint.Position) < currPoint.Position.distance_to(secondPathPoint.Position):
-				pathStack.push(startPoint)
+			if start_point.Position.distance_to(second_path_point.Position) < curr_point.Position.distance_to(second_path_point.Position):
+				path_stack.push(start_point)
 				continue
-		elif i == numPointsInPath - 1 && numPointsInPath >= 2:
-			var penultimatePoint = get_point_info_by_id(idPath[i - 1])
+		elif i == id_path_array_size - 1 && id_path_array_size >= 2:
+			var penultimate_point = get_point_info_by_id(id_path_array[i - 1])
 			
-			if endPoint.Position.distance_to(penultimatePoint.Position) < currPoint.Position.distance_to(penultimatePoint.Position):
+			if end_point.Position.distance_to(penultimate_point.Position) < curr_point.Position.distance_to(penultimate_point.Position):
 				continue
 			else:
-				pathStack.push(currPoint)
+				path_stack.push(curr_point)
 				break
-		pathStack.push(currPoint)
-	pathStack.push(endPoint)
-	return ExtendGDScript.Stack.ReversePathStack(pathStack)
+		path_stack.push(curr_point)
+	path_stack.push(end_point)
+	return ExtendGDScript.Stack.ReversePathStack(path_stack)
 
 # 与原先不同的是，我要达到的目的是找到最下面的一个点，这在游戏中肯定存在（不过最好写上不存在的处理方法） 
-func get_bottom_point_info_by_position(position:Vector2)->PointInfo:
-	var tile:Vector2i = local_to_map(position)
+func get_bottom_point_info_by_position(pos:Vector2)->PointInfo:
+	var cell:Vector2i = local_to_map(pos)
 	# 找到下面的坠落点
-	var fallTile = find_fall_point_info_cell(tile)
-	var existingPointId = is_cell_already_exist_in_graph(fallTile)
+	var fall_cell = find_fall_point_info_cell(cell)
+	var existing_point_id = is_cell_already_exist_in_graph(fall_cell)
 	# 如果这个点不存在
-	if existingPointId == CELL_IS_EMPTY:
-		var fallTileLocal = Vector2i(map_to_local(fallTile))
-		var newInfoPoint = PointInfo.createPointInfo(-10000,fallTileLocal)
-		newInfoPoint.isFallTile = true
-		return newInfoPoint
+	if existing_point_id == CELL_IS_EMPTY:
+		var local_fall_cell = Vector2i(map_to_local(fall_cell))
+		var new_point_info = PointInfo.createPointInfo(-10000,local_fall_cell)
+		new_point_info.isFallTile = true
+		return new_point_info
 	# 如果这个点存在
 	else:
-		return get_point_info_by_id(existingPointId)
+		return get_point_info_by_id(existing_point_id)
 
 #endregion
 
 #region 辅助函数
+
+func init_path_finder():
+	_used_cells = outer_tilemap_layer.get_used_cells() + water_tilemap_layer.get_used_cells()
+	_point_info_array = []
+	_astar_graph = AStar2D.new()
+	## 在ready时调用该函数无效
+	for point in get_children():
+		remove_child(point)
+		point.queue_free()
+
 
 # 判断单位能否通过：如果瓷砖上单位所占格数（unit_cells）的格子都为空，才返回true
 func can_unit_pass(tile:Vector2i)->bool:
@@ -306,15 +279,15 @@ func get_point_info_by_id(point_id:int)->PointInfo:
 			return point_info
 	return null
 
-# 判断一个局部坐标是否在图中 
-func is_cell_already_exist_in_graph(tile:Vector2i)->int:
-	var localPos = map_to_local(tile)
+# 判断一个地图坐标是否有对应的点，如有，返回其ID，如无，返回CELL_IS_EMPTY
+func is_cell_already_exist_in_graph(cell:Vector2i)->int:
+	var local_pos = map_to_local(cell)
 	
 	if (_astar_graph.get_point_count() > 0):
-		var pointId = _astar_graph.get_closest_point(localPos)
+		var point_id = _astar_graph.get_closest_point(local_pos)
 		
-		if _astar_graph.get_point_position(pointId) == localPos:
-			return pointId
+		if _astar_graph.get_point_position(point_id) == local_pos:
+			return point_id
 	
 	return CELL_IS_EMPTY
 
@@ -324,22 +297,9 @@ func get_point_info_by_cell(cell:Vector2i)->PointInfo:
 		if point_info.Position == map_to_local(cell):
 			return point_info
 	return null
-#region 寻找【坠落点】的辅助函数
-# 获取开始坠落的点 
-func get_start_scan_cell_for_fall_point(cell:Vector2i,dir:FallDirType)->Vector2i:
-	var above_cell = cell + Vector2i(0,-1)
-	var point_info = get_point_info_by_cell(above_cell)
-	
-	if point_info == null:return VECTOR2I_NULL
-	
-	var scan_cell = VECTOR2I_NULL
-	
-	if isLeftEdgeWithoutWall(point_info) and dir == FallDirType.LEFT:
-		scan_cell = cell + Vector2i(-1,-1)
-	elif isRightEdgeWithoutWall(point_info) and dir == FallDirType.RIGHT:
-		scan_cell = cell + Vector2i(1,-1)
-	return scan_cell
 
+func get_point_info_down_cell(point_info:PointInfo)->Vector2i:
+	return local_to_map(point_info.Position) + Vector2i.DOWN
 
 # 从开始坠落的点下坠直到平台 
 func find_fall_point_info_cell(scan:Vector2i)->Vector2i:
@@ -349,7 +309,7 @@ func find_fall_point_info_cell(scan:Vector2i)->Vector2i:
 	var scan_cell:Vector2i = scan
 	var fall_cell:Vector2i = VECTOR2I_NULL
 	for i in MAX_TILE_FALL_SCAN_DEPTH:
-		if !is_cell_empty(scan_cell + Vector2i(0,1)):
+		if !is_cell_empty(scan_cell + Vector2i.DOWN):
 			fall_cell = scan_cell
 			break
 		scan_cell.y += 1
@@ -358,35 +318,38 @@ func find_fall_point_info_cell(scan:Vector2i)->Vector2i:
 	if !can_unit_pass(fall_cell):
 		return VECTOR2I_NULL
 	return fall_cell
-
-#endregion 
+	
 #region 判断边缘点是否是wall
-func isLeftEdgeWithoutWall(p1:PointInfo)->bool:
-	if !p1.isLeftEdge:
+func is_left_edge_without_wall(point_info:PointInfo)->bool:
+	if !point_info.isLeftEdge:
 		return false
-	var tile = local_to_map(p1.Position) + Vector2i(0,1)
-	if isTileWall(tile + Vector2i(-1,0)):
-		return false
-	return true
-
-func isRightEdgeWithoutWall(p1:PointInfo)->bool:
-	if !p1.isRightEdge:
-		return false
-	var tile = local_to_map(p1.Position) + Vector2i(0,1)
-	if isTileWall(tile + Vector2i(1,0)):
+	var cell = get_point_info_down_cell(point_info)
+	if is_cell_wall(cell + Vector2i.LEFT):
 		return false
 	return true
 
-func isTileWall(tile:Vector2i)->bool:
-	if !is_cell_empty(tile) and !can_unit_pass(tile):
+func is_right_edge_without_wall(point_info:PointInfo)->bool:
+	if !point_info.isRightEdge:
+		return false
+	var cell = get_point_info_down_cell(point_info)
+	if is_cell_wall(cell + Vector2i.RIGHT):
+		return false
+	return true
+
+func is_cell_wall(cell:Vector2i)->bool:
+	if !is_cell_empty(cell) and !can_unit_pass(cell):
 		return true
 	return false
 
 #endregion
+#region tilemap的函数
 # 考虑到“水”和外层地图的position一致，其map_to_local相等
-func map_to_local(tile:Vector2i)->Vector2:
-	return outer_tilemap_layer.map_to_local(tile)
+func map_to_local(cell:Vector2i)->Vector2:
+	return outer_tilemap_layer.map_to_local(cell)
 
 func local_to_map(pos:Vector2)->Vector2i:
 	return outer_tilemap_layer.local_to_map(pos)
+
+#endregion
+
 #endregion
