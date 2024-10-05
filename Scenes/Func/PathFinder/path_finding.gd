@@ -2,28 +2,30 @@ class_name TransversePathFinder
 extends Node2D
 
 class PointInfo:
-	var isFallTile:bool
-	var isLeftEdge:bool
-	var isRightEdge:bool
-	var isPositionPoint:bool
-	var PointID:int
-	var Position:Vector2
+	var is_fall_point:bool
+	var is_left_edge_point:bool
+	var is_right_edge_point:bool
+	var is_position_point:bool
+	var point_id:int
+	var point_pos:Vector2
 	
-	enum SetType {FALL,LEFT_EDGE,RIGHT_EDGE}
+	enum SetType {FALL,LEFT_EDGE,RIGHT_EDGE,POSITION}
 	
 	func set_type(type:SetType):
 		match type:
 			SetType.FALL:
-				isFallTile = true
+				is_fall_point = true
 			SetType.LEFT_EDGE:
-				isLeftEdge = true
+				is_left_edge_point = true
 			SetType.RIGHT_EDGE:
-				isRightEdge = true
+				is_right_edge_point = true
+			SetType.POSITION:
+				is_position_point = true
 	
-	static func createPointInfo(pointID:int,position:Vector2i)->PointInfo:
+	static func createPointInfo(point_id:int,position:Vector2i)->PointInfo:
 		var new_point_info = PointInfo.new()
-		new_point_info.PointID = pointID
-		new_point_info.Position = position
+		new_point_info.point_id = point_id
+		new_point_info.point_pos = position
 		return new_point_info
 
 @export_category("Data")
@@ -107,7 +109,7 @@ func add_right_edge_point(tile:Vector2i):
 		add_point_by_cell(tileAbove,PointInfo.SetType.RIGHT_EDGE,Color("#ffcd75"))
 
 func add_fall_point(edge_point:PointInfo):
-	var point_tile_cell = local_to_map(edge_point.Position) + Vector2i.DOWN
+	var point_tile_cell = local_to_map(edge_point.point_pos) + Vector2i.DOWN
 	# 左边找点
 	if is_left_edge_without_wall(edge_point):
 		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.LEFT
@@ -143,20 +145,20 @@ func connect_points():
 		connect_fall_points(point_info)
 
 func connect_horizontal_points(front_point:PointInfo):
-	if front_point.isLeftEdge  || front_point.isFallTile:
+	if front_point.is_left_edge_point  || front_point.is_fall_point:
 		var closest_point:PointInfo = null
 		
 		for p2 in _point_info_array:
-			if front_point.PointID == p2.PointID:continue
-			if (p2.isRightEdge || p2.isFallTile) && p2.Position.y == front_point.Position.y && p2.Position.x > front_point.Position.x:
+			if front_point.point_id == p2.point_id:continue
+			if (p2.is_right_edge_point || p2.is_fall_point) && p2.point_pos.y == front_point.point_pos.y && p2.point_pos.x > front_point.point_pos.x:
 				if closest_point == null:
-					closest_point = PointInfo.createPointInfo(p2.PointID,p2.Position)
-				if p2.Position.x < closest_point.Position.x:
-					closest_point.Position = p2.Position
-					closest_point.PointID = p2.PointID
+					closest_point = PointInfo.createPointInfo(p2.point_id,p2.point_pos)
+				if p2.point_pos.x < closest_point.point_pos.x:
+					closest_point.point_pos = p2.point_pos
+					closest_point.point_id = p2.point_id
 		
 		if closest_point != null:
-			if !is_not_horizontal_connection_can_be_made(Vector2i(front_point.Position),Vector2i(closest_point.Position)):
+			if !is_not_horizontal_connection_can_be_made(Vector2i(front_point.point_pos),Vector2i(closest_point.point_pos)):
 				connect_two_point(front_point,closest_point,Color(0,1,0,1))
 
 # 是否允许两点之间横向连线 
@@ -172,7 +174,7 @@ func is_not_horizontal_connection_can_be_made(p1:Vector2i,p2:Vector2i)->bool:
 func connect_fall_points(point_info:PointInfo):
 	# 左边寻找
 	if is_left_edge_without_wall(point_info):
-		var point_tile_cell = local_to_map(point_info.Position) + Vector2i.DOWN
+		var point_tile_cell = local_to_map(point_info.point_pos) + Vector2i.DOWN
 		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.LEFT
 		var fall_point_cell:Vector2i = find_fall_point_info_cell(scan_cell)
 		if fall_point_cell != VECTOR2I_NULL:
@@ -180,7 +182,7 @@ func connect_fall_points(point_info:PointInfo):
 			connect_two_point(point_info,fall_point_info,Color(1,1,0,1))
 	# 右边寻找
 	if is_right_edge_without_wall(point_info):
-		var point_tile_cell = local_to_map(point_info.Position) + Vector2i.DOWN
+		var point_tile_cell = local_to_map(point_info.point_pos) + Vector2i.DOWN
 		var scan_cell:Vector2i = point_tile_cell + Vector2i.UP + Vector2i.RIGHT
 		var fall_point_cell:Vector2i = find_fall_point_info_cell(scan_cell)
 		if fall_point_cell != VECTOR2I_NULL:
@@ -189,8 +191,8 @@ func connect_fall_points(point_info:PointInfo):
 
 
 func connect_two_point(front_point:PointInfo,back_point:PointInfo,line_color:Color):
-	_astar_graph.connect_points(front_point.PointID,back_point.PointID)
-	draw_debug_line(front_point.Position,back_point.Position,line_color)
+	_astar_graph.connect_points(front_point.point_id,back_point.point_id)
+	draw_debug_line(front_point.point_pos,back_point.point_pos,line_color)
 
 #endregion
 
@@ -215,13 +217,13 @@ func get_plaform_2d_path(start_pos:Vector2,end_pos:Vector2)->ExtendGDScript.Stac
 		if i == 0 && id_path_array_size >= 2:
 			var second_path_point = get_point_info_by_id(id_path_array[i+1])
 			
-			if start_point.Position.distance_to(second_path_point.Position) < curr_point.Position.distance_to(second_path_point.Position):
+			if start_point.point_pos.distance_to(second_path_point.point_pos) < curr_point.point_pos.distance_to(second_path_point.point_pos):
 				path_stack.push(start_point)
 				continue
 		elif i == id_path_array_size - 1 && id_path_array_size >= 2:
 			var penultimate_point = get_point_info_by_id(id_path_array[i - 1])
 			
-			if end_point.Position.distance_to(penultimate_point.Position) < curr_point.Position.distance_to(penultimate_point.Position):
+			if end_point.point_pos.distance_to(penultimate_point.point_pos) <= curr_point.point_pos.distance_to(penultimate_point.point_pos):
 				continue
 			else:
 				path_stack.push(curr_point)
@@ -230,7 +232,8 @@ func get_plaform_2d_path(start_pos:Vector2,end_pos:Vector2)->ExtendGDScript.Stac
 	path_stack.push(end_point)
 	return ExtendGDScript.Stack.ReversePathStack(path_stack)
 
-# 与原先不同的是，我要达到的目的是找到最下面的一个点，这在游戏中肯定存在（不过最好写上不存在的处理方法） 
+# 要找到最下面的点，这个点的x与原坐标一致，但y与平台上的点一致，如有相同的返回那个点，如无就创建新的点
+# 可能并不需要判断点是否已存在,并且position也不需要Vector2i，这个之后再看吧
 func get_bottom_point_info_by_position(pos:Vector2)->PointInfo:
 	var cell:Vector2i = local_to_map(pos)
 	# 找到下面的坠落点
@@ -238,13 +241,15 @@ func get_bottom_point_info_by_position(pos:Vector2)->PointInfo:
 	var existing_point_id = is_cell_already_exist_in_graph(fall_cell)
 	# 如果这个点不存在
 	if existing_point_id == CELL_IS_EMPTY:
-		var local_fall_cell = Vector2i(map_to_local(fall_cell))
+		var local_fall_cell = Vector2i(pos.x,map_to_local(fall_cell).y)
 		var new_point_info = PointInfo.createPointInfo(-10000,local_fall_cell)
-		new_point_info.isFallTile = true
+		new_point_info.set_type(PointInfo.SetType.POSITION)
 		return new_point_info
 	# 如果这个点存在
 	else:
-		return get_point_info_by_id(existing_point_id)
+		var exiting_point_info = get_point_info_by_id(existing_point_id)
+		exiting_point_info.set_type(PointInfo.SetType.POSITION)
+		return exiting_point_info
 
 #endregion
 
@@ -275,7 +280,7 @@ func is_cell_empty(cell:Vector2i)->bool:
 # 根据id找到数组中的PointInfo 【注意，这里默认能够找到且只找到一个！】
 func get_point_info_by_id(point_id:int)->PointInfo:
 	for point_info in _point_info_array:
-		if point_info.PointID == point_id:
+		if point_info.point_id == point_id:
 			return point_info
 	return null
 
@@ -294,12 +299,12 @@ func is_cell_already_exist_in_graph(cell:Vector2i)->int:
 # 通过坐标获取PointInfo 
 func get_point_info_by_cell(cell:Vector2i)->PointInfo:
 	for point_info in _point_info_array:
-		if point_info.Position == map_to_local(cell):
+		if point_info.point_pos == map_to_local(cell):
 			return point_info
 	return null
 
 func get_point_info_down_cell(point_info:PointInfo)->Vector2i:
-	return local_to_map(point_info.Position) + Vector2i.DOWN
+	return local_to_map(point_info.point_pos) + Vector2i.DOWN
 
 # 从开始坠落的点下坠直到平台 
 func find_fall_point_info_cell(scan:Vector2i)->Vector2i:
@@ -321,7 +326,7 @@ func find_fall_point_info_cell(scan:Vector2i)->Vector2i:
 	
 #region 判断边缘点是否是wall
 func is_left_edge_without_wall(point_info:PointInfo)->bool:
-	if !point_info.isLeftEdge:
+	if !point_info.is_left_edge_point:
 		return false
 	var cell = get_point_info_down_cell(point_info)
 	if is_cell_wall(cell + Vector2i.LEFT):
@@ -329,7 +334,7 @@ func is_left_edge_without_wall(point_info:PointInfo)->bool:
 	return true
 
 func is_right_edge_without_wall(point_info:PointInfo)->bool:
-	if !point_info.isRightEdge:
+	if !point_info.is_right_edge_point:
 		return false
 	var cell = get_point_info_down_cell(point_info)
 	if is_cell_wall(cell + Vector2i.RIGHT):
