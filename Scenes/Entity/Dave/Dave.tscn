@@ -27,10 +27,27 @@ char_body = NodePath("..")
 
 [node name="MoveCast" type="Node2D" parent="Move"]
 
-[node name="WallCheck" type="RayCast2D" parent="Move/MoveCast"]
+[node name="WallCheck" type="Node2D" parent="Move/MoveCast"]
+
+[node name="WallRightDownCheck" type="RayCast2D" parent="Move/MoveCast/WallCheck"]
 unique_name_in_owner = true
 position = Vector2(0, -4)
 target_position = Vector2(10, -0.25)
+
+[node name="WallRightUpCheck" type="RayCast2D" parent="Move/MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+target_position = Vector2(10, -0.25)
+
+[node name="WallLeftDownCheck" type="RayCast2D" parent="Move/MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+target_position = Vector2(-10, -0.25)
+
+[node name="WallLeftUpCheck" type="RayCast2D" parent="Move/MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+target_position = Vector2(-10, -0.25)
 
 [node name="LadderCheck" type="RayCast2D" parent="Move/MoveCast"]
 unique_name_in_owner = true

@@ -1,11 +1,10 @@
 extends Node2D
 
-
-
-
 @onready var lateral_movement_timer: Timer = %LateralMovementTimer
-@onready var image: Sprite2D = %Image
-@onready var wall_check: RayCast2D = %WallCheck
+@onready var wall_right_down_check: RayCast2D = %WallRightDownCheck
+@onready var wall_right_up_check: RayCast2D = %WallRightUpCheck
+@onready var wall_left_down_check: RayCast2D = %WallLeftDownCheck
+@onready var wall_left_up_check: RayCast2D = %WallLeftUpCheck
 @onready var ladder_check: RayCast2D = %LadderCheck
 @onready var water_check: RayCast2D = %WaterCheck
 
@@ -14,14 +13,16 @@ extends Node2D
 @export var can_move:bool = true
 var water_layer
 var top_water:AnimaWater
-var velocity:Vector2
+var char_velocity:Vector2
+var char_rotation_degrees:float
+var char_face_dir:int = 1
 
 
 @export_group("LateralMove")
 ## 横向移动最大速度
-@export var speed:float = 100
+@export var lateral_speed:float = 100
 ## 横向移动加速度
-@export var speed_acceleration:float = 120
+@export var lateral_speed_acceleration:float = 120
 ## 横向移动小小跳
 @export var lateral_small_jump:float = 30
 ## 横向移动小跳
@@ -61,7 +62,6 @@ var can_clamp:bool = true
 ## 图像中心点偏移量
 @export var water_sprite_offect_distance:float = -8
 var in_water:bool
-var has_balloon:bool
 
 
 func _ready() -> void:
@@ -70,39 +70,29 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	if can_move:
-		velocity = char_body.velocity
+		char_velocity = char_body.velocity
+		char_rotation_degrees = char_body.rotation_degrees
+		
+		move_dir_control(delta)
 		
 		var lateral_direction := Input.get_axis("move_left", "move_right")
 		lateral_move(lateral_direction,delta)
 		
 		lengthwise_move(delta)
-		#print(velocity)
-		char_body.velocity = velocity
+		
+		
+		move_deflexion_control(delta)
+		
+		char_body.velocity = char_velocity
+		char_body.rotation_degrees = char_rotation_degrees
 		char_body.move_and_slide()
 	
-	#position = position.round() # 防止抖动，但效果不大
-	pass
-
+	position = position.round() # 防止抖动
 
 #region 横移移动 
 
 func lateral_move(lateral_direction:int,delta:float):
-	if has_balloon:
-		lateral_move_with_ballon(delta)
-		return
-	
 	if lateral_direction:
-		# 设置图像等方向
-		image.flip_h = false if lateral_direction == 1 else true
-		wall_check.scale = Vector2(1,1) if lateral_direction == 1 else Vector2(-1,-1)
-		
-		# 偏转角度，先判断是否有障碍，如有，回正（遇到障碍的回正似乎是上面先接触，然后下面再靠过来）
-		var deflection_factor:float = 1.0 if (!is_clamping and !water_check.is_colliding()) else 0.5
-		if wall_check.is_colliding():
-			char_body.rotation_degrees = move_toward(char_body.rotation_degrees,0,100*delta)
-		else:
-			char_body.rotation_degrees = move_toward(char_body.rotation_degrees,move_rotation_degrees * lateral_direction * deflection_factor,100*delta)
-		
 		# 水的影响
 		var water_move_foctor = 0.75 if water_check.is_colliding() else 1.0
 		# 如果刚刚开始，就开始计时，并小跳小移动
@@ -110,41 +100,31 @@ func lateral_move(lateral_direction:int,delta:float):
 			lateral_movement_timer.start(lateral_input_max_time)
 			is_lateral_moving = true
 			lateral_jump(lateral_small_jump)
-			#velocity.x = move_toward(velocity.x, lateral_direction * speed * 0.2, speed_acceleration)
-			velocity.x = lateral_direction * speed * 0.2
+			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * 0.2, lateral_speed_acceleration)
 			
 		# 如果计时超过时间，就大跳，直到横移结束归0
 		elif is_lateral_moving and lateral_movement_timer.time_left <= lateral_input_max_time - lateral_input_gap_time:
 			lateral_jump(lateral_common_jump)
-			#velocity.x = move_toward(velocity.x, lateral_direction * speed * water_move_foctor, speed_acceleration)
-			velocity.x = lateral_direction * speed * water_move_foctor
+			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * water_move_foctor, lateral_speed_acceleration)
 		
 	else:
 		is_lateral_moving = false
-		velocity.x = move_toward(velocity.x, 0, 500*delta)
-		char_body.rotation_degrees = move_toward(char_body.rotation_degrees,0,100*delta)
+		char_velocity.x = move_toward(char_velocity.x, 0, 500*delta)
 
 func lateral_jump(jump_force:float):
-	if char_body.is_on_floor() and !wall_check.is_colliding():
-		velocity.y = -jump_force
+	if char_body.is_on_floor() and !is_meet_wall():
+		char_velocity.y = -jump_force
 
-# 保留给气球用
-func lateral_move_with_ballon(delta:float):
-	pass
 
 #endregion
 
 #region 纵向移动
 func lengthwise_move(delta:float):
-	if has_balloon:
-		velocity.y = -300
-		return
-	
 	if can_reset_jump_times():
 		current_jump_times = jump_times
 
 	if !in_water and water_check.is_colliding():
-		velocity.y = water_init_speed 
+		char_velocity.y = water_init_speed 
 		current_jump_times = 0
 		can_clamp = false
 
@@ -165,27 +145,27 @@ func lengthwise_move(delta:float):
 		top_water = null
 	
 	if not char_body.is_on_floor() and !is_clamping and !in_water:
-		velocity.y += length_down_speed * delta
+		char_velocity.y += length_down_speed * delta
 	elif in_water and top_water:
 		float_in_water(delta)
 
 func float_in_water(delta:float):
 	var center_horizon:float = top_water.global_position.y
 	var offect_distance:float = water_sprite_offect_distance
-	velocity.y += water_down_speed * delta
+	char_velocity.y += water_down_speed * delta
 	if global_position.y + offect_distance > center_horizon:
-		velocity.y = -water_up_speed
+		char_velocity.y = -water_up_speed
 		current_jump_times = jump_times
 		can_clamp = true
 
 func climb_ladder(delta:float):
-	velocity.y = -clamp_velocity
+	char_velocity.y = -clamp_velocity
 
 func big_jump(delta:float):
-	velocity.y = -jump_velocity
+	char_velocity.y = -jump_velocity
 	if current_jump_times == 1:
-		if !wall_check.is_colliding():
-			velocity.x += jump_lateral_move * wall_check.scale.x
+		if !wall_right_down_check.is_colliding():
+			char_velocity.x += jump_lateral_move * char_face_dir
 		make_turn()
 	current_jump_times -= 1
 
@@ -199,7 +179,46 @@ func can_reset_jump_times()->bool:
 
 func make_turn():
 	var tween = get_tree().create_tween()
-	tween.tween_property(char_body.image,"rotation_degrees",360 * wall_check.scale.x ,turn_time)
+	tween.tween_property(char_body.image,"rotation_degrees",360 * char_face_dir ,turn_time)
 	char_body.image.rotation_degrees = 0
+
+#endregion
+
+#region 偏转控制
+
+# 机制
+# 三种模式：竖直、偏转、平躺
+# “竖直”发生在没有横向位移的时候。当“偏转”遇到障碍时也会变为“竖直”。
+# “偏转”发生在有横向位移的时候。在二段跳时有额外的翻转一圈，但不在这里考量。
+# “平躺”独立与这两种模式，优先级最高。前倾90度。
+# 偏转程度与横向速度有关。有可能不进行三个状态的划分而是一个公式解决。
+
+func move_dir_control(delta:float):
+	if char_velocity.x > 0:
+		char_body.image.flip_h = false
+		char_face_dir = 1
+	elif char_velocity.x < 0:
+		char_body.image.flip_h = true
+		char_face_dir = -1
+
+func move_deflexion_control(delta:float):
+	var curr_speed:float = char_velocity.x
+	
+	# 根据speed来决定偏转大小，根据speed和dir来决定偏转方向
+	# 超过横向速度最大值，就直接偏转90度。
+	var lateral_speed_ratio = (curr_speed/lateral_speed)
+	var deflexion_angle = min(90,abs(move_rotation_degrees * lateral_speed_ratio)) * char_face_dir
+	#print("lateral_speed_ratio:",lateral_speed_ratio)
+	if is_meet_wall():
+		char_rotation_degrees = 0
+	else:
+		char_rotation_degrees = move_toward(char_rotation_degrees,deflexion_angle,rotation_change_speed*delta)
+
+func is_meet_wall()->bool:
+	if wall_right_down_check.is_colliding() or wall_right_up_check.is_colliding():
+		return true
+	if wall_left_down_check.is_colliding() or wall_left_up_check.is_colliding():
+		return true
+	return false
 
 #endregion
