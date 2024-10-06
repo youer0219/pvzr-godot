@@ -86,8 +86,7 @@ func _physics_process(delta: float) -> void:
 		char_body.velocity = char_velocity
 		char_body.rotation_degrees = char_rotation_degrees
 		char_body.move_and_slide()
-	
-	position = position.round() # 防止抖动
+
 
 #region 横移移动 
 

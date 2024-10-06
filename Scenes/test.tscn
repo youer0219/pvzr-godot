@@ -53,7 +53,13 @@ physics_interpolation_mode = 1
 zoom = Vector2(4.7, 4.7)
 process_callback = 0
 position_smoothing_enabled = true
-position_smoothing_speed = 4.0
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.24
+drag_top_margin = 0.24
+drag_right_margin = 0.24
+drag_bottom_margin = 0.24
 
 [node name="地图" type="Node2D" parent="."]
 
