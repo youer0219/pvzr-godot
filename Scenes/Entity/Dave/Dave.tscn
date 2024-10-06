@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/Entity/Dave/dave.gd" id="1_d2ren"]
 [ext_resource type="Texture2D" uid="uid://ck8w1qlnq7yr6" path="res://assets/实体/戴夫/大佬戴夫.png" id="2_heisa"]
-[ext_resource type="Script" path="res://Scenes/Func/Move/move.gd" id="3_6xfo8"]
+[ext_resource type="Script" path="res://Scenes/Func/Move/test_move.gd" id="3_048ek"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t70m5"]
 radius = 5.0
@@ -22,7 +22,7 @@ position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_t70m5")
 
 [node name="Move" type="Node2D" parent="." node_paths=PackedStringArray("char_body")]
-script = ExtResource("3_6xfo8")
+script = ExtResource("3_048ek")
 char_body = NodePath("..")
 
 [node name="MoveCast" type="Node2D" parent="Move"]

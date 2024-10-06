@@ -1,5 +1,5 @@
 extends TileMapLayer
-
+class_name WaterLayer
 
 # 找到所有第一排的“水”
 # 使之浮动
@@ -17,6 +17,8 @@ func _on_child_order_changed() -> void:
 		set_top_waters()
 
 func find_top_water(ori_water:AnimaWater)->AnimaWater:
+	if ori_water == null:
+		return null
 	var top_water:AnimaWater
 	var cell:Vector2i = local_to_map(ori_water.position)
 	var cells:Array[Vector2i] = get_used_cells()

@@ -10,10 +10,12 @@ extends Node2D
 
 const MAX_FALL_VELOCITY := 300
 
+enum State {COMMON,IN_WATER}
+
 ## 移动实体
 @export var char_body:CharacterBody2D
 @export var can_move:bool = true
-var water_layer
+var water_layer:WaterLayer
 var top_water:AnimaWater
 var char_velocity:Vector2
 var char_rotation_degrees:float
@@ -22,13 +24,13 @@ var char_face_dir:int = 1
 
 @export_group("LateralMove")
 ## 横向移动最大速度
-@export var lateral_speed:float = 100
+@export var lateral_speed:float = 90
 ## 横向移动加速度
-@export var lateral_speed_acceleration:float = 120
+@export var lateral_speed_acceleration:float = 100
 ## 横向移动小小跳
 @export var lateral_small_jump:float = 30
 ## 横向移动小跳
-@export var lateral_common_jump:float = 80
+@export var lateral_common_jump:float = 70
 @export_range(0.05,0.18) var lateral_input_gap_time:float = 0.15
 var lateral_input_max_time:float = 0.2
 var is_lateral_moving:bool
@@ -59,18 +61,17 @@ var can_clamp:bool = true
 @export_group("Water")
 ## 在水中的下落速度
 @export var water_init_speed:float = 4
-@export var water_down_speed:float = 30
-@export var water_up_speed:float = 40
+@export var water_down_speed:float = 65
+@export var water_up_speed:float = 30
 ## 图像中心点偏移量
-@export var water_sprite_offect_distance:float = -8
-var in_water:bool
+@export var water_sprite_offect_distance:float = -4
+
 
 
 func _ready() -> void:
 	water_layer = get_tree().get_first_node_in_group("water_layer")
 
 func _physics_process(delta: float) -> void:
-	
 	if can_move:
 		char_velocity = char_body.velocity
 		char_rotation_degrees = char_body.rotation_degrees
@@ -122,12 +123,7 @@ func lateral_jump(jump_force:float):
 #region 纵向移动
 func lengthwise_move(delta:float):
 	if can_reset_jump_times():
-		current_jump_times = jump_times
-
-	if !in_water and is_in_water():
-		char_velocity.y = water_init_speed 
-		current_jump_times = 0
-		can_clamp = false
+		reset_jump_times()
 
 	if ladder_check.is_colliding() and Input.is_action_pressed("move_up") and can_clamp:
 		climb_ladder(delta)
@@ -138,17 +134,9 @@ func lengthwise_move(delta:float):
 	else:
 		is_clamping = false
 	
-	in_water = is_in_water()
+	update_water_state()
 	
-	if in_water and !top_water:
-		top_water = water_layer.find_top_water(water_check.get_collider().owner)
-	elif !in_water:
-		top_water = null
-	
-	if not char_body.is_on_floor() and !is_clamping and !in_water:
-		char_velocity.y += length_down_speed * delta
-	elif in_water and top_water:
-		float_in_water(delta)
+	char_velocity.y += get_gravity(delta)
 
 func float_in_water(delta:float):
 	var center_horizon:float = top_water.global_position.y
@@ -170,12 +158,21 @@ func big_jump(delta:float):
 		make_turn()
 	current_jump_times -= 1
 
+func clear_jump_times():
+	current_jump_times = 0
+
+func reset_jump_times():
+	current_jump_times = jump_times
+
 func can_reset_jump_times()->bool:
 	if char_body.is_on_floor():
 		return true
-	if ladder_check.is_colliding() and !in_water:
+	if ladder_check.is_colliding() and !is_in_water():
 		return true
-	
+	#if is_in_water() and top_water:
+		#var water_center_horizon:float = top_water.global_position.y
+		#if global_position.y + water_sprite_offect_distance > water_center_horizon:
+			#return true
 	return false
 
 func make_turn():
@@ -209,7 +206,6 @@ func move_deflexion_control(delta:float):
 	# 超过横向速度最大值，就直接偏转90度。
 	var lateral_speed_ratio = (curr_speed/lateral_speed)
 	var deflexion_angle = min(90,abs(move_rotation_degrees * lateral_speed_ratio)) * char_face_dir
-	#print("lateral_speed_ratio:",lateral_speed_ratio)
 	if is_meet_wall():
 		char_rotation_degrees = 0
 	else:
@@ -229,15 +225,41 @@ func is_meet_wall()->bool:
 ## 空中对应地板，水中也需要设置一个地板
 ## 水中地板以上下沉，地板以下立即给一个向上的速度
 
-func apply_gravity(delta:float):
+func update_water_state():
+	# 只有刚进入水时才需要获取一下top-water
+	# 离开水时自动把top-water清空
+	# 所以没有top-water说明他离开过水了
+	if !is_in_water():
+		top_water = null
+	elif is_just_in_water():
+		top_water = water_layer.find_top_water(water_check.get_collider().owner)
+		char_velocity.y = water_init_speed
+		can_clamp = false
+		clear_jump_times()
+
+func get_gravity(delta:float)->float:
 	if is_in_water():
-		pass
-	elif !char_body.is_on_floor() and !is_clamping and !in_water:
-		char_velocity.y = min(MAX_FALL_VELOCITY,char_velocity.y + length_down_speed * delta)
+		var water_center_horizon:float = top_water.global_position.y
+		if global_position.y + water_sprite_offect_distance > water_center_horizon:
+			char_velocity.y = -water_up_speed
+			can_clamp = true
+			reset_jump_times()
+			return 0
+		else:
+			return water_down_speed * delta
+	elif is_in_air_without_clamp_and_water():
+		return length_down_speed * delta
+	else:
+		return 0
 
 func is_in_water()->bool:
 	return water_check.is_colliding()
 
+func is_just_in_water()->bool:
+	return !top_water and is_in_water()
+
+func is_in_air_without_clamp_and_water()->bool:
+	return !char_body.is_on_floor() and !is_clamping and !is_in_water()
 
 ## 爬行和跳跃的条件控制
 ## 横移时的小跳：当碰到墙或在水中时不进行

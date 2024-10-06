@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=13 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
-[ext_resource type="Texture2D" uid="uid://kitbpay12n5e" path="res://assets/瓦片地图/池砖.png" id="7_h606o"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/path_finding.tscn" id="9_73auh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
@@ -35,18 +34,11 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ecbsv"]
-texture = ExtResource("7_h606o")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_4e2vc"]
-sources/0 = SubResource("TileSetAtlasSource_ecbsv")
-
 [node name="Test" type="Node2D"]
 script = ExtResource("1_y4jx2")
 
 [node name="戴夫" parent="." instance=ExtResource("6_k6k4w")]
-position = Vector2(-772, 126)
+position = Vector2(-187, 109)
 
 [node name="Camera2D" type="Camera2D" parent="戴夫"]
 physics_interpolation_mode = 1
@@ -89,11 +81,6 @@ tile_map_data = PackedByteArray("AAAAAAkAAQAAAAAAAAABAAkAAQAAAAAAAAACAAkAAQAAAAA
 tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAMAAAAAAAAAAQADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQD8/wUAAAAAAAAAAQD8/wQAAAAAAAAAAQD8/wMAAAAAAAAAAQD8/wIAAAAAAAAAAQA=")
 
 [node name="water" type="Node2D" parent="地图"]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="地图/water"]
-z_index = -1
-tile_map_data = PackedByteArray("AAD4/wYAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wYAAAAAAAAAAAD7/wYAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAD7/wcAAAAAAAAAAAD6/wcAAAAAAAAAAAD5/wcAAAAAAAAAAAD4/wcAAAAAAAAAAAD4/wgAAAAAAAAAAAD5/wgAAAAAAAAAAAD6/wgAAAAAAAAAAAD8/wgAAAAAAAAAAAD7/wgAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_4e2vc")
 
 [node name="Water" type="CanvasGroup" parent="地图/water"]
 self_modulate = Color(1, 1, 1, 0.443137)
