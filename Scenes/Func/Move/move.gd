@@ -7,7 +7,6 @@ class_name Move
 @onready var wall_left_up_check: RayCast2D = %WallLeftUpCheck
 @onready var ladder_check: RayCast2D = %LadderCheck
 @onready var water_check: RayCast2D = %WaterCheck
-@onready var lateral_movement_timer: Timer = %LateralMovementTimer
 
 const MAX_FALL_VELOCITY := 200
 
@@ -22,19 +21,16 @@ var char_velocity:Vector2
 var char_rotation_degrees:float
 var char_face_dir:int = 1
 
+var move_factor:float = 1.0:get = get_move_factor
+@export var water_move_factor:float = 0.6
 
 @export_group("LateralMove")
 ## 横向移动最大速度
-@export var lateral_speed:float = 90
+@export var lateral_speed:float = 100
 ## 横向移动加速度
-@export var lateral_speed_acceleration:float = 2000
-## 横向移动小小跳
-@export var lateral_small_jump:float = 30
+@export var lateral_speed_acceleration:float = 600
 ## 横向移动小跳
-@export var lateral_common_jump:float = 60
-@export_range(0.05,0.18) var lateral_input_gap_time:float = 0.15
-var lateral_input_max_time:float = 0.2
-var is_lateral_moving:bool
+@export var lateral_move_jump:float = 60
 @export_subgroup("Deflexion")
 ## 偏转角度
 @export var move_rotation_degrees:int = 10
@@ -93,7 +89,9 @@ func move_by_input(delta:float):
 	
 	update_state_by_water()
 	move_deflexion_control(delta)
+	
 	apply_gravity(delta)
+	
 	char_body.velocity = char_velocity
 	char_body.rotation_degrees = char_rotation_degrees
 	char_body.move_and_slide()
@@ -101,29 +99,13 @@ func move_by_input(delta:float):
 #region 横移移动 
 
 func lateral_move(lateral_direction:int,delta:float):
-	if lateral_direction:
-		# 水的影响
-		var water_move_foctor = 0.75 if is_in_water() else 1.0
-		# 如果刚刚开始，就开始计时，并小跳小移动
-		if !is_lateral_moving:
-			lateral_movement_timer.start(lateral_input_max_time)
-			is_lateral_moving = true
-			lateral_jump(lateral_small_jump)
-			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * 0.2, lateral_speed_acceleration*delta)
-			
-		# 如果计时超过时间，就大跳，直到横移结束归0
-		elif is_lateral_moving and lateral_movement_timer.time_left <= lateral_input_max_time - lateral_input_gap_time:
-			lateral_jump(lateral_common_jump)
-			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * water_move_foctor, lateral_speed_acceleration*delta)
-		
-	else:
-		is_lateral_moving = false
-		char_velocity.x = move_toward(char_velocity.x, 0, 500*delta)
+	char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * move_factor, lateral_speed_acceleration*delta)
+	var lateral_velocity_ratio = abs(char_velocity.x) / lateral_speed
+	lateral_jump(lateral_move_jump * lateral_velocity_ratio)
 
 func lateral_jump(jump_force:float):
 	if is_on_floor() and !is_meet_wall():
 		char_velocity.y = -jump_force
-
 
 #endregion
 
@@ -221,9 +203,6 @@ func is_meet_wall()->bool:
 ## 空中对应地板，水中也需要设置一个地板
 ## 水中地板以上下沉，地板以下立即给一个向上的速度
 
-func apply_gravity(delta:float):
-	char_velocity.y = min(char_velocity.y +  get_gravity(delta),MAX_FALL_VELOCITY)
-
 func update_state_by_water():
 	# 只有刚进入水时才需要获取一下top-water
 	# 离开水时自动把top-water清空
@@ -234,7 +213,7 @@ func update_state_by_water():
 		can_clamp = true
 	elif is_just_in_water():
 		top_water = water_layer.find_top_water(water_check.get_collider().owner)
-		char_velocity.y = water_init_speed
+		char_velocity.y = min(water_init_speed,char_velocity.y)
 		is_sink_in_water = false
 		if !is_on_floor():
 			can_clamp = false
@@ -248,6 +227,9 @@ func update_state_by_water():
 	else:
 		is_sink_in_water = false
 
+func apply_gravity(delta:float):
+	char_velocity.y = min(char_velocity.y +  get_gravity(delta),MAX_FALL_VELOCITY)
+
 func get_gravity(delta:float)->float:
 	if is_in_water():
 		if !can_float or !is_sink_in_water:
@@ -258,6 +240,12 @@ func get_gravity(delta:float)->float:
 		return length_down_speed * delta
 	else:
 		return 0
+
+func get_move_factor():
+	move_factor = 1.0
+	if is_in_water():
+		move_factor *= water_move_factor
+	return move_factor
 
 func is_in_water()->bool:
 	return water_check.is_colliding()
