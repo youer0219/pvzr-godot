@@ -71,8 +71,6 @@ var is_sink_in_water:bool
 func _ready() -> void:
 	water_layer = get_tree().get_first_node_in_group("water_layer")
 
-func _physics_process(delta: float) -> void:
-	move_by_input(delta)
 
 func move_by_input(delta:float):
 	
@@ -137,8 +135,7 @@ func climb_ladder(delta:float):
 func big_jump(delta:float):
 	char_velocity.y = -jump_velocity
 	if current_jump_times == 1:
-		if !wall_right_down_check.is_colliding():
-			char_velocity.x += jump_lateral_move * char_face_dir
+		char_velocity.x += jump_lateral_move * char_face_dir
 		make_turn()
 	current_jump_times -= 1
 

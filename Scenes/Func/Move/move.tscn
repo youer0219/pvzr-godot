@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb6kp00inaup1"]
+
+[ext_resource type="Script" path="res://Scenes/Func/Move/move.gd" id="1_7itvk"]
+
+[node name="Move" type="Node2D" node_paths=PackedStringArray("char_body")]
+script = ExtResource("1_7itvk")
+char_body = NodePath("")
+
+[node name="MoveCast" type="Node2D" parent="."]
+
+[node name="WallCheck" type="Node2D" parent="MoveCast"]
+
+[node name="WallRightDownCheck" type="RayCast2D" parent="MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+target_position = Vector2(10, -0.25)
+
+[node name="WallRightUpCheck" type="RayCast2D" parent="MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+target_position = Vector2(10, -0.25)
+
+[node name="WallLeftDownCheck" type="RayCast2D" parent="MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+target_position = Vector2(-10, -0.25)
+
+[node name="WallLeftUpCheck" type="RayCast2D" parent="MoveCast/WallCheck"]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+target_position = Vector2(-10, -0.25)
+
+[node name="LadderCheck" type="RayCast2D" parent="MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+exclude_parent = false
+target_position = Vector2(0, 8)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="WaterCheck" type="RayCast2D" parent="MoveCast"]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+exclude_parent = false
+target_position = Vector2(0, 6)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
