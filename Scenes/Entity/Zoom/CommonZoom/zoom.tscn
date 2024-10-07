@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://urmmehrexiu8"]
+[gd_scene load_steps=4 format=3 uid="uid://urmmehrexiu8"]
+
+[ext_resource type="Texture2D" uid="uid://bv3ecietb3311" path="res://Scenes/Entity/Zoom/CommonZoom/assest/普通僵尸.png" id="1_e4vtb"]
+[ext_resource type="PackedScene" uid="uid://bb6kp00inaup1" path="res://Scenes/Func/Move/move.tscn" id="2_1s7q1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17vah"]
+radius = 4.0
+height = 26.0
 
 [node name="Zoom" type="CharacterBody2D"]
+collision_layer = 2
+
+[node name="Image" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+texture = ExtResource("1_e4vtb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_17vah")
+
+[node name="Move" parent="." node_paths=PackedStringArray("char_body") instance=ExtResource("2_1s7q1")]
+char_body = NodePath("..")
