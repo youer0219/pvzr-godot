@@ -27,11 +27,11 @@ var char_face_dir:int = 1
 ## 横向移动最大速度
 @export var lateral_speed:float = 90
 ## 横向移动加速度
-@export var lateral_speed_acceleration:float = 100
+@export var lateral_speed_acceleration:float = 2000
 ## 横向移动小小跳
 @export var lateral_small_jump:float = 30
 ## 横向移动小跳
-@export var lateral_common_jump:float = 70
+@export var lateral_common_jump:float = 60
 @export_range(0.05,0.18) var lateral_input_gap_time:float = 0.15
 var lateral_input_max_time:float = 0.2
 var is_lateral_moving:bool
@@ -66,6 +66,7 @@ var can_clamp:bool = true:
 @export var water_init_speed:float = 10
 @export var water_down_speed:float = 65
 @export var water_up_speed:float = 30
+@export var can_float:bool = true
 ## 图像中心点偏移量
 @export var water_sprite_offect_distance:float = -4
 var is_sink_in_water:bool
@@ -78,24 +79,24 @@ func _physics_process(delta: float) -> void:
 	move_by_input(delta)
 
 func move_by_input(delta:float):
+	
+	char_velocity = char_body.velocity
+	char_rotation_degrees = char_body.rotation_degrees
+	
+	move_dir_control(delta)
 	if can_move:
-		char_velocity = char_body.velocity
-		char_rotation_degrees = char_body.rotation_degrees
-		
-		move_dir_control(delta)
-		
 		var lateral_direction := Input.get_axis("move_left", "move_right")
 		lateral_move(lateral_direction,delta)
 		
 		var lengthwise_move_type:LengthwiseMoveType = get_lengthwise_move_type_by_input()
 		lengthwise_move(lengthwise_move_type,delta)
-		
-		update_state_by_water()
-		move_deflexion_control(delta)
-		apply_gravity(delta)
-		char_body.velocity = char_velocity
-		char_body.rotation_degrees = char_rotation_degrees
-		char_body.move_and_slide()
+	
+	update_state_by_water()
+	move_deflexion_control(delta)
+	apply_gravity(delta)
+	char_body.velocity = char_velocity
+	char_body.rotation_degrees = char_rotation_degrees
+	char_body.move_and_slide()
 
 #region 横移移动 
 
@@ -108,12 +109,12 @@ func lateral_move(lateral_direction:int,delta:float):
 			lateral_movement_timer.start(lateral_input_max_time)
 			is_lateral_moving = true
 			lateral_jump(lateral_small_jump)
-			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * 0.2, lateral_speed_acceleration)
+			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * 0.2, lateral_speed_acceleration*delta)
 			
 		# 如果计时超过时间，就大跳，直到横移结束归0
 		elif is_lateral_moving and lateral_movement_timer.time_left <= lateral_input_max_time - lateral_input_gap_time:
 			lateral_jump(lateral_common_jump)
-			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * water_move_foctor, lateral_speed_acceleration)
+			char_velocity.x = move_toward(char_velocity.x, lateral_direction * lateral_speed * water_move_foctor, lateral_speed_acceleration*delta)
 		
 	else:
 		is_lateral_moving = false
@@ -122,6 +123,7 @@ func lateral_move(lateral_direction:int,delta:float):
 func lateral_jump(jump_force:float):
 	if is_on_floor() and !is_meet_wall():
 		char_velocity.y = -jump_force
+
 
 #endregion
 
@@ -183,6 +185,7 @@ func make_turn():
 
 # 机制
 # 偏转程度与横向速度有关。有可能不进行三个状态的划分而是一个公式解决。
+# 状态：正常、平躺（戴夫受伤或气球状态）
 
 func move_dir_control(delta:float):
 	if char_velocity.x > 0:
@@ -238,18 +241,19 @@ func update_state_by_water():
 			clear_jump_times()
 	elif global_position.y + water_sprite_offect_distance > top_water.global_position.y:
 		is_sink_in_water = true
-		char_velocity.y = -water_up_speed
-		can_clamp = true
-		reset_jump_times()
+		if can_float:
+			char_velocity.y = -water_up_speed
+			can_clamp = true
+			reset_jump_times()
 	else:
 		is_sink_in_water = false
 
 func get_gravity(delta:float)->float:
 	if is_in_water():
-		if is_sink_in_water:
-			return 0
-		else:
+		if !can_float or !is_sink_in_water:
 			return water_down_speed * delta
+		else:
+			return 0
 	elif is_in_air_without_clamp_and_water():
 		return length_down_speed * delta
 	else:

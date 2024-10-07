@@ -38,7 +38,7 @@ shader_parameter/add_margins = true
 script = ExtResource("1_y4jx2")
 
 [node name="戴夫" parent="." instance=ExtResource("6_k6k4w")]
-position = Vector2(-25, 93)
+position = Vector2(-494, 142)
 
 [node name="Camera2D" type="Camera2D" parent="戴夫"]
 physics_interpolation_mode = 1

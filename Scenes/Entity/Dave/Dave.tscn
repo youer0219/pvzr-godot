@@ -73,3 +73,4 @@ collide_with_bodies = false
 unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
+one_shot = true
