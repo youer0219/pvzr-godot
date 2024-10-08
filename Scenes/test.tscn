@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
-[ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/path_finding.tscn" id="9_73auh"]
+[ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/path_finder.tscn" id="9_73auh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
 shader = ExtResource("1_n8kdf")
@@ -96,7 +96,8 @@ self_modulate = Color(1, 1, 1, 0.443137)
 [node name="WaterLayer" parent="地图/water/Water" instance=ExtResource("6_mf0wt")]
 tile_map_data = PackedByteArray("AAD8/wgAAAAAAAAAAQD7/wgAAAAAAAAAAQD6/wgAAAAAAAAAAQD5/wgAAAAAAAAAAQD4/wgAAAAAAAAAAQD4/wcAAAAAAAAAAQD5/wcAAAAAAAAAAQD6/wcAAAAAAAAAAQD7/wcAAAAAAAAAAQD8/wcAAAAAAAAAAQD4/wYAAAAAAAAAAQD5/wYAAAAAAAAAAQD6/wYAAAAAAAAAAQD7/wYAAAAAAAAAAQD8/wYAAAAAAAAAAQA=")
 
-[node name="PathFinding" parent="." node_paths=PackedStringArray("outer_tilemap_layer", "water_tilemap_layer") instance=ExtResource("9_73auh")]
+[node name="PathFinder" parent="." node_paths=PackedStringArray("outer_tilemap_layer", "water_tilemap_layer") groups=["path_finder"] instance=ExtResource("9_73auh")]
+unique_name_in_owner = true
 outer_tilemap_layer = NodePath("../地图/Outer/外层地图")
 water_tilemap_layer = NodePath("../地图/water/Water/WaterLayer")
 
