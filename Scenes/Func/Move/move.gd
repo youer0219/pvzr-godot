@@ -22,7 +22,7 @@ var char_rotation_degrees:float
 var char_face_dir:int = 1
 
 var move_factor:float = 1.0:get = get_move_factor
-@export var water_move_factor:float = 0.6
+@export var water_move_factor:float = 0.7
 
 @export_group("LateralMove")
 ## 横向移动最大速度
@@ -186,12 +186,6 @@ func move_deflexion_control(delta:float):
 	else:
 		char_rotation_degrees = move_toward(char_rotation_degrees,deflexion_angle,rotation_change_speed*delta)
 
-func is_meet_wall()->bool:
-	if wall_right_down_check.is_colliding() or wall_right_up_check.is_colliding():
-		return true
-	if wall_left_down_check.is_colliding() or wall_left_up_check.is_colliding():
-		return true
-	return false
 
 #endregion
 
@@ -243,6 +237,13 @@ func get_move_factor():
 	if is_in_water():
 		move_factor *= water_move_factor
 	return move_factor
+
+func is_meet_wall()->bool:
+	if wall_right_down_check.is_colliding() or wall_right_up_check.is_colliding():
+		return true
+	if wall_left_down_check.is_colliding() or wall_left_up_check.is_colliding():
+		return true
+	return false
 
 func is_in_water()->bool:
 	return water_check.is_colliding()
