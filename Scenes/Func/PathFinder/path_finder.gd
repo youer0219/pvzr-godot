@@ -44,6 +44,7 @@ const CELL_IS_EMPTY = -1
 const MAX_TILE_FALL_SCAN_DEPTH = 200
 const VECTOR2I_NULL = Vector2i(-10008,-10008)
 const GRAPH_POINT = preload("res://Scenes/Func/PathFinder/scene/GraphPoint.tscn")
+const TILE_CELL_Y = 16
 
 var _astar_graph:AStar2D = AStar2D.new()
 var _used_cells:Array[Vector2i]
@@ -235,7 +236,7 @@ func get_plaform_2d_path(start_pos:Vector2,end_pos:Vector2)->ExtendGDScript.Stac
 # 要找到最下面的点，这个点的x与原坐标一致，但y与平台上的点一致，如有相同的返回那个点，如无就创建新的点
 # 可能并不需要判断点是否已存在,并且position也不需要Vector2i，这个之后再看吧
 func get_bottom_point_info_by_position(pos:Vector2)->PointInfo:
-	var y_offect = outer_tilemap_layer.tile_set.tile_size.y / 2
+	var y_offect = TILE_CELL_Y / 2
 	var cell:Vector2i = local_to_map(pos + Vector2(0,-y_offect)) ## 增加一下高度，避免识别到下面的格子了
 	# 找到下面的坠落点
 	var fall_cell = find_fall_point_info_cell(cell)
