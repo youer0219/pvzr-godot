@@ -10,6 +10,4 @@ func _ready() -> void:
 	print("start_pos",start_pos)
 	print("end_pos:",end_pos)
 	var path_stack = path_finder.get_plaform_2d_path(start_pos,end_pos)
-	for path:TransversePathFinder.PointInfo in path_stack._stack:
-		print("position:",path.point_pos,"id:",path.point_id)
-	pass
+	path_stack.print_stack_path()
