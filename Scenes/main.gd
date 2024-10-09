@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var path_finder: TransversePathFinder = %PathFinder
+@onready var path_finder: MapPathFinder = %PathFinder
 
 func _ready() -> void:
 	

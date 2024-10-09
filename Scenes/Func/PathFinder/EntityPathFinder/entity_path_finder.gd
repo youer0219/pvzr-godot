@@ -2,7 +2,7 @@ extends Node2D
 class_name EntityPathFinder
 
 var target_body:CharacterBody2D
-var path_finder:TransversePathFinder
+var path_finder:MapPathFinder
 var move_path:ExtendGDScript.Stack
 
 ## 目标类型

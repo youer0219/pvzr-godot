@@ -1,4 +1,4 @@
-class_name TransversePathFinder
+class_name MapPathFinder
 extends Node2D
 
 class PointInfo:
@@ -43,7 +43,7 @@ class PointInfo:
 const CELL_IS_EMPTY = -1
 const MAX_TILE_FALL_SCAN_DEPTH = 200
 const VECTOR2I_NULL = Vector2i(-10008,-10008)
-const GRAPH_POINT = preload("res://Scenes/Func/PathFinder/scene/GraphPoint.tscn")
+const GRAPH_POINT = preload("res://Scenes/Func/PathFinder/GraphPoint/scene/GraphPoint.tscn")
 const TILE_CELL_Y = 16
 
 var _astar_graph:AStar2D = AStar2D.new()

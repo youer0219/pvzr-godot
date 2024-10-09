@@ -45,5 +45,5 @@ class Stack:
 	
 	# 路径专用
 	func print_stack_path():
-		for path:TransversePathFinder.PointInfo in _stack:
+		for path:MapPathFinder.PointInfo in _stack:
 			print("position:",path.point_pos,"id:",path.point_id)
