@@ -35,9 +35,11 @@ func move_by_path(delta:float):
 	if position.x == next_point_pos.x:
 		move_path.pop()
 	
+	move.auto_move(delta)
+	
 	velocity = move.char_velocity
 	rotation_degrees = move.char_rotation_degrees
-
+	move_and_slide()
 
 func find_path():
 	if target_body == null:return

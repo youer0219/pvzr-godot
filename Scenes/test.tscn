@@ -59,7 +59,7 @@ drag_bottom_margin = 0.24
 [node name="Zooms" type="Node2D" parent="Entities"]
 
 [node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
-position = Vector2(106, 77)
+position = Vector2(-95, 106)
 
 [node name="Map" type="Node2D" parent="."]
 
