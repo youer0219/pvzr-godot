@@ -11,10 +11,12 @@ class_name Move
 const MAX_FALL_VELOCITY := 200
 
 enum LengthwiseMoveType {CLAMP,JUMP,NULL}
+enum MoveControlType {INPUT,PATH}
 
 ## 移动实体
 @export var char_body:CharacterBody2D
 @export var can_move:bool = true
+@export var move_type:MoveControlType
 var water_layer:WaterLayer
 var top_water:AnimaWater
 var char_velocity:Vector2
@@ -71,32 +73,48 @@ var is_sink_in_water:bool
 func _ready() -> void:
 	water_layer = get_tree().get_first_node_in_group("water_layer")
 
-
-func move_by_input(delta:float):
-	
+#region 移动控制函数
+func char_body_move(delta:float):
 	char_velocity = char_body.velocity
 	char_rotation_degrees = char_body.rotation_degrees
 	
+	auto_move(delta)
 	
+	move_by_type(delta,move_type)
+	
+	char_body.velocity = char_velocity
+	char_body.rotation_degrees = char_rotation_degrees
+	char_body.move_and_slide()
+
+func move_by_type(delta:float,move_type:MoveControlType):
+	match move_type:
+		MoveControlType.INPUT:
+			move_by_input(delta)
+		MoveControlType.PATH:
+			move_by_path(delta)
+
+func move_by_input(delta:float):
 	if can_move:
 		var lateral_direction := Input.get_axis("move_left", "move_right")
 		lateral_move(lateral_direction,delta)
 		
 		var lengthwise_move_type:LengthwiseMoveType = get_lengthwise_move_type_by_input()
 		lengthwise_move(lengthwise_move_type,delta)
-	
-	auto_move(delta)
-	
-	char_body.velocity = char_velocity
-	char_body.rotation_degrees = char_rotation_degrees
-	char_body.move_and_slide()
+
+func move_by_path(delta:float):
+	pass
 
 # 被动函数
 func auto_move(delta):
+	if can_reset_jump_times():
+		reset_jump_times()
 	move_dir_control(delta)
 	update_state_by_water()
 	move_deflexion_control(delta)
 	apply_gravity(delta)
+
+#endregion
+
 #region 横移移动 
 
 func lateral_move(lateral_direction:int,delta:float):
@@ -123,8 +141,7 @@ func lengthwise_move(lengthwise_move_type:LengthwiseMoveType,delta:float):
 
 
 func get_lengthwise_move_type_by_input()->LengthwiseMoveType:
-	if can_reset_jump_times():
-		reset_jump_times()
+
 	if Input.is_action_pressed("move_up") and ladder_check.is_colliding() and can_clamp:
 		return LengthwiseMoveType.CLAMP
 	elif Input.is_action_just_pressed("move_up") and current_jump_times > 0:

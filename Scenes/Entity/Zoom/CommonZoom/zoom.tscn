@@ -25,6 +25,7 @@ shape = SubResource("CapsuleShape2D_17vah")
 [node name="Move" parent="." node_paths=PackedStringArray("char_body") instance=ExtResource("2_1s7q1")]
 unique_name_in_owner = true
 char_body = NodePath("..")
+move_type = 1
 jump_times = 1
 
 [node name="EntityPathFinder" type="Node2D" parent="."]

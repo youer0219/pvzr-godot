@@ -5,4 +5,4 @@ extends CharacterBody2D
 
 
 func _physics_process(delta: float) -> void:
-	move.move_by_input(delta)
+	move.char_body_move(delta)
