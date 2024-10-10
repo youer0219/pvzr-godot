@@ -77,7 +77,7 @@ func move_by_input(delta:float):
 	char_velocity = char_body.velocity
 	char_rotation_degrees = char_body.rotation_degrees
 	
-	move_dir_control(delta)
+	
 	if can_move:
 		var lateral_direction := Input.get_axis("move_left", "move_right")
 		lateral_move(lateral_direction,delta)
@@ -85,15 +85,18 @@ func move_by_input(delta:float):
 		var lengthwise_move_type:LengthwiseMoveType = get_lengthwise_move_type_by_input()
 		lengthwise_move(lengthwise_move_type,delta)
 	
-	update_state_by_water()
-	move_deflexion_control(delta)
-	
-	apply_gravity(delta)
+	auto_move(delta)
 	
 	char_body.velocity = char_velocity
 	char_body.rotation_degrees = char_rotation_degrees
 	char_body.move_and_slide()
 
+# 被动函数
+func auto_move(delta):
+	move_dir_control(delta)
+	update_state_by_water()
+	move_deflexion_control(delta)
+	apply_gravity(delta)
 #region 横移移动 
 
 func lateral_move(lateral_direction:int,delta:float):
