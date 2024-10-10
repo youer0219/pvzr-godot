@@ -10,7 +10,11 @@ class Stack:
 	# 将元素压入堆栈
 	func push(element):
 		_stack.append(element)
-
+	
+	# 获取堆栈所有元素数组
+	func get_stack_array()->Array:
+		return _stack
+	
 	# 从堆栈中弹出元素
 	func pop():
 		if not is_empty():
@@ -42,8 +46,3 @@ class Stack:
 		while rawStack.count != 0:
 			pathStackReversed.push(rawStack.pop())
 		return pathStackReversed
-	
-	# 路径专用
-	func print_stack_path():
-		for path:MapPathFinder.PointInfo in _stack:
-			print("position:",path.point_pos,"id:",path.point_id)

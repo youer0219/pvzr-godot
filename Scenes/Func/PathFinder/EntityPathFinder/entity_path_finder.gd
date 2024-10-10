@@ -31,7 +31,6 @@ func get_move_path(target_body:CharacterBody2D)->ExtendGDScript.Stack:
 	var pos = global_position
 	var target_pos = target_body.global_position
 	return get_path_finder().get_plaform_2d_path(pos,target_pos)
-	#move_path.print_stack_path()
 
 ## 路径更新
 #func update_move_path():

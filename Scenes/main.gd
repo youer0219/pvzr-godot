@@ -10,4 +10,4 @@ func _ready() -> void:
 	print("start_pos",start_pos)
 	print("end_pos:",end_pos)
 	var path_stack = path_finder.get_plaform_2d_path(start_pos,end_pos)
-	path_stack.print_stack_path()
+	Test.print_path_pos_by_stack(path_stack)
