@@ -80,7 +80,8 @@ func char_body_move(delta:float):
 	
 	auto_move(delta)
 	
-	move_by_type(delta,move_type)
+	if can_move:
+		move_by_type(delta,move_type)
 	
 	char_body.velocity = char_velocity
 	char_body.rotation_degrees = char_rotation_degrees
@@ -94,12 +95,11 @@ func move_by_type(delta:float,move_type:MoveControlType):
 			move_by_path(delta)
 
 func move_by_input(delta:float):
-	if can_move:
-		var lateral_direction := Input.get_axis("move_left", "move_right")
-		lateral_move(lateral_direction,delta)
-		
-		var lengthwise_move_type:LengthwiseMoveType = get_lengthwise_move_type_by_input()
-		lengthwise_move(lengthwise_move_type,delta)
+	var lateral_direction := Input.get_axis("move_left", "move_right")
+	lateral_move(lateral_direction,delta)
+	
+	var lengthwise_move_type:LengthwiseMoveType = get_lengthwise_move_type_by_input()
+	lengthwise_move(lengthwise_move_type,delta)
 
 func move_by_path(delta:float):
 	pass
