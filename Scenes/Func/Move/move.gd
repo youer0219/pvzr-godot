@@ -134,7 +134,7 @@ func climb_ladder(delta:float):
 
 func big_jump(delta:float):
 	char_velocity.y = -jump_velocity
-	if current_jump_times == 1:
+	if jump_times - current_jump_times == 1 and jump_times > 1:
 		char_velocity.x += jump_lateral_move * char_face_dir
 		make_turn()
 	current_jump_times -= 1
