@@ -36,6 +36,7 @@ enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 [global_group]
 
 Dave="戴夫"
+path_finder=""
 
 [input]
 

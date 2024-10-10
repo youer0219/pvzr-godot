@@ -7,6 +7,7 @@ class_name Move
 @onready var wall_left_up_check: RayCast2D = %WallLeftUpCheck
 @onready var ladder_check: RayCast2D = %LadderCheck
 @onready var water_check: RayCast2D = %WaterCheck
+@onready var move_control: MoveControl = %MoveControl
 
 const MAX_FALL_VELOCITY := 200
 
@@ -90,19 +91,9 @@ func char_body_move(delta:float):
 func move_by_type(delta:float,move_type:MoveControlType):
 	match move_type:
 		MoveControlType.INPUT:
-			move_by_input(delta)
+			move_control.move_by_input(delta)
 		MoveControlType.PATH:
-			move_by_path(delta)
-
-func move_by_input(delta:float):
-	var lateral_direction := Input.get_axis("move_left", "move_right")
-	lateral_move(lateral_direction,delta)
-	
-	var lengthwise_move_type:LengthwiseMoveType = get_lengthwise_move_type_by_input()
-	lengthwise_move(lengthwise_move_type,delta)
-
-func move_by_path(delta:float):
-	pass
+			move_control.move_by_path(delta)
 
 # 被动函数
 func auto_move(delta):
@@ -130,14 +121,15 @@ func lateral_jump(jump_force:float):
 
 #region 纵向移动
 func lengthwise_move(lengthwise_move_type:LengthwiseMoveType,delta:float):
-	if lengthwise_move_type == LengthwiseMoveType.CLAMP:
-		climb_ladder(delta)
-		is_clamping = true
-	elif lengthwise_move_type == LengthwiseMoveType.JUMP:
-		big_jump(delta)
-		is_clamping = false
-	else:
-		is_clamping = false
+	match lengthwise_move_type:
+		LengthwiseMoveType.CLAMP:
+			climb_ladder(delta)
+			is_clamping = true
+		LengthwiseMoveType.JUMP:
+			big_jump(delta)
+			is_clamping = false
+		LengthwiseMoveType.NULL:
+			is_clamping = false
 
 
 func get_lengthwise_move_type_by_input()->LengthwiseMoveType:

@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var move: Move = %Move
-@onready var entity_path_finder: EntityPathFinder = %EntityPathFinder
 @onready var image: Sprite2D = %Image
 
 #var move_path:ExtendGDScript.Stack = ExtendGDScript.Stack.new()

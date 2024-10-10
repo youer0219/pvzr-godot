@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bb6kp00inaup1"]
+[gd_scene load_steps=4 format=3 uid="uid://bb6kp00inaup1"]
 
 [ext_resource type="Script" path="res://Scenes/Func/Move/move.gd" id="1_7itvk"]
+[ext_resource type="Script" path="res://Scenes/Func/Move/move_control/move_control.gd" id="2_ya3rg"]
+[ext_resource type="Script" path="res://Scenes/Func/PathFinder/EntityPathFinder/entity_path_finder.gd" id="3_3nysb"]
 
 [node name="Move" type="Node2D"]
 script = ExtResource("1_7itvk")
@@ -48,3 +50,11 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="MoveControl" type="Node" parent="." node_paths=PackedStringArray("move")]
+unique_name_in_owner = true
+script = ExtResource("2_ya3rg")
+move = NodePath("..")
+
+[node name="EntityPathFinder" type="Node" parent="MoveControl"]
+script = ExtResource("3_3nysb")
