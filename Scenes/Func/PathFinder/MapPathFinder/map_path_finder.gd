@@ -198,60 +198,73 @@ func connect_two_point(front_point:PointInfo,back_point:PointInfo,line_color:Col
 #endregion
 
 #region 寻找路径 
-func get_plaform_2d_path(start_pos:Vector2,end_pos:Vector2)->ExtendGDScript.Stack:
-	var path_stack = ExtendGDScript.Stack.new()
 
-	var id_path_array = _astar_graph.get_id_path(_astar_graph.get_closest_point(start_pos),_astar_graph.get_closest_point(end_pos),true)
-
-	if id_path_array.size() <= 0:return path_stack
+func get_move_path(start_pos:Vector2,end_pos:Vector2)->Array[Vector2]:
+	var move_path:Array[Vector2]
+	var y_offect = Vector2(0,- TILE_CELL_Y / 2)
 	
-	var start_point = get_bottom_point_info_by_position(start_pos)
-	var end_point = get_bottom_point_info_by_position(end_pos)
-	var id_path_array_size = id_path_array.size()
+	var start_cell_pos = Vector2(start_pos.x, get_cell_pos_by_pos(start_pos + y_offect).y)
+	var end_cell_pos = Vector2(end_pos.x, get_cell_pos_by_pos(end_pos + y_offect).y)
 	
-	for i in id_path_array_size:
-		var curr_point = get_point_info_by_id(id_path_array[i])
-		
-		if id_path_array_size == 1:
-			continue
-		
-		if i == 0 && id_path_array_size >= 2:
-			var second_path_point = get_point_info_by_id(id_path_array[i+1])
-			
-			if start_point.point_pos.distance_to(second_path_point.point_pos) < curr_point.point_pos.distance_to(second_path_point.point_pos):
-				path_stack.push(start_point)
-				continue
-		elif i == id_path_array_size - 1 && id_path_array_size >= 2:
-			var penultimate_point = get_point_info_by_id(id_path_array[i - 1])
-			
-			if end_point.point_pos.distance_to(penultimate_point.point_pos) <= curr_point.point_pos.distance_to(penultimate_point.point_pos):
-				continue
-			else:
-				path_stack.push(curr_point)
-				break
-		path_stack.push(curr_point)
-	path_stack.push(end_point)
-	return ExtendGDScript.Stack.ReversePathStack(path_stack)
+	# 找到起始点和最终点的平台点
+	var start_plaform_pos:Vector2 = get_plaform_pos_by_pos(start_cell_pos)
+	var end_plaform_pos:Vector2 = get_plaform_pos_by_pos(end_cell_pos)
+	
+	# 得到路径
+	var point_path = get_point_path(get_closest_point(start_cell_pos),get_closest_point(end_cell_pos))
+	
+	# 处理路径
+	var point_path_size:int = point_path.size()
+	if point_path_size >= 2:
+		# 判断最前两个点
+		var first_point_pos:Vector2 = point_path[0] 
+		var second_point_pos:Vector2 = point_path[1]
+		if start_plaform_pos.distance_to(second_point_pos) < first_point_pos.distance_to(second_point_pos):
+			point_path[0] = start_plaform_pos
+		# 判断最后两个点
+		var last_point_pos:Vector2 = point_path[point_path_size - 1]
+		var penultimate_point_pos:Vector2 = point_path[point_path_size - 2]
+		if end_plaform_pos.distance_to(penultimate_point_pos) <= last_point_pos.distance_to(penultimate_point_pos):
+			point_path[point_path_size - 1] = end_plaform_pos
+	
+	# 加入起始点
+	if start_cell_pos != start_plaform_pos:
+		move_path.append(start_cell_pos)
+	# 加入起始平台点
+	if point_path[0] != start_plaform_pos:
+		move_path.append(start_plaform_pos)
+	# 加入寻路得到的点
+	move_path.append_array(point_path)
+	# 加入结束平台点
+	if point_path[point_path_size - 1] != end_plaform_pos:
+		move_path.append(end_plaform_pos)
+	# 加入最终点
+	if end_cell_pos != end_plaform_pos:
+		move_path.append(end_cell_pos)
+	
+	return move_path
 
-# 要找到最下面的点，这个点的x与原坐标一致，但y与平台上的点一致，如有相同的返回那个点，如无就创建新的点
-# 可能并不需要判断点是否已存在,并且position也不需要Vector2i，这个之后再看吧
-func get_bottom_point_info_by_position(pos:Vector2)->PointInfo:
-	var y_offect = TILE_CELL_Y / 2
-	var cell:Vector2i = local_to_map(pos + Vector2(0,-y_offect)) ## 增加一下高度，避免识别到下面的格子了
-	# 找到下面的坠落点
-	var fall_cell = find_fall_point_info_cell(cell)
-	var existing_point_id = is_cell_already_exist_in_graph(fall_cell)
-	# 如果这个点不存在
-	if existing_point_id == CELL_IS_EMPTY:
-		var local_fall_cell = Vector2i(pos.x,map_to_local(fall_cell).y)
-		var new_point_info = PointInfo.createPointInfo(-10000,local_fall_cell)
-		new_point_info.set_type(PointInfo.SetType.POSITION)
-		return new_point_info
-	# 如果这个点存在
+func get_plaform_pos_by_pos(pos:Vector2)->Vector2:
+	var bottom_cell_pos:Vector2
+	
+	var curr_cell:Vector2i = local_to_map(pos)
+	var fall_cell = find_fall_point_info_cell(curr_cell + Vector2i(0,-1))
+	
+	if fall_cell == VECTOR2I_NULL:
+		bottom_cell_pos = Vector2(VECTOR2I_NULL)
 	else:
-		var exiting_point_info = get_point_info_by_id(existing_point_id)
-		exiting_point_info.set_type(PointInfo.SetType.POSITION)
-		return exiting_point_info
+		bottom_cell_pos = Vector2(pos.x,map_to_local(fall_cell).y)
+	
+	return bottom_cell_pos
+
+func get_cell_pos_by_pos(pos:Vector2)->Vector2:
+	return map_to_local(local_to_map(pos))
+
+func get_point_path(from_id: int, to_id: int, allow_partial_path: bool = false)->PackedVector2Array:
+	return _astar_graph.get_point_path(from_id,to_id,allow_partial_path)
+
+func get_closest_point(to_position: Vector2, include_disabled: bool = false)->int:
+	return _astar_graph.get_closest_point(to_position,include_disabled)
 
 #endregion
 
@@ -321,11 +334,12 @@ func find_fall_point_info_cell(scan:Vector2i)->Vector2i:
 			break
 		scan_cell.y += 1
 	
-	## 判断下坠点是否合法 必须在下坠点生成过程中判断，因为用到这一过程的不止一个函数
-	if !can_unit_pass(fall_cell):
+	## 判断下坠点是否合法，必须在下坠点生成过程中判断，因为用到这一过程的不止一个函数
+	if !can_unit_pass(fall_cell + Vector2i.DOWN):
 		return VECTOR2I_NULL
-	return fall_cell
 	
+	return fall_cell
+
 #region 判断边缘点是否是wall
 func is_left_edge_without_wall(point_info:PointInfo)->bool:
 	if !point_info.is_left_edge_point:

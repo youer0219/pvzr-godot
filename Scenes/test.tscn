@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
-[ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/path_finder.tscn" id="9_73auh"]
+[ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
 shader = ExtResource("1_n8kdf")
@@ -41,7 +41,7 @@ script = ExtResource("1_y4jx2")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Dave" parent="Entities" instance=ExtResource("6_k6k4w")]
-position = Vector2(-36, 93)
+position = Vector2(-644, 137)
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Dave"]
 physics_interpolation_mode = 1
@@ -59,7 +59,7 @@ drag_bottom_margin = 0.24
 [node name="Zooms" type="Node2D" parent="Entities"]
 
 [node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
-position = Vector2(-95, 106)
+position = Vector2(-462, 114)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -101,5 +101,9 @@ unique_name_in_owner = true
 outer_tilemap_layer = NodePath("../Map/Outer/外层地图")
 water_tilemap_layer = NodePath("../Map/water/Water/WaterLayer")
 
+[node name="TestTimer" type="Timer" parent="."]
+process_callback = 0
+
 [connection signal="child_order_changed" from="Map/Ladder/LadderLayer" to="Map/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/water/Water/WaterLayer" to="Map/water/Water/WaterLayer" method="_on_child_order_changed"]
+[connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

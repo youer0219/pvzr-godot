@@ -15,11 +15,11 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if !target_body:return
+	#if !target_body:return
 	
 	#find_path()
 	#if move_path and move_path.count > 0 :
-		#self_move(delta)
+	self_move(delta)
 
 func self_move(delta:float):
 	move.char_velocity = velocity

@@ -4,10 +4,17 @@ extends Node2D
 
 func _ready() -> void:
 	
-	await get_tree().create_timer(1).timeout
-	var start_pos:Vector2 = path_finder.map_to_local(Vector2i(-24,5)) 
-	var end_pos:Vector2 = path_finder.map_to_local(Vector2i(-17,8)) + Vector2(11,0)
-	print("start_pos",start_pos)
-	print("end_pos:",end_pos)
-	var path_stack = path_finder.get_plaform_2d_path(start_pos,end_pos)
-	Test.print_path_pos_by_stack(path_stack)
+	#test_move_path(1)
+	$TestTimer.start(1)
+	pass
+
+func test_move_path(delay_time:int = 0):
+	await get_tree().create_timer(delay_time).timeout
+	print($Entities/Dave.position)
+	print($Entities/Zooms/Zoom.position)
+	var move_path = path_finder.get_move_path($Entities/Dave.position,$Entities/Zooms/Zoom.position)
+	print(move_path)
+
+
+func _on_test_timer_timeout() -> void:
+	test_move_path()
