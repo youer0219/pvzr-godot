@@ -41,7 +41,7 @@ script = ExtResource("1_y4jx2")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Dave" parent="Entities" instance=ExtResource("6_k6k4w")]
-position = Vector2(-644, 137)
+position = Vector2(-619, 125)
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Dave"]
 physics_interpolation_mode = 1
@@ -86,7 +86,7 @@ tile_map_data = PackedByteArray("AAAAAAkAAQAAAAAAAAABAAkAAQAAAAAAAAACAAkAAQAAAAA
 [node name="Ladder" type="Node2D" parent="Map"]
 
 [node name="LadderLayer" parent="Map/Ladder" instance=ExtResource("6_wg3l6")]
-tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAMAAAAAAAAAAQADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQD8/wUAAAAAAAAAAQD8/wQAAAAAAAAAAQD8/wMAAAAAAAAAAQD8/wIAAAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAD+/wUAAAAAAAAAAQD+/wQAAAAAAAAAAQD+/wMAAAAAAAAAAQD+/wIAAAAAAAAAAQADAAMAAAAAAAAAAQADAAQAAAAAAAAAAQADAAUAAAAAAAAAAQD8/wUAAAAAAAAAAQD8/wQAAAAAAAAAAQD8/wMAAAAAAAAAAQD8/wIAAAAAAAAAAQDc/wgAAAAAAAAAAQDc/wcAAAAAAAAAAQDc/wYAAAAAAAAAAQDc/wUAAAAAAAAAAQDc/wQAAAAAAAAAAQA=")
 
 [node name="water" type="Node2D" parent="Map"]
 

@@ -58,3 +58,10 @@ move = NodePath("..")
 
 [node name="EntityPathFinder" type="Node" parent="MoveControl"]
 script = ExtResource("3_3nysb")
+
+[node name="ClampJumpTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="ClampJumpTimer" to="." method="_on_clamp_jump_timer_timeout"]

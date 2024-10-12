@@ -26,3 +26,4 @@ unique_name_in_owner = true
 char_body = NodePath("..")
 move_type = 1
 jump_times = 1
+clamp_gap_time = 0.25

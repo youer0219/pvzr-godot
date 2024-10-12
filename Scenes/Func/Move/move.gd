@@ -8,6 +8,7 @@ class_name Move
 @onready var ladder_check: RayCast2D = %LadderCheck
 @onready var water_check: RayCast2D = %WaterCheck
 @onready var move_control: MoveControl = %MoveControl
+@onready var clamp_jump_timer: Timer = %ClampJumpTimer
 
 const MAX_FALL_VELOCITY := 200
 
@@ -55,6 +56,7 @@ var current_jump_times:int = jump_times
 @export_subgroup("Clamp")
 ## 攀爬速度
 @export var clamp_velocity:float = 50
+@export var clamp_gap_time:float = 0.05
 var is_clamping:bool
 var can_clamp:bool = true:
 	get:
@@ -142,7 +144,11 @@ func get_lengthwise_move_type_by_input()->LengthwiseMoveType:
 		return LengthwiseMoveType.NULL
 
 func climb_ladder(delta:float):
-	char_velocity.y = -clamp_velocity
+	if clamp_jump_timer.time_left == 0:
+		char_velocity.y = -clamp_velocity
+		clamp_jump_timer.start(clamp_gap_time)
+	else:
+		char_velocity.y += delta * length_down_speed
 
 func big_jump(delta:float):
 	char_velocity.y = -jump_velocity
