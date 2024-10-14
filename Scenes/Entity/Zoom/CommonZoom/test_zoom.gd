@@ -25,19 +25,7 @@ func self_move(delta:float):
 	move.char_velocity = velocity
 	move.char_rotation_degrees = rotation_degrees
 	
-	#var next_point_pos:Vector2 = move_path.peek().point_pos
-	#if position.x < next_point_pos.x:
-		#move.lateral_move(1,delta)
-	#elif position.x > next_point_pos.x:
-		#move.lateral_move(-1,delta)
-	#else:
-		#move.lateral_move(0,delta)
-	#
-	#if position.y - TILE_CELL_SIZE.y  > next_point_pos.y:
-		#move.lengthwise_move(Move.LengthwiseMoveType.JUMP,delta)
-	#
-	#if position.x == next_point_pos.x:
-		#move_path.pop()
+	move.move_by_type(delta,move.MoveControlType.PATH)
 	
 	move.auto_move(delta)
 	

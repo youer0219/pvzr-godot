@@ -4,8 +4,7 @@ extends Node2D
 
 func _ready() -> void:
 	
-	#test_move_path(1)
-	$TestTimer.start(1)
+	#$TestTimer.start(1)
 	pass
 
 func test_move_path(delay_time:int = 0):

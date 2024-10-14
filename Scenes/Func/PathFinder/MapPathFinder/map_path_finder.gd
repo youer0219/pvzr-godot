@@ -214,6 +214,7 @@ func get_move_path(start_pos:Vector2,end_pos:Vector2)->Array[Vector2]:
 	var point_path = get_point_path(get_closest_point(start_cell_pos),get_closest_point(end_cell_pos))
 	
 	# 处理路径
+	
 	var point_path_size:int = point_path.size()
 	if point_path_size >= 2:
 		# 判断最前两个点
@@ -230,13 +231,19 @@ func get_move_path(start_pos:Vector2,end_pos:Vector2)->Array[Vector2]:
 	# 加入起始点
 	if start_cell_pos != start_plaform_pos:
 		move_path.append(start_cell_pos)
-	# 加入起始平台点
-	if point_path[0] != start_plaform_pos:
+	# 避免在point_path为空时调用point_path[0]而报错
+	if point_path_size > 0:
+		# 加入起始平台点
+		if point_path[0] != start_plaform_pos:
+			move_path.append(start_plaform_pos)
+		# 加入寻路得到的点
+		if point_path_size > 1 or point_path[0].y != start_plaform_pos.y:
+			move_path.append_array(point_path)
+		# 加入结束平台点
+		if point_path[point_path_size - 1] != end_plaform_pos:
+			move_path.append(end_plaform_pos)
+	else:
 		move_path.append(start_plaform_pos)
-	# 加入寻路得到的点
-	move_path.append_array(point_path)
-	# 加入结束平台点
-	if point_path[point_path_size - 1] != end_plaform_pos:
 		move_path.append(end_plaform_pos)
 	# 加入最终点
 	if end_cell_pos != end_plaform_pos:
