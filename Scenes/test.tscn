@@ -41,7 +41,7 @@ script = ExtResource("1_y4jx2")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Dave" parent="Entities" instance=ExtResource("6_k6k4w")]
-position = Vector2(-157, 92)
+position = Vector2(-482, 126)
 
 [node name="Camera2D" type="Camera2D" parent="Entities/Dave"]
 physics_interpolation_mode = 1
@@ -59,7 +59,7 @@ drag_bottom_margin = 0.24
 [node name="Zooms" type="Node2D" parent="Entities"]
 
 [node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
-position = Vector2(-37, 91)
+position = Vector2(-452, 127)
 
 [node name="Map" type="Node2D" parent="."]
 

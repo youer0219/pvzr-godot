@@ -47,6 +47,7 @@ const GRAPH_POINT = preload("res://Scenes/Func/PathFinder/GraphPoint/scene/Graph
 const TILE_CELL_Y = 16
 
 var _astar_graph:AStar2D = AStar2D.new()
+var _used_water_cells:Array[Vector2i]
 var _used_cells:Array[Vector2i]
 var _point_info_array:Array[PointInfo]
 
@@ -254,15 +255,33 @@ func get_move_path(start_pos:Vector2,end_pos:Vector2)->Array[Vector2]:
 func get_plaform_pos_by_pos(pos:Vector2)->Vector2:
 	var bottom_cell_pos:Vector2
 	
+	# 判断pos类型
+		# 不是水——向下获取平点
+		
+		# 有实体但实体为水——向上获取平台点
 	var curr_cell:Vector2i = local_to_map(pos)
-	var fall_cell = find_fall_point_info_cell(curr_cell + Vector2i(0,-1))
-	
-	if fall_cell == VECTOR2I_NULL:
-		bottom_cell_pos = Vector2(VECTOR2I_NULL)
+	if _used_water_cells.has(curr_cell):
+		var plaform_cell:Vector2i = find_plaform_cell_in_water(curr_cell)
+		bottom_cell_pos = Vector2(pos.x,map_to_local(plaform_cell).y)
 	else:
-		bottom_cell_pos = Vector2(pos.x,map_to_local(fall_cell).y)
+		var fall_cell = find_fall_point_info_cell(curr_cell + Vector2i(0,-1))
+		if fall_cell == VECTOR2I_NULL:
+			bottom_cell_pos = Vector2(VECTOR2I_NULL)
+		else:
+			bottom_cell_pos = Vector2(pos.x,map_to_local(fall_cell).y)
 	
 	return bottom_cell_pos
+
+func find_plaform_cell_in_water(curr_cell:Vector2i)->Vector2i:
+	var plaform_cell:Vector2i = VECTOR2I_NULL
+	
+	for i in MAX_TILE_FALL_SCAN_DEPTH:
+		if is_cell_empty(curr_cell + Vector2i.UP):
+			plaform_cell = curr_cell + Vector2i.UP
+			break
+		curr_cell += Vector2i.UP
+	
+	return plaform_cell
 
 func get_cell_pos_by_pos(pos:Vector2)->Vector2:
 	return map_to_local(local_to_map(pos))
@@ -278,7 +297,8 @@ func get_closest_point(to_position: Vector2, include_disabled: bool = false)->in
 #region 辅助函数
 
 func init_path_finder():
-	_used_cells = outer_tilemap_layer.get_used_cells() + water_tilemap_layer.get_used_cells()
+	_used_water_cells = water_tilemap_layer.get_used_cells()
+	_used_cells = outer_tilemap_layer.get_used_cells() + _used_water_cells
 	_point_info_array = []
 	_astar_graph = AStar2D.new()
 	## 在ready时调用该函数无效
