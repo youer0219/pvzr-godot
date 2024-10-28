@@ -229,9 +229,9 @@ func get_move_path(start_pos:Vector2,end_pos:Vector2)->Array[Vector2]:
 		if end_plaform_pos.distance_to(penultimate_point_pos) <= last_point_pos.distance_to(penultimate_point_pos):
 			point_path[point_path_size - 1] = end_plaform_pos
 	
-	# 加入起始点
-	if start_cell_pos != start_plaform_pos:
-		move_path.append(start_cell_pos)
+	## 加入起始点
+	#if start_cell_pos != start_plaform_pos:
+		#move_path.append(start_cell_pos)
 	# 避免在point_path为空时调用point_path[0]而报错
 	if point_path_size > 0:
 		# 加入起始平台点
