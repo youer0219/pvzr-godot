@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://urmmehrexiu8"]
+[gd_scene load_steps=7 format=3 uid="uid://urmmehrexiu8"]
 
 [ext_resource type="Texture2D" uid="uid://bv3ecietb3311" path="res://Scenes/Entity/Zoom/CommonZoom/assest/普通僵尸.png" id="1_e4vtb"]
 [ext_resource type="Script" path="res://Scenes/Entity/Zoom/CommonZoom/test_zoom.gd" id="1_q660q"]
-[ext_resource type="PackedScene" uid="uid://bb6kp00inaup1" path="res://Scenes/Func/Move/move.tscn" id="2_1s7q1"]
+[ext_resource type="Script" path="res://Scenes/Func/Move/CharMove/char_move_control.gd" id="4_7wjia"]
+[ext_resource type="Script" path="res://Scenes/Func/PathFinder/EntityPathFinder/entity_path_finder.gd" id="5_imnoj"]
+[ext_resource type="PackedScene" uid="uid://dp0bhbgw2i86b" path="res://Scenes/Func/Move/CharMove/char_move.tscn" id="5_j24xr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17vah"]
 radius = 4.0
@@ -21,9 +23,19 @@ texture = ExtResource("1_e4vtb")
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_17vah")
 
-[node name="Move" parent="." node_paths=PackedStringArray("char_body") instance=ExtResource("2_1s7q1")]
+[node name="CharMoveControl" type="Node2D" parent="." node_paths=PackedStringArray("char_move", "entity_path_finder")]
+script = ExtResource("4_7wjia")
+char_move = NodePath("CharMove")
+entity_path_finder = NodePath("EntityPathFinder")
+
+[node name="CharMove" parent="CharMoveControl" node_paths=PackedStringArray("char_body") instance=ExtResource("5_j24xr")]
+char_body = NodePath("../..")
+
+[node name="EntityPathFinder" type="Node" parent="CharMoveControl"]
+script = ExtResource("5_imnoj")
+
+[node name="PathFindGapTimer" type="Timer" parent="CharMoveControl"]
 unique_name_in_owner = true
-char_body = NodePath("..")
-move_type = 1
-jump_times = 1
-clamp_gap_time = 0.25
+wait_time = 0.2
+
+[connection signal="timeout" from="CharMoveControl/PathFindGapTimer" to="CharMoveControl" method="_on_path_find_gap_timer_timeout"]
