@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=16 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -11,6 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 
+[sub_resource type="Gradient" id="Gradient_51p2i"]
+offsets = PackedFloat32Array(0, 0.501362, 1)
+colors = PackedColorArray(1, 1, 0.329412, 1, 1, 1, 0.772549, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7epbc"]
+gradient = SubResource("Gradient_51p2i")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
 shader = ExtResource("1_n8kdf")
 shader_parameter/color = Color(0, 0, 0, 1)
@@ -22,7 +29,7 @@ shader_parameter/add_margins = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_of7mj"]
 shader = ExtResource("1_n8kdf")
 shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 4.0
 shader_parameter/pattern = 0
 shader_parameter/inside = true
 shader_parameter/add_margins = true
@@ -30,7 +37,7 @@ shader_parameter/add_margins = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r0ex2"]
 shader = ExtResource("1_n8kdf")
 shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 3.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
@@ -64,6 +71,20 @@ position = Vector2(-147, 80)
 [node name="Map" type="Node2D" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Map"]
+layer = -20
+scroll_offset = Vector2(1, 1)
+scroll_base_scale = Vector2(0.6, 0.6)
+
+[node name="SubViewport" type="CanvasLayer" parent="Map/ParallaxBackground"]
+layer = -128
+
+[node name="TextureRect" type="TextureRect" parent="Map/ParallaxBackground/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_7epbc")
 
 [node name="CanvasGroup3" type="CanvasGroup" parent="Map/ParallaxBackground"]
 material = SubResource("ShaderMaterial_kdnqj")
