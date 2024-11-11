@@ -68,8 +68,8 @@ func active_move_by_path(delta:float):
 		else:
 			char_move.lateral_move(CharMove.LateralMoveType.RIGHT,delta)
 		
-		if from_point.y < to_point.y:
-			print("需要纵向移动")
+		#if from_point.y < to_point.y:
+			#print("需要纵向移动")
 		# 如果有Y方向的向上变化，需要判断一下
 
 ## 第四步：移动前更新路径(char_move_control负责)
