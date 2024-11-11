@@ -30,6 +30,9 @@ entity_path_finder = NodePath("EntityPathFinder")
 
 [node name="CharMove" parent="CharMoveControl" node_paths=PackedStringArray("char_body") instance=ExtResource("5_j24xr")]
 char_body = NodePath("../..")
+lateral_speed = 50.0
+lateral_speed_acceleration = 800.0
+lateral_move_jump = 50.0
 
 [node name="EntityPathFinder" type="Node" parent="CharMoveControl"]
 script = ExtResource("5_imnoj")

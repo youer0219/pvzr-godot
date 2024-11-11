@@ -24,3 +24,7 @@ func improve_path(path:Array[Vector2])->Array[Vector2]:
 
 func get_move_path(start_pos:Vector2,end_pos:Vector2)->Array[Vector2]:
 	return path_finder.get_move_path(start_pos,end_pos)
+
+
+func get_cell(pos:Vector2)->Vector2:
+	return Vector2(path_finder.local_to_map(pos))

@@ -12,7 +12,9 @@ class_name CharMove
 const MAX_FALL_VELOCITY := 200
 
 enum LengthwiseMoveType {CLAMP,JUMP,NULL}
+enum LateralMoveType {LEFT = 1,RIGHT = -1,IDLE = 0}
 
+#region 变量
 ## 移动实体
 @export var char_body:CharacterBody2D
 @export var can_move:bool = true
@@ -69,10 +71,10 @@ var can_clamp:bool = true:
 @export var water_sprite_offect_distance:float = -4
 var is_sink_in_water:bool
 
+#endregion
 
 func _ready() -> void:
 	water_layer = get_tree().get_first_node_in_group("water_layer")
-
 
 func char_date_to_move():
 	char_velocity = char_body.velocity
