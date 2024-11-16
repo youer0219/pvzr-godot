@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7dipaip41uyt"]
 
 [ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://assets/实体/植物/豌豆家族/豌豆射手.png" id="1_cc38f"]
-[ext_resource type="Texture2D" uid="uid://dspixwlcqktr5" path="res://assets/实体/植物/豌豆家族/根茎叶.png" id="2_xc137"]
+[ext_resource type="Texture2D" uid="uid://dspixwlcqktr5" path="res://Scenes/Entity/Plant/Components/RootComponent/assets/根茎叶.png" id="2_xc137"]
 
 [sub_resource type="Animation" id="Animation_qjt2q"]
 resource_name = "idle"

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dspixwlcqktr5"
-path="res://.godot/imported/根茎叶.png-e46838b8ea47c145d277f10e4f23f36a.ctex"
+path="res://.godot/imported/根茎叶.png-678a8154f7c0274e90744c39e079d686.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/实体/植物/豌豆家族/根茎叶.png"
-dest_files=["res://.godot/imported/根茎叶.png-e46838b8ea47c145d277f10e4f23f36a.ctex"]
+source_file="res://Scenes/Entity/Plant/Components/RootComponent/assets/根茎叶.png"
+dest_files=["res://.godot/imported/根茎叶.png-678a8154f7c0274e90744c39e079d686.ctex"]
 
 [params]
 
