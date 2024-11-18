@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwe1uryq8vi2q"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Bullet/bullet.gd" id="1_lh8mi"]
+[ext_resource type="Texture2D" uid="uid://b8rqh5qnsxobm" path="res://assets/实体/植物/豌豆家族/豌豆.png" id="1_uxvyc"]
+[ext_resource type="PackedScene" uid="uid://dymig5sxwqlbn" path="res://Scenes/Func/Move/BulletMove/BulletStraightMove/BulletStraightMove.tscn" id="3_pil1p"]
+
+[node name="Bullet" type="Node2D"]
+scale = Vector2(0.8, 0.8)
+script = ExtResource("1_lh8mi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uxvyc")
+
+[node name="BulletStraightMove" parent="." node_paths=PackedStringArray("bullet") instance=ExtResource("3_pil1p")]
+bullet = NodePath("..")

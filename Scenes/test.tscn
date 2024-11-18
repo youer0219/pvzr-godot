@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=19 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
 [ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="4_aas52"]
+[ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="5_kgypu"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
+[ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="6_v2bjv"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 
@@ -73,7 +75,19 @@ position = Vector2(-147, 80)
 
 [node name="RootComponent" parent="Entities/Plants" instance=ExtResource("4_aas52")]
 position = Vector2(-9, 27)
-gap_time = 0.16
+
+[node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
+
+[node name="Bullet" parent="Entities/Bullets" instance=ExtResource("5_kgypu")]
+position = Vector2(-137, 87)
+
+[node name="BulletStraightMove" parent="Entities/Bullets/Bullet" index="1"]
+speed = 0.0
+
+[node name="ComponentTest" type="Node2D" parent="Entities"]
+
+[node name="FireBulletComponent" parent="Entities/ComponentTest" instance=ExtResource("6_v2bjv")]
+position = Vector2(-13, 15)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -135,3 +149,5 @@ process_callback = 0
 [connection signal="child_order_changed" from="Map/Ladder/LadderLayer" to="Map/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/water/Water/WaterLayer" to="Map/water/Water/WaterLayer" method="_on_child_order_changed"]
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]
+
+[editable path="Entities/Bullets/Bullet"]

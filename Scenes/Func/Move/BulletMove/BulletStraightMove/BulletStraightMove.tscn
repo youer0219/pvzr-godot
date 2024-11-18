@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dymig5sxwqlbn"]
+
+[ext_resource type="Script" path="res://Scenes/Func/Move/BulletMove/BulletStraightMove/bullet_straight_move.gd" id="1_qi6k8"]
+
+[node name="BulletStraightMove" type="Node"]
+script = ExtResource("1_qi6k8")
