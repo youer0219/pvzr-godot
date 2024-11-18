@@ -74,7 +74,7 @@ position = Vector2(-147, 80)
 [node name="Plants" type="Node2D" parent="Entities"]
 
 [node name="RootComponent" parent="Entities/Plants" instance=ExtResource("4_aas52")]
-position = Vector2(-9, 27)
+position = Vector2(-9, 28)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
@@ -142,6 +142,7 @@ tile_map_data = PackedByteArray("AAD8/wgAAAAAAAAAAQD7/wgAAAAAAAAAAQD6/wgAAAAAAAA
 unique_name_in_owner = true
 outer_tilemap_layer = NodePath("../Map/Outer/外层地图")
 water_tilemap_layer = NodePath("../Map/water/Water/WaterLayer")
+is_show_debug_graph = false
 
 [node name="TestTimer" type="Timer" parent="."]
 process_callback = 0

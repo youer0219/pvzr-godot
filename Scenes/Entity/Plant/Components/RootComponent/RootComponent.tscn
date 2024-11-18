@@ -7,3 +7,4 @@
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_xdjda")
 script = ExtResource("2_4gj4m")
+gap_time = 0.25
