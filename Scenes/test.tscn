@@ -76,6 +76,7 @@ position = Vector2(-147, 80)
 
 [node name="RootComponent" parent="Entities/Plants" instance=ExtResource("4_aas52")]
 position = Vector2(-9, 29)
+swing_right_degree = 1.0
 
 [node name="PlantHeadComponent" parent="Entities/Plants" instance=ExtResource("5_fm1e1")]
 position = Vector2(-10, 22)
@@ -91,7 +92,7 @@ speed = 0.0
 [node name="ComponentTest" type="Node2D" parent="Entities"]
 
 [node name="FireBulletComponent" parent="Entities/ComponentTest" instance=ExtResource("6_v2bjv")]
-position = Vector2(-13, 15)
+position = Vector2(-33, -14)
 
 [node name="Map" type="Node2D" parent="."]
 

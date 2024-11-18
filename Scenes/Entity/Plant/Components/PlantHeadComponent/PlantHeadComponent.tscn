@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/plant_head_component.gd" id="1_bvika"]
 [ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/assets/豌豆射手.png" id="2_12bwt"]
-[ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_8buss"]
+[ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_j62th"]
 
 [node name="PlantHeadComponent" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_bvika")
-gap_time = 0.25
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_12bwt")
 flip_h = true
 
-[node name="FireBulletComponent" parent="." instance=ExtResource("3_8buss")]
-position = Vector2(9, 0)
+[node name="FireBulletComponent" parent="." instance=ExtResource("3_j62th")]
+position = Vector2(-8.75, 0)
+fire_gap_time = 1.0
