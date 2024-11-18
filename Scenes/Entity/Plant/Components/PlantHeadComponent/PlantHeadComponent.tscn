@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb82t4vxmc0cd"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/plant_head_component.gd" id="1_bvika"]
+[ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/assets/豌豆射手.png" id="2_12bwt"]
+
+[node name="PlantHeadComponent" type="Node2D"]
+script = ExtResource("1_bvika")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_12bwt")
