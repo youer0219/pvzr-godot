@@ -14,7 +14,6 @@ func _ready() -> void:
 	sway()
 
 func sway():
-	tween.tween_interval(0.05)
 	rotation_degrees = 0
 	tween.tween_property(self,"rotation_degrees",swing_left_degree,gap_time)
 	tween.tween_property(self,"rotation_degrees",-swing_right_degree,gap_time*2)
