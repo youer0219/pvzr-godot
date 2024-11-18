@@ -79,7 +79,6 @@ position = Vector2(-9, 29)
 
 [node name="PlantHeadComponent" parent="Entities/Plants" instance=ExtResource("5_fm1e1")]
 position = Vector2(-10, 22)
-scale = Vector2(0.8, 0.8)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
