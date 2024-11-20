@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=22 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
+[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="4_234v1"]
 [ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="4_aas52"]
 [ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="5_fm1e1"]
 [ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="5_kgypu"]
@@ -14,6 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="6_v2bjv"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpffo"]
+shader = ExtResource("4_234v1")
+shader_parameter/strength = 2.0
+shader_parameter/speed = 3.0
 
 [sub_resource type="Gradient" id="Gradient_51p2i"]
 offsets = PackedFloat32Array(0, 0.501362, 1)
@@ -74,11 +80,15 @@ position = Vector2(-147, 80)
 
 [node name="Plants" type="Node2D" parent="Entities"]
 
-[node name="RootComponent" parent="Entities/Plants" instance=ExtResource("4_aas52")]
-position = Vector2(-9, 29)
-swing_right_degree = 1.0
+[node name="Node2D" type="Node2D" parent="Entities/Plants"]
+material = SubResource("ShaderMaterial_wpffo")
 
-[node name="PlantHeadComponent" parent="Entities/Plants" instance=ExtResource("5_fm1e1")]
+[node name="RootComponent" parent="Entities/Plants/Node2D" instance=ExtResource("4_aas52")]
+use_parent_material = true
+position = Vector2(-9, 29)
+
+[node name="PlantHeadComponent" parent="Entities/Plants/Node2D" instance=ExtResource("5_fm1e1")]
+use_parent_material = true
 position = Vector2(-10, 22)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]

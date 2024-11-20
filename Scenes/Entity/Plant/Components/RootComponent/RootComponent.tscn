@@ -7,6 +7,3 @@
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_xdjda")
 script = ExtResource("2_4gj4m")
-swing_left_degree = 15.0
-swing_right_degree = 0.0
-gap_time = 0.25
