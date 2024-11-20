@@ -11,6 +11,9 @@ enum State {Idle,Attack}
 func _ready() -> void:
 	attack_tween = get_tree().create_tween().set_loops().bind_node(self)
 	attack()
+	stop_attack()
+	await get_tree().create_timer(10).timeout
+	start_attack()
 
 # 攻击动画
 var attack_tween:Tween
@@ -22,3 +25,9 @@ func attack():
 	attack_tween.tween_property(self,"rotation_degrees",curr_degerss + attack_offect_angle, gap_time/2 )
 	attack_tween.tween_property(self,"rotation_degrees",curr_degerss, gap_time )
 	attack_tween.tween_interval(gap_time * 2)
+
+func start_attack():
+	attack_tween.play()
+
+func stop_attack():
+	attack_tween.stop()
