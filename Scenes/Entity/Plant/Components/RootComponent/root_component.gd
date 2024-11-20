@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 #@export var swing_left_degree:float = 20.0
 #@export var swing_right_degree:float = 12.0

@@ -1,6 +1,6 @@
 shader_type canvas_item;
-uniform float strength = 5.;
-uniform float speed = 2.;
+uniform float strength = 2.;
+uniform float speed = 3.;
 
 void vertex() {
 float offset = sin(TIME * speed) * strength;
