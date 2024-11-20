@@ -1,9 +1,5 @@
 extends Node2D
 
-
-enum State {Idle,Attack}
-
-
 @export var gap_time:float = 0.25
 @export var attack_offect_angle:float = 60
 @export var fire_bullet_component:FireBulletComponent
