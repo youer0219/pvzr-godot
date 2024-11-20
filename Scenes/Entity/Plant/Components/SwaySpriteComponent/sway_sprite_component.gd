@@ -15,8 +15,12 @@ func set_sway_shader():
 
 func set_sway_strength(value:float):
 	sway_strength = value
+	if !is_node_ready():
+		await ready
 	set_sway_shader()
 
 func set_sway_speed(value:float):
 	sway_speed = value
+	if !is_node_ready():
+		await ready
 	set_sway_shader()

@@ -6,8 +6,8 @@ extends Node
 # bullet
 @export var bullet:Bullet
 @export var speed:float = 100
-enum Direction {LEFT = -1, RIGHT = 1}
-@export var direction:Direction = Direction.LEFT
+enum Direction { RIGHT = 1,LEFT = -1}
+@export var direction:Direction = Direction.RIGHT
 
 func _physics_process(delta: float) -> void:
 	bullet.position.x += direction * speed * delta

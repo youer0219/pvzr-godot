@@ -10,4 +10,4 @@
 [node name="RootComponent" parent="components" instance=ExtResource("1_0sy0q")]
 
 [node name="PlantHeadComponent" parent="components" instance=ExtResource("2_fslku")]
-position = Vector2(0, -6)
+position = Vector2(0, -7)

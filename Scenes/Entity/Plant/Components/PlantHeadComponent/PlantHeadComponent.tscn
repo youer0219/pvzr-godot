@@ -19,9 +19,7 @@ fire_bullet_component = NodePath("FireBulletComponent")
 
 [node name="SwaySpriteComponent" parent="." instance=ExtResource("2_u0wvv")]
 material = SubResource("ShaderMaterial_6dpbw")
-scale = Vector2(1, 1)
 texture = ExtResource("2_12bwt")
-flip_h = true
 
 [node name="FireBulletComponent" parent="." instance=ExtResource("3_j62th")]
-position = Vector2(-8.75, 0)
+position = Vector2(8.75, 0)

@@ -3,6 +3,8 @@ extends Node2D
 @export var gap_time:float = 0.25
 @export var attack_offect_angle:float = 60
 @export var fire_bullet_component:FireBulletComponent
+enum Direction { RIGHT = -1,LEFT = 1}
+@export var direction:Direction = Direction.RIGHT
 
 func _ready() -> void:
 	attack_tween = get_tree().create_tween().set_loops().bind_node(self)
@@ -16,9 +18,9 @@ var attack_tween:Tween
 func attack():
 	var curr_degerss = rotation_degrees
 	attack_tween.tween_interval(gap_time * 4)
-	attack_tween.tween_property(self,"rotation_degrees",curr_degerss + attack_offect_angle/2, gap_time/2 )
+	attack_tween.tween_property(self,"rotation_degrees",curr_degerss + direction * attack_offect_angle/2, gap_time/2 )
 	attack_tween.tween_callback(fire_bullet_component.fire)
-	attack_tween.tween_property(self,"rotation_degrees",curr_degerss + attack_offect_angle, gap_time/2 )
+	attack_tween.tween_property(self,"rotation_degrees",curr_degerss + direction * attack_offect_angle, gap_time/2 )
 	attack_tween.tween_property(self,"rotation_degrees",curr_degerss, gap_time )
 	attack_tween.tween_interval(gap_time * 2)
 
