@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb82t4vxmc0cd"]
+[gd_scene load_steps=9 format=3 uid="uid://cb82t4vxmc0cd"]
 
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/plant_head_component.gd" id="1_bvika"]
 [ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/assets/豌豆射手.png" id="2_12bwt"]
 [ext_resource type="PackedScene" uid="uid://domms2uncg2b2" path="res://Scenes/Entity/Plant/Components/SwaySpriteComponent/sway_sprite_component.tscn" id="2_u0wvv"]
 [ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="3_akemo"]
 [ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_j62th"]
+[ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="6_si1jw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6dpbw"]
 resource_local_to_scene = true
@@ -12,14 +13,26 @@ shader = ExtResource("3_akemo")
 shader_parameter/strength = 2.0
 shader_parameter/speed = 3.0
 
-[node name="PlantHeadComponent" type="Node2D" node_paths=PackedStringArray("fire_bullet_component")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ycvq"]
+size = Vector2(320, 16)
+
+[node name="PlantHeadComponent" type="Node2D" node_paths=PackedStringArray("sway_sprite_component", "fire_bullet_component", "check_area_componet")]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_bvika")
+sway_sprite_component = NodePath("SwaySpriteComponent")
 fire_bullet_component = NodePath("FireBulletComponent")
+check_area_componet = NodePath("CheckAreaComponent")
 
 [node name="SwaySpriteComponent" parent="." instance=ExtResource("2_u0wvv")]
 material = SubResource("ShaderMaterial_6dpbw")
 texture = ExtResource("2_12bwt")
 
 [node name="FireBulletComponent" parent="." instance=ExtResource("3_j62th")]
-position = Vector2(8.75, 0)
+position = Vector2(11.25, 0)
+
+[node name="CheckAreaComponent" parent="." instance=ExtResource("6_si1jw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckAreaComponent"]
+position = Vector2(152, -3)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_6ycvq")

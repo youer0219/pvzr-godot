@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=19 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -6,20 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
-[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="4_234v1"]
-[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="4_aas52"]
-[ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="5_fm1e1"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpffo"]
-shader = ExtResource("4_234v1")
-shader_parameter/strength = 2.0
-shader_parameter/speed = 3.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
@@ -79,23 +71,12 @@ drag_bottom_margin = 0.24
 [node name="Zooms" type="Node2D" parent="Entities"]
 
 [node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
-position = Vector2(-147, 80)
+position = Vector2(-142, 81)
 
 [node name="Plants" type="Node2D" parent="Entities"]
 
-[node name="Node2D" type="Node2D" parent="Entities/Plants"]
-material = SubResource("ShaderMaterial_wpffo")
-
-[node name="RootComponent" parent="Entities/Plants/Node2D" instance=ExtResource("4_aas52")]
-use_parent_material = true
-position = Vector2(-9, 29)
-
-[node name="PlantHeadComponent" parent="Entities/Plants/Node2D" instance=ExtResource("5_fm1e1")]
-use_parent_material = true
-position = Vector2(-10, 22)
-
 [node name="Peashooter" parent="Entities/Plants" instance=ExtResource("7_iytiv")]
-position = Vector2(8, 29)
+position = Vector2(-167, 92)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 

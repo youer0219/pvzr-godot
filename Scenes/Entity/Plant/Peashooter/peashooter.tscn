@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7dipaip41uyt"]
+[gd_scene load_steps=5 format=3 uid="uid://b7dipaip41uyt"]
 
 [ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="1_0sy0q"]
 [ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="2_fslku"]
+[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="3_3ik1v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dpbw"]
+resource_local_to_scene = true
+shader = ExtResource("3_3ik1v")
+shader_parameter/strength = 2.0
+shader_parameter/speed = 3.0
 
 [node name="Peashooter" type="Node2D"]
 
@@ -11,3 +18,11 @@
 
 [node name="PlantHeadComponent" parent="components" instance=ExtResource("2_fslku")]
 position = Vector2(0, -7)
+
+[node name="SwaySpriteComponent" parent="components/PlantHeadComponent" index="0"]
+material = SubResource("ShaderMaterial_6dpbw")
+
+[node name="CollisionShape2D" parent="components/PlantHeadComponent/CheckAreaComponent" index="0"]
+position = Vector2(153.75, 5)
+
+[editable path="components/PlantHeadComponent"]
