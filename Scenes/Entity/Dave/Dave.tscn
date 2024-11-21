@@ -10,7 +10,7 @@ height = 28.0
 
 [node name="Dave" type="CharacterBody2D" groups=["Dave"]]
 scale = Vector2(0.9, 0.9)
-collision_layer = 16
+collision_layer = 32
 script = ExtResource("1_d2ren")
 
 [node name="Image" type="Sprite2D" parent="."]

@@ -63,6 +63,8 @@ move_up={
 2d_physics/layer_2="ladder"
 2d_physics/layer_3="water"
 2d_physics/layer_4="absolute_barriers"
+2d_physics/layer_5="zoom"
+2d_physics/layer_6="Dave"
 
 [physics]
 
