@@ -9,18 +9,20 @@
 [ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="4_234v1"]
 [ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="4_aas52"]
 [ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="5_fm1e1"]
-[ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="5_kgypu"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
-[ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="6_v2bjv"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
+[ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wpffo"]
 shader = ExtResource("4_234v1")
 shader_parameter/strength = 2.0
 shader_parameter/speed = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
+size = Vector2(84, 139)
 
 [sub_resource type="Gradient" id="Gradient_51p2i"]
 offsets = PackedFloat32Array(0, 0.501362, 1)
@@ -97,16 +99,13 @@ position = Vector2(8, 29)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
-[node name="Bullet" parent="Entities/Bullets" instance=ExtResource("5_kgypu")]
-position = Vector2(-137, 87)
-
-[node name="BulletStraightMove" parent="Entities/Bullets/Bullet" index="1"]
-speed = 0.0
-
 [node name="ComponentTest" type="Node2D" parent="Entities"]
 
-[node name="FireBulletComponent" parent="Entities/ComponentTest" instance=ExtResource("6_v2bjv")]
-position = Vector2(-33, -14)
+[node name="CheckAreaComponent" parent="Entities/ComponentTest" instance=ExtResource("8_0j2bm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/ComponentTest/CheckAreaComponent"]
+position = Vector2(-32, 59.5)
+shape = SubResource("RectangleShape2D_qr0tc")
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -169,5 +168,3 @@ process_callback = 0
 [connection signal="child_order_changed" from="Map/Ladder/LadderLayer" to="Map/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/water/Water/WaterLayer" to="Map/water/Water/WaterLayer" method="_on_child_order_changed"]
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]
-
-[editable path="Entities/Bullets/Bullet"]
