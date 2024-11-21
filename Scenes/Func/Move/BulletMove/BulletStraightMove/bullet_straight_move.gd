@@ -6,8 +6,18 @@ extends Node
 # bullet
 @export var bullet:Bullet
 @export var speed:float = 100
-enum Direction { RIGHT = 1,LEFT = -1}
-@export var direction:Direction = Direction.RIGHT
+
+var direction:int = 1
+
+func _ready() -> void:
+	bullet.change_direction.connect(
+		func(value:Bullet.Direction):
+			print("bullt value:",value)
+			if value == Bullet.Direction.RIGHT:
+				direction = 1
+			else:
+				direction = -1
+	)
 
 func _physics_process(delta: float) -> void:
 	bullet.position.x += direction * speed * delta

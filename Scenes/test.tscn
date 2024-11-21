@@ -76,7 +76,8 @@ position = Vector2(-142, 81)
 [node name="Plants" type="Node2D" parent="Entities"]
 
 [node name="Peashooter" parent="Entities/Plants" instance=ExtResource("7_iytiv")]
-position = Vector2(-167, 92)
+position = Vector2(-40, 88)
+bullet_direction = 1
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 

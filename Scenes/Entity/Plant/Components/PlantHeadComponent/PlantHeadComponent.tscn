@@ -34,5 +34,4 @@ position = Vector2(11.25, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckAreaComponent"]
 position = Vector2(152, -3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_6ycvq")
