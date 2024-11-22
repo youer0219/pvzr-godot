@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=22 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
+[ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
@@ -155,6 +156,16 @@ process_callback = 0
 [node name="LightningCurtain" parent="." instance=ExtResource("13_ce573")]
 visible = false
 is_runing = true
+
+[node name="Debug" type="CanvasLayer" parent="."]
+script = ExtResource("15_4wjpy")
+
+[node name="frames" type="Label" parent="Debug"]
+offset_left = 795.0
+offset_top = 89.0
+offset_right = 835.0
+offset_bottom = 112.0
+text = "frames :"
 
 [connection signal="child_order_changed" from="Map/Ladder/LadderLayer" to="Map/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/water/Water/WaterLayer" to="Map/water/Water/WaterLayer" method="_on_child_order_changed"]
