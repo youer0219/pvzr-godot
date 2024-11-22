@@ -13,6 +13,5 @@ func _ready() -> void:
 func fire(direction:Bullet.Direction):
 	var bullet:Bullet = BULLET.instantiate()
 	bullet.global_position = global_position
-	print("direction:",direction)
-	bullet.set_direction(direction)
+	bullet.direction = direction
 	bullets.add_child(bullet)

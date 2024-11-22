@@ -15,6 +15,7 @@ func _ready() -> void:
 	check_area_componet.target_disappear.connect(stop_attack)
 	owner.change_direction.connect(
 		func(value:Bullet.Direction):
+			print(name," bullet_direction ", value)
 			bullet_direction = value
 	)
 
@@ -25,10 +26,14 @@ func attack():
 	var curr_degerss = sway_sprite_component.rotation_degrees
 	attack_tween.tween_interval(gap_time * 4)
 	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss + -1 * attack_offect_angle/2, gap_time/2 )
-	attack_tween.tween_callback(fire_bullet_component.fire.bind(bullet_direction))
+	## 不要直接绑定bullet-direction数据，因为会固定，无法更改！
+	attack_tween.tween_callback(fire)
 	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss + -1 * attack_offect_angle, gap_time/2 )
 	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss, gap_time )
 	attack_tween.tween_interval(gap_time * 2)
+
+func fire():
+	fire_bullet_component.fire(bullet_direction)
 
 func start_attack():
 	if !attack_tween.is_running():

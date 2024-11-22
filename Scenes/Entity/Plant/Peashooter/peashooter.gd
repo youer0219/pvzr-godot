@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var bullet_direction:Bullet.Direction  = Bullet.Direction.RIGHT : set = set_bullet_direction
+@export var bullet_direction:Bullet.Direction: set = set_bullet_direction
 
 signal change_direction(direction:Bullet.Direction)
 
