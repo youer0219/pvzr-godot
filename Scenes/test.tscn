@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=21 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -12,9 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
+[ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6wld"]
 
 [sub_resource type="Gradient" id="Gradient_omo0e"]
 offsets = PackedFloat32Array(0, 0.126615, 0.808786, 0.992248)
@@ -95,7 +98,8 @@ shape = SubResource("RectangleShape2D_qr0tc")
 [node name="Background" type="ParallaxBackground" parent="Map"]
 layer = -20
 
-[node name="TextureRect" type="TextureRect" parent="Map/Background"]
+[node name="BackgroundColor" type="TextureRect" parent="Map/Background"]
+material = SubResource("ShaderMaterial_i6wld")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -145,6 +149,10 @@ is_show_debug_graph = false
 
 [node name="TestTimer" type="Timer" parent="."]
 process_callback = 0
+
+[node name="LightningCurtain" parent="." instance=ExtResource("13_ce573")]
+visible = false
+is_runing = true
 
 [connection signal="child_order_changed" from="Map/Ladder/LadderLayer" to="Map/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/water/Water/WaterLayer" to="Map/water/Water/WaterLayer" method="_on_child_order_changed"]
