@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
+[ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雪.tres" id="6_bqdrj"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
@@ -16,8 +17,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6wld"]
 
 [sub_resource type="Gradient" id="Gradient_omo0e"]
 offsets = PackedFloat32Array(0, 0.126615, 0.808786, 0.992248)
@@ -83,6 +82,9 @@ position = Vector2(-142, 81)
 position = Vector2(-40, 92)
 bullet_direction = 1
 
+[node name="Peashooter2" parent="Entities/Plants" instance=ExtResource("7_iytiv")]
+position = Vector2(-167, 92)
+
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
 [node name="ComponentTest" type="Node2D" parent="Entities"]
@@ -99,7 +101,7 @@ shape = SubResource("RectangleShape2D_qr0tc")
 layer = -20
 
 [node name="BackgroundColor" type="TextureRect" parent="Map/Background"]
-material = SubResource("ShaderMaterial_i6wld")
+material = ExtResource("6_bqdrj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
