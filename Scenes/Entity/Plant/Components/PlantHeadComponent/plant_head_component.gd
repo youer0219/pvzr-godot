@@ -41,5 +41,3 @@ func start_attack():
 
 func stop_attack():
 	attack_tween.stop()
-	var tween:Tween = get_tree().create_tween()
-	tween.tween_property(self,"rotation_degrees",0,gap_time)
