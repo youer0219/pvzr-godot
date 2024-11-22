@@ -16,12 +16,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
 
-[sub_resource type="Gradient" id="Gradient_mn5us"]
-offsets = PackedFloat32Array(0, 0.991826)
-colors = PackedColorArray(0.192157, 0.113725, 0.270588, 1, 0.12549, 0.0470588, 0.203922, 1)
+[sub_resource type="Gradient" id="Gradient_omo0e"]
+offsets = PackedFloat32Array(0, 0.126615, 0.808786, 0.992248)
+colors = PackedColorArray(0.0937343, 0.0298141, 0.158393, 1, 0.12549, 0.0470588, 0.203922, 1, 0.192157, 0.113725, 0.270588, 1, 0.230501, 0.140229, 0.32087, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yfcy4"]
-gradient = SubResource("Gradient_mn5us")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_68lj4"]
+gradient = SubResource("Gradient_omo0e")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
 shader = ExtResource("1_n8kdf")
@@ -100,10 +101,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture1D_yfcy4")
+texture = SubResource("GradientTexture2D_68lj4")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Map/Background"]
-motion_scale = Vector2(0.4, 0.3)
+motion_scale = Vector2(0.4, 0.2)
 
 [node name="CanvasGroup3" type="CanvasGroup" parent="Map/Background/ParallaxLayer"]
 material = SubResource("ShaderMaterial_kdnqj")
