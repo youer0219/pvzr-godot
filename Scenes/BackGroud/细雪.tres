@@ -14,4 +14,4 @@ shader_parameter/far_rain_transparency = 0.5
 shader_parameter/rain_color = Color(0.8, 0.8, 0.8, 0.266667)
 shader_parameter/base_rain_speed = 0.5
 shader_parameter/additional_rain_speed = 0.5
-shader_parameter/slant = 0.2
+shader_parameter/slant = 4.75e-08
