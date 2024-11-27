@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7am8kl0dlt1h"
-path="res://.godot/imported/选卡.png-fbedc92555dfdc07daea6fda9e4a1ae2.ctex"
+uid="uid://b3ksxbgrox0eg"
+path="res://.godot/imported/适宜铲除.png-db9cef94c0dbddf4438e74c66d89673e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/选卡/选卡.png"
-dest_files=["res://.godot/imported/选卡.png-fbedc92555dfdc07daea6fda9e4a1ae2.ctex"]
+source_file="res://Scenes/Func/GridSystem/Grids/assets/适宜铲除.png"
+dest_files=["res://.godot/imported/适宜铲除.png-db9cef94c0dbddf4438e74c66d89673e.ctex"]
 
 [params]
 

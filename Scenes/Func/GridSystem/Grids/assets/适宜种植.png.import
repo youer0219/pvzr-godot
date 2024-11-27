@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjelnuho5vdq3"
-path="res://.godot/imported/适宜开炮.png-1679d19662ff4efaed90a8ce4671887c.ctex"
+uid="uid://c0cmvmvwctrxn"
+path="res://.godot/imported/适宜种植.png-d2f680638c83cc03c1a7d331714cca63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/选卡/适宜开炮.png"
-dest_files=["res://.godot/imported/适宜开炮.png-1679d19662ff4efaed90a8ce4671887c.ctex"]
+source_file="res://Scenes/Func/GridSystem/Grids/assets/适宜种植.png"
+dest_files=["res://.godot/imported/适宜种植.png-d2f680638c83cc03c1a7d331714cca63.ctex"]
 
 [params]
 

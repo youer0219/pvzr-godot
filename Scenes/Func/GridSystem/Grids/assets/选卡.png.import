@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3ujkltb5wgyd"
-path="res://.godot/imported/不适宜种植.png-a47297a807c3b42c7ac5e7fbe2a1fba5.ctex"
+uid="uid://b7am8kl0dlt1h"
+path="res://.godot/imported/选卡.png-079c43608b7ab9468c990f73f830fa21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/纹理特效/不适宜种植.png"
-dest_files=["res://.godot/imported/不适宜种植.png-a47297a807c3b42c7ac5e7fbe2a1fba5.ctex"]
+source_file="res://Scenes/Func/GridSystem/Grids/assets/选卡.png"
+dest_files=["res://.godot/imported/选卡.png-079c43608b7ab9468c990f73f830fa21.ctex"]
 
 [params]
 
