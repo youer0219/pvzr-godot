@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=23 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
-[ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雪.tres" id="6_bqdrj"]
+[ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雨.tres" id="6_bqdrj"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
+[ext_resource type="Script" path="res://Scenes/BackGroud/Rain/rain_rect.gd" id="14_edywy"]
 [ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
@@ -166,6 +167,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+script = ExtResource("14_edywy")
+is_raining = true
 
 [node name="LightningCurtain" parent="." instance=ExtResource("13_ce573")]
 layer = 10

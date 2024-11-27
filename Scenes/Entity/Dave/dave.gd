@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Dave
 
 @onready var image: Sprite2D = %Image
 @onready var move: Move = %Move

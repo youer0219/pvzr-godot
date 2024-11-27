@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvk5ocwj3fct2"]
+
+[ext_resource type="Shader" path="res://Common/Shader/背景测试.gdshader" id="1_21b46"]
+
+[resource]
+shader = ExtResource("1_21b46")
+shader_parameter/rain_amount = 400.0
+shader_parameter/near_rain_length = 0.02
+shader_parameter/far_rain_length = 0.02
+shader_parameter/near_rain_width = 0.2
+shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.1
+shader_parameter/rain_color = Color(0.8, 0.8, 0.8, 0.627451)
+shader_parameter/base_rain_speed = 0.598
+shader_parameter/additional_rain_speed = 1.0
+shader_parameter/slant = 4.75e-08
