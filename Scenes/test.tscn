@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=29 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
 [ext_resource type="Script" path="res://Scenes/BackGroud/Rain/rain_rect.gd" id="14_edywy"]
 [ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="18_1yx3n"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
@@ -53,6 +56,15 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 
+[sub_resource type="Resource" id="Resource_l7vra"]
+script = ExtResource("20_7n4fl")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvsda"]
+size = Vector2(1453, 405)
+
 [node name="Test" type="Node2D"]
 script = ExtResource("1_y4jx2")
 
@@ -60,19 +72,6 @@ script = ExtResource("1_y4jx2")
 
 [node name="Dave" parent="Entities" instance=ExtResource("6_k6k4w")]
 position = Vector2(-99, 81)
-
-[node name="Camera2D" type="Camera2D" parent="Entities/Dave"]
-physics_interpolation_mode = 1
-zoom = Vector2(4.7, 4.7)
-process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.24
-drag_top_margin = 0.24
-drag_right_margin = 0.24
-drag_bottom_margin = 0.24
 
 [node name="Zooms" type="Node2D" parent="Entities"]
 
@@ -188,6 +187,44 @@ offset_top = 89.0
 offset_right = 835.0
 offset_bottom = 112.0
 text = "frames :"
+
+[node name="CamaraNodes" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="CamaraNodes"]
+physics_interpolation_mode = 1
+position = Vector2(-99, 81)
+zoom = Vector2(4.6, 4.6)
+process_callback = 0
+limit_left = -1213
+limit_top = -167
+limit_right = 240
+limit_bottom = 238
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.24
+drag_top_margin = 0.24
+drag_right_margin = 0.24
+drag_bottom_margin = 0.24
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="CamaraNodes/Camera2D"]
+script = ExtResource("18_1yx3n")
+
+[node name="PhantomCamera2D" type="Node2D" parent="CamaraNodes" node_paths=PackedStringArray("follow_target")]
+position = Vector2(-99, 81)
+script = ExtResource("19_7ur37")
+follow_mode = 2
+follow_target = NodePath("../../Entities/Dave")
+zoom = Vector2(4.6, 4.6)
+tween_resource = SubResource("Resource_l7vra")
+draw_limits = true
+limit_target = NodePath("../CameraLimitShape")
+
+[node name="CameraLimitShape" type="CollisionShape2D" parent="CamaraNodes"]
+visible = false
+position = Vector2(-486.5, 35.5)
+shape = SubResource("RectangleShape2D_mvsda")
 
 [connection signal="child_order_changed" from="Map/Frontend/Ladder/LadderLayer" to="Map/Frontend/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/Frontend/water/Water/WaterLayer" to="Map/Frontend/water/Water/WaterLayer" method="_on_child_order_changed"]
