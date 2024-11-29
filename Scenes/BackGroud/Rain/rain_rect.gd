@@ -24,7 +24,7 @@ func follow(delta:float):
 		#slant_speed = delta
 	
 	if is_equal_approx(speed,0):
-		slant = move_toward(slant,0,slant_speed * 2)
+		slant = move_toward(slant,0,slant_speed )
 	elif speed > 0:
 		slant = move_toward(slant,-max_slant,slant_speed)
 	else:

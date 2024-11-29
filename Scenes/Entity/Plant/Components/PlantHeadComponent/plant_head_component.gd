@@ -28,7 +28,7 @@ func attack():
 	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss + -1 * attack_offect_angle/2, gap_time/2 )
 	## 不要直接绑定bullet-direction数据，因为会固定，无法更改！
 	attack_tween.tween_callback(fire)
-	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss + -1 * attack_offect_angle, gap_time/2 )
+	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss + -1 * attack_offect_angle, gap_time/3 )
 	attack_tween.tween_property(sway_sprite_component,"rotation_degrees",curr_degerss, gap_time )
 	attack_tween.tween_interval(gap_time * 2)
 
