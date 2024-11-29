@@ -32,7 +32,7 @@ movie_writer/movie_file="D:/桌面/横板植物大战僵尸Godot复刻/视频/�
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 
