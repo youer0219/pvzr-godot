@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfr14f6a5jqkv"]
+
+[ext_resource type="PackedScene" uid="uid://7ikq7x856va5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/flower_head_component.tscn" id="1_euy5f"]
+[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="2_x8gfo"]
+
+[node name="SunFlower" type="Node2D"]
+
+[node name="RootComponent" parent="." instance=ExtResource("2_x8gfo")]
+
+[node name="FlowerHeadComponent" parent="." instance=ExtResource("1_euy5f")]
+position = Vector2(0, -7)

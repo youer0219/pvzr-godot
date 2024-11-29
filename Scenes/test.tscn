@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=30 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
+[ext_resource type="PackedScene" uid="uid://dfr14f6a5jqkv" path="res://Scenes/Entity/Plant/sunflower/SunFlower.tscn" id="5_o8a3s"]
 [ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雨.tres" id="6_bqdrj"]
 [ext_resource type="PackedScene" uid="uid://3ddlvfk8j20o" path="res://Scenes/Func/GridSystem/Grids/base_grid.tscn" id="6_k1jcg"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
@@ -85,7 +86,11 @@ position = Vector2(-40, 92)
 bullet_direction = 1
 
 [node name="Peashooter2" parent="Entities/Plants" instance=ExtResource("7_iytiv")]
-position = Vector2(-167, 92)
+position = Vector2(-152, 92)
+bullet_direction = 1
+
+[node name="SunFlower" parent="Entities/Plants" instance=ExtResource("5_o8a3s")]
+position = Vector2(-137, 92)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
