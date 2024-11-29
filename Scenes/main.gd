@@ -5,6 +5,7 @@ extends Node2D
 func _ready() -> void:
 	
 	#$TestTimer.start(1)
+	SoundManager.play_de_bgm()
 	pass
 
 func test_move_path(delay_time:int = 0):
