@@ -1,11 +1,12 @@
 extends ColorRect
 
 @export var is_raining:bool = false:set = set_is_raining
-@export var max_slant:float = 0.45
+@export var max_slant:float = 0.4
+@export var slant_speed:float = 0.005
 
 var dave:CharacterBody2D
 var slant:float = 0
-var slant_speed:float = 0.01
+
 
 func _ready() -> void:
 	update_rain()
@@ -19,7 +20,8 @@ func follow(delta:float):
 		return
 	
 	var speed:float = dave.velocity.x
-	slant_speed = delta
+	#if is_equal_approx(slant_speed,0):
+		#slant_speed = delta
 	
 	if is_equal_approx(speed,0):
 		slant = move_toward(slant,0,slant_speed * 2)
