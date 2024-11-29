@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ui78de8t4ex"]
+
+[ext_resource type="PackedScene" uid="uid://dfr14f6a5jqkv" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="1_2sijh"]
+[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="2_3nh70"]
+[ext_resource type="Texture2D" uid="uid://b4cpv4vpsill" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/金盏花.png" id="3_0dkw1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cceqp"]
+resource_local_to_scene = true
+shader = ExtResource("2_3nh70")
+shader_parameter/strength = 2.0
+shader_parameter/speed = 3.0
+
+[node name="Marigold" instance=ExtResource("1_2sijh")]
+
+[node name="SwaySpriteComponent" parent="FlowerHeadComponent" index="0"]
+material = SubResource("ShaderMaterial_cceqp")
+texture = ExtResource("3_0dkw1")
+
+[editable path="FlowerHeadComponent"]
