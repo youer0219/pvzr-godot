@@ -186,6 +186,7 @@ is_raining = true
 [node name="LightningCurtain" parent="." instance=ExtResource("13_ce573")]
 layer = 10
 visible = false
+is_runing = true
 
 [node name="Debug" type="CanvasLayer" parent="."]
 script = ExtResource("15_4wjpy")
@@ -238,3 +239,5 @@ shape = SubResource("RectangleShape2D_mvsda")
 [connection signal="child_order_changed" from="Map/Frontend/Ladder/LadderLayer" to="Map/Frontend/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="Map/Frontend/water/Water/WaterLayer" to="Map/Frontend/water/Water/WaterLayer" method="_on_child_order_changed"]
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]
+
+[editable path="LightningCurtain"]
