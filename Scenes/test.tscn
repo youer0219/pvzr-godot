@@ -186,7 +186,6 @@ is_raining = true
 [node name="LightningCurtain" parent="." instance=ExtResource("13_ce573")]
 layer = 10
 visible = false
-is_runing = true
 
 [node name="Debug" type="CanvasLayer" parent="."]
 script = ExtResource("15_4wjpy")
