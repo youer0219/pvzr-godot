@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://domms2uncg2b2"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SwaySpriteComponent/sway_sprite_component.gd" id="1_6p80i"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.gd" id="1_6p80i"]
 [ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="1_d73go"]
-[ext_resource type="Texture2D" uid="uid://bqh5yti36w873" path="res://icon.svg" id="2_yqoc2"]
+[ext_resource type="Texture2D" uid="uid://0kw0necan52v" path="res://icon.svg" id="2_yqoc2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwvat"]
 resource_local_to_scene = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dspixwlcqktr5" path="res://Scenes/Entity/Plant/Components/RootComponent/assets/根茎叶.png" id="1_xdjda"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/RootComponent/root_component.gd" id="2_4gj4m"]
-[ext_resource type="PackedScene" uid="uid://domms2uncg2b2" path="res://Scenes/Entity/Plant/Components/SwaySpriteComponent/sway_sprite_component.tscn" id="2_w51ig"]
+[ext_resource type="PackedScene" uid="uid://domms2uncg2b2" path="res://Scenes/Entity/Plant/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.tscn" id="2_w51ig"]
 [ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="3_pndwx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5ontp"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://drgfjptf1bekx"]
 
 [ext_resource type="Shader" path="res://Common/Shader/blink.gdshader" id="1_7aob3"]
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/BlinkSpriteComponent/blink_sprite_component.gd" id="1_7o1nv"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/BlinkSpriteComponent/blink_sprite_component.gd" id="1_7o1nv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adyc1"]
 shader = ExtResource("1_7aob3")
