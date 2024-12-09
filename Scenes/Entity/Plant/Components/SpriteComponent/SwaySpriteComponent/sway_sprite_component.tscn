@@ -1,16 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://domms2uncg2b2"]
 
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.gd" id="1_6p80i"]
-[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="1_d73go"]
-[ext_resource type="Texture2D" uid="uid://0kw0necan52v" path="res://icon.svg" id="2_yqoc2"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="1_bajp4"]
+[ext_resource type="Texture2D" uid="uid://da4ilf3ys83q5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/向日葵.png" id="2_obc4e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwvat"]
 resource_local_to_scene = true
-shader = ExtResource("1_d73go")
-shader_parameter/strength = 0.0
-shader_parameter/speed = 0.0
+shader = ExtResource("1_bajp4")
+shader_parameter/strength = 2.0
+shader_parameter/speed = 3.0
+shader_parameter/blink_color = Color(0, 0, 0, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
 
 [node name="SwaySpriteComponent" type="Sprite2D"]
 material = SubResource("ShaderMaterial_lwvat")
-texture = ExtResource("2_yqoc2")
+texture = ExtResource("2_obc4e")
 script = ExtResource("1_6p80i")

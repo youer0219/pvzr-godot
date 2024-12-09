@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfeswouo02xfa"]
+
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="1_qwui7"]
+[ext_resource type="Texture2D" uid="uid://da4ilf3ys83q5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/向日葵.png" id="2_go7as"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/visual_sprite_component.gd" id="3_6h0qh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcduh"]
+shader = ExtResource("1_qwui7")
+shader_parameter/strength = 2.0
+shader_parameter/speed = 3.0
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
+
+[node name="VisualSpriteComponent" type="Sprite2D"]
+material = SubResource("ShaderMaterial_pcduh")
+texture = ExtResource("2_go7as")
+script = ExtResource("3_6h0qh")

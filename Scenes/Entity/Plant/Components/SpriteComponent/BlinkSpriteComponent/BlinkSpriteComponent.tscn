@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://drgfjptf1bekx"]
+[gd_scene load_steps=5 format=3 uid="uid://drgfjptf1bekx"]
 
 [ext_resource type="Shader" path="res://Common/Shader/blink.gdshader" id="1_7aob3"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/BlinkSpriteComponent/blink_sprite_component.gd" id="1_7o1nv"]
+[ext_resource type="Texture2D" uid="uid://da4ilf3ys83q5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/向日葵.png" id="2_0bdts"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adyc1"]
 shader = ExtResource("1_7aob3")
-shader_parameter/blink_color = null
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0, 1)
 shader_parameter/blink_intensity = 0.0
 
 [node name="BlinkSpriteComponent" type="Sprite2D"]
 material = SubResource("ShaderMaterial_adyc1")
+texture = ExtResource("2_0bdts")
 script = ExtResource("1_7o1nv")
+blink_all_time = 0.2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)
