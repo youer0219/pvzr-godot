@@ -1,20 +1,23 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4xgfqxcv2qmu"]
 
 [ext_resource type="Texture2D" uid="uid://dspixwlcqktr5" path="res://Scenes/Entity/Plant/Components/RootComponent/assets/根茎叶.png" id="1_xdjda"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Plant/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_1m2jo"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/RootComponent/root_component.gd" id="2_4gj4m"]
-[ext_resource type="PackedScene" uid="uid://domms2uncg2b2" path="res://Scenes/Entity/Plant/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.tscn" id="2_w51ig"]
-[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="3_pndwx"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_itd4r"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ontp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pj0c4"]
 resource_local_to_scene = true
-shader = ExtResource("3_pndwx")
+shader = ExtResource("3_itd4r")
 shader_parameter/strength = 2.0
 shader_parameter/speed = 3.0
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
 
 [node name="RootComponent" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("2_4gj4m")
 
-[node name="SwaySpriteComponent" parent="." instance=ExtResource("2_w51ig")]
-material = SubResource("ShaderMaterial_5ontp")
+[node name="VisualSpriteComponent" parent="." instance=ExtResource("2_1m2jo")]
+material = SubResource("ShaderMaterial_pj0c4")
 texture = ExtResource("1_xdjda")

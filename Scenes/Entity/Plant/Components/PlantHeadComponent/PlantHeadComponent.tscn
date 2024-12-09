@@ -2,29 +2,33 @@
 
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/plant_head_component.gd" id="1_bvika"]
 [ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/assets/豌豆射手.png" id="2_12bwt"]
-[ext_resource type="PackedScene" uid="uid://domms2uncg2b2" path="res://Scenes/Entity/Plant/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.tscn" id="2_u0wvv"]
-[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="3_akemo"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Plant/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_gejue"]
 [ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_j62th"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_yo1dl"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="6_si1jw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dpbw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx6ga"]
 resource_local_to_scene = true
-shader = ExtResource("3_akemo")
+shader = ExtResource("3_yo1dl")
 shader_parameter/strength = 2.0
 shader_parameter/speed = 3.0
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ycvq"]
 size = Vector2(320, 16)
 
-[node name="PlantHeadComponent" type="Node2D" node_paths=PackedStringArray("sway_sprite_component", "fire_bullet_component", "check_area_componet")]
+[node name="PlantHeadComponent" type="Node2D" node_paths=PackedStringArray("fire_bullet_component", "check_area_componet", "visual_sprite_component")]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_bvika")
-sway_sprite_component = NodePath("SwaySpriteComponent")
 fire_bullet_component = NodePath("FireBulletComponent")
 check_area_componet = NodePath("CheckAreaComponent")
+visual_sprite_component = NodePath("VisualSpriteComponent")
 
-[node name="SwaySpriteComponent" parent="." instance=ExtResource("2_u0wvv")]
-material = SubResource("ShaderMaterial_6dpbw")
+[node name="VisualSpriteComponent" parent="." instance=ExtResource("2_gejue")]
+material = SubResource("ShaderMaterial_gx6ga")
+scale = Vector2(1, 1)
 texture = ExtResource("2_12bwt")
 
 [node name="FireBulletComponent" parent="." instance=ExtResource("3_j62th")]
