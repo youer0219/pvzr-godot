@@ -18,6 +18,10 @@ var visual_material:ShaderMaterial
 
 func _ready() -> void:
 	visual_material = material
+	ready_blink()
+
+#region blink部分
+func ready_blink():
 	blink_tween = get_tree().create_tween().set_loops().bind_node(self)
 	blink_tween.stop()
 	is_blinking=false
@@ -50,7 +54,8 @@ func set_is_blinking(value:bool):
 		start_blink()
 	else:
 		stop_blink()
-
+#endregion
+#region sway部分
 func set_sway_shader():
 	visual_material.set_shader_parameter("strength",sway_strength)
 	visual_material.set_shader_parameter("speed",sway_speed)
@@ -66,3 +71,8 @@ func set_sway_speed(value:float):
 	if !is_node_ready():
 		await ready
 	set_sway_shader()
+
+func set_sway_mode(is_vertical:bool):
+	visual_material.set_shader_parameter("is_vertical",is_vertical)
+
+#endregion
