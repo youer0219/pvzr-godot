@@ -1,19 +1,25 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5ui78de8t4ex"]
 
 [ext_resource type="PackedScene" uid="uid://dfr14f6a5jqkv" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="1_2sijh"]
-[ext_resource type="Shader" path="res://Common/Shader/sway.gdshader" id="2_3nh70"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="2_27k2p"]
 [ext_resource type="Texture2D" uid="uid://b4cpv4vpsill" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/金盏花.png" id="3_0dkw1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cceqp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbvhi"]
 resource_local_to_scene = true
-shader = ExtResource("2_3nh70")
+shader = ExtResource("2_27k2p")
 shader_parameter/strength = 2.0
 shader_parameter/speed = 3.0
+shader_parameter/blink_color = Color(1, 0.945098, 0.945098, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
 
 [node name="Marigold" instance=ExtResource("1_2sijh")]
 
-[node name="SwaySpriteComponent" parent="FlowerHeadComponent" index="0"]
-material = SubResource("ShaderMaterial_cceqp")
+[node name="FlowerHeadComponent" parent="." index="1"]
+flower_type = 1
+
+[node name="VisualSpriteComponent" parent="FlowerHeadComponent" index="0"]
+material = SubResource("ShaderMaterial_kbvhi")
 texture = ExtResource("3_0dkw1")
 
 [editable path="FlowerHeadComponent"]

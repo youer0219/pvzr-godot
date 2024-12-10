@@ -7,9 +7,10 @@ class_name VisualSpriteComponent
 @export var sway_speed:float = 3.0:set = set_sway_speed
 
 var blink_tween:Tween
-@export_range(0,1) var end_blink_intensity:float = 0.9
-@export var bline_time:float = 0.3
-@export var blink_all_time:float = 0.45
+@export_range(0,1) var end_blink_intensity:float = 1.0
+@export var bline_time:float = 0.1
+@export var blink_all_time:float = 0.3
+@export var blink_fade_time:float = 0.2
 @export var gap_time:float = 2
 @export var is_blinking:bool = false:set = set_is_blinking
 var visual_material:ShaderMaterial
@@ -25,11 +26,14 @@ func _ready() -> void:
 func set_bilnk_tween():
 	blink_tween.tween_method(set_blink_intensity,0.0,end_blink_intensity,bline_time)
 	blink_tween.tween_interval(blink_all_time)
-	blink_tween.tween_callback(set_blink_intensity.bind(0))
+	blink_tween.tween_method(set_blink_intensity,end_blink_intensity,0,blink_fade_time)
 	blink_tween.tween_interval(gap_time)
 
 func set_blink_intensity(new_value:float):
 	visual_material.set_shader_parameter("blink_intensity",new_value)
+
+func set_blink_color(color:Color):
+	visual_material.set_shader_parameter("blink_color",color)
 
 func start_blink():
 	if !blink_tween.is_running():

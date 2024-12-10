@@ -28,7 +28,6 @@ visual_sprite_component = NodePath("VisualSpriteComponent")
 
 [node name="VisualSpriteComponent" parent="." instance=ExtResource("2_gejue")]
 material = SubResource("ShaderMaterial_gx6ga")
-scale = Vector2(1, 1)
 texture = ExtResource("2_12bwt")
 
 [node name="FireBulletComponent" parent="." instance=ExtResource("3_j62th")]
