@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dum8f2hl5q3ei"]
+[gd_scene load_steps=7 format=3 uid="uid://bg85hnqhyeg8w"]
 
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/pot/pot.gd" id="1_e74k7"]
+[ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_ufloj"]
 [ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Plant/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_ijhwi"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_c3m3e"]
 [ext_resource type="Texture2D" uid="uid://nh2c0gewgp5a" path="res://Scenes/Entity/Plant/pot/assets/花盆块.png" id="4_v30i0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8cw2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28taf"]
 resource_local_to_scene = true
 shader = ExtResource("3_c3m3e")
 shader_parameter/strength = 2.0
@@ -14,11 +15,11 @@ shader_parameter/blink_color = Color(0.952941, 0.913725, 0, 1)
 shader_parameter/blink_intensity = 0.0
 shader_parameter/is_vertical = false
 
-[node name="Pot" type="Node2D"]
+[node name="Pot" instance=ExtResource("1_ufloj")]
 position = Vector2(0, 1)
 script = ExtResource("1_e74k7")
 
-[node name="VisualSpriteComponent" parent="." instance=ExtResource("2_ijhwi")]
-material = SubResource("ShaderMaterial_t8cw2")
+[node name="VisualSpriteComponent" parent="." index="1" instance=ExtResource("2_ijhwi")]
+material = SubResource("ShaderMaterial_28taf")
 scale = Vector2(0.7, 0.6)
 texture = ExtResource("4_v30i0")

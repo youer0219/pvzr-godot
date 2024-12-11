@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5ui78de8t4ex"]
+[gd_scene load_steps=8 format=3 uid="uid://cn85cvhwupsah"]
 
-[ext_resource type="PackedScene" uid="uid://dfr14f6a5jqkv" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="1_2sijh"]
+[ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_nhq3h"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="2_27k2p"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/flower/flower.gd" id="2_xi0iv"]
 [ext_resource type="Texture2D" uid="uid://b4cpv4vpsill" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/金盏花.png" id="3_0dkw1"]
+[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="3_6vaxb"]
+[ext_resource type="PackedScene" uid="uid://7ikq7x856va5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/flower_head_component.tscn" id="4_nygc6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kbvhi"]
 resource_local_to_scene = true
@@ -13,9 +16,14 @@ shader_parameter/blink_color = Color(1, 0.945098, 0.945098, 1)
 shader_parameter/blink_intensity = 0.0
 shader_parameter/is_vertical = false
 
-[node name="Marigold" instance=ExtResource("1_2sijh")]
+[node name="Marigold" instance=ExtResource("1_nhq3h")]
+script = ExtResource("2_xi0iv")
 
-[node name="FlowerHeadComponent" parent="." index="1"]
+[node name="RootComponent" parent="." index="1" instance=ExtResource("3_6vaxb")]
+position = Vector2(0, 5)
+
+[node name="FlowerHeadComponent" parent="." index="2" instance=ExtResource("4_nygc6")]
+position = Vector2(0, -2)
 flower_type = 1
 
 [node name="VisualSpriteComponent" parent="FlowerHeadComponent" index="0"]

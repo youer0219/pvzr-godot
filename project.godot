@@ -72,6 +72,7 @@ chick={
 2d_physics/layer_4="absolute_barriers"
 2d_physics/layer_5="zoom"
 2d_physics/layer_6="Dave"
+2d_physics/layer_7="plant"
 
 [physics]
 

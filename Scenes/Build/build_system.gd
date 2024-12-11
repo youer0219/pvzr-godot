@@ -20,6 +20,10 @@ func _physics_process(delta: float) -> void:
 
 func plant():
 	var can_plant = can_plant()
+	if can_plant:
+		grid_system.grid_state = GridSystem.GridState.PlantableState
+	else:
+		grid_system.grid_state = GridSystem.GridState.DisabledState
 	if can_plant and Input.is_action_just_pressed("chick"):
 		var new_plant = POT.instantiate()
 		new_plant.position = grid_system.get_mouse_cell_center()
@@ -56,9 +60,9 @@ func ready_cast_collision():
 
 func can_plant():
 	var mouse_cell_center = grid_system.get_mouse_cell_center()	
-	# 检测当前CELL的地图和梯子.暂时不检测水.
+	# 检测当前CELL的地图、梯子和植物.暂时不检测水.
 	cast_collision.position = mouse_cell_center
-	cast_collision.collision_mask = 1 + 2
+	cast_collision.collision_mask = 1 + 2 + 64 
 	cast_collision.force_shapecast_update()
 	if cast_collision.is_colliding():
 		return false

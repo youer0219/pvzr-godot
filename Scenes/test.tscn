@@ -6,15 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
-[ext_resource type="PackedScene" uid="uid://dfr14f6a5jqkv" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="5_o8a3s"]
-[ext_resource type="PackedScene" uid="uid://c5ui78de8t4ex" path="res://Scenes/Entity/Plant/flower/Marigold.tscn" id="6_4utpj"]
 [ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雨.tres" id="6_bqdrj"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
-[ext_resource type="PackedScene" uid="uid://dum8f2hl5q3ei" path="res://Scenes/Entity/Plant/pot/pot.tscn" id="7_524xp"]
+[ext_resource type="PackedScene" uid="uid://bg85hnqhyeg8w" path="res://Scenes/Entity/Plant/pot/pot.tscn" id="7_524xp"]
 [ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
+[ext_resource type="PackedScene" uid="uid://2onpvdu1k7f4" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="8_7j1cg"]
+[ext_resource type="PackedScene" uid="uid://cn85cvhwupsah" path="res://Scenes/Entity/Plant/flower/Marigold.tscn" id="8_g6syv"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 [ext_resource type="PackedScene" uid="uid://brehvk0nymobe" path="res://Scenes/Build/build_system.tscn" id="9_uis2g"]
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
@@ -74,7 +74,7 @@ script = ExtResource("1_y4jx2")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Dave" parent="Entities" instance=ExtResource("6_k6k4w")]
-position = Vector2(-99, 81)
+position = Vector2(-9.00001, 28)
 
 [node name="Zooms" type="Node2D" parent="Entities"]
 
@@ -91,14 +91,14 @@ bullet_direction = 1
 position = Vector2(-152, 92)
 bullet_direction = 1
 
-[node name="SunFlower" parent="Entities/Plants" instance=ExtResource("5_o8a3s")]
-position = Vector2(-137, 92)
-
-[node name="Marigold" parent="Entities/Plants" instance=ExtResource("6_4utpj")]
-position = Vector2(-184, 108)
-
 [node name="Pot" parent="Entities/Plants" instance=ExtResource("7_524xp")]
-position = Vector2(-168, 89)
+position = Vector2(7, 24)
+
+[node name="SunFlower" parent="Entities/Plants" instance=ExtResource("8_7j1cg")]
+position = Vector2(40, 40)
+
+[node name="Marigold" parent="Entities/Plants" instance=ExtResource("8_g6syv")]
+position = Vector2(24, 40)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
@@ -206,7 +206,7 @@ text = "frames :"
 
 [node name="Camera2D" type="Camera2D" parent="CamaraNodes"]
 physics_interpolation_mode = 1
-position = Vector2(-99, 81)
+position = Vector2(-9.00001, 28)
 zoom = Vector2(4.6, 4.6)
 process_callback = 0
 limit_left = -1213
@@ -226,7 +226,7 @@ editor_draw_limits = true
 script = ExtResource("18_1yx3n")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CamaraNodes" node_paths=PackedStringArray("follow_target")]
-position = Vector2(-99, 81)
+position = Vector2(-9.00001, 28)
 script = ExtResource("19_7ur37")
 follow_mode = 2
 follow_target = NodePath("../../Entities/Dave")

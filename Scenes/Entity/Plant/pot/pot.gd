@@ -1,4 +1,5 @@
-extends Node2D
+extends Plant
+
 
 @onready var visual_sprite_component: VisualSpriteComponent = $VisualSpriteComponent
 
