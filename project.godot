@@ -24,7 +24,6 @@ SoundManager="*res://Global/Singleton/SoundManager.tscn"
 
 window/size/viewport_width=1516
 window/size/viewport_height=844
-window/size/always_on_top=true
 window/stretch/mode="viewport"
 
 [editor]

@@ -1,33 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7dipaip41uyt"]
+[gd_scene load_steps=7 format=3 uid="uid://bus0l6dvfanty"]
 
-[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="1_0sy0q"]
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Peashooter/peashooter.gd" id="1_swc5m"]
-[ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="2_fslku"]
-[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="4_cipme"]
+[ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_8vp16"]
+[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="2_oopwd"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Peashooter/pea_shooter.gd" id="2_oxt53"]
+[ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="3_wukvn"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="4_juobx"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx6ga"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxnvk"]
 resource_local_to_scene = true
-shader = ExtResource("4_cipme")
+shader = ExtResource("4_juobx")
 shader_parameter/strength = 2.0
 shader_parameter/speed = 3.0
 shader_parameter/blink_color = Color(0.952941, 0.913725, 0, 1)
 shader_parameter/blink_intensity = 0.0
 shader_parameter/is_vertical = false
 
-[node name="Peashooter" type="Node2D"]
-script = ExtResource("1_swc5m")
+[node name="PeaShooter" instance=ExtResource("1_8vp16")]
+script = ExtResource("2_oxt53")
+bullet_direction = 0
 
-[node name="components" type="Node2D" parent="."]
+[node name="RootComponent" parent="." index="1" instance=ExtResource("2_oopwd")]
+position = Vector2(0, 5)
 
-[node name="RootComponent" parent="components" instance=ExtResource("1_0sy0q")]
+[node name="PlantHeadComponent" parent="." index="2" instance=ExtResource("3_wukvn")]
+position = Vector2(0, -1)
 
-[node name="PlantHeadComponent" parent="components" instance=ExtResource("2_fslku")]
-position = Vector2(0, -7)
+[node name="VisualSpriteComponent" parent="PlantHeadComponent" index="0"]
+material = SubResource("ShaderMaterial_fxnvk")
 
-[node name="VisualSpriteComponent" parent="components/PlantHeadComponent" index="0"]
-material = SubResource("ShaderMaterial_gx6ga")
+[node name="CollisionShape2D" parent="PlantHeadComponent/CheckAreaComponent" index="0"]
+position = Vector2(153.75, 1.25)
 
-[node name="CollisionShape2D" parent="components/PlantHeadComponent/CheckAreaComponent" index="0"]
-position = Vector2(153.75, 5)
-
-[editable path="components/PlantHeadComponent"]
+[editable path="PlantHeadComponent"]

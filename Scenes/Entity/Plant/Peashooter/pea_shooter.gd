@@ -1,4 +1,4 @@
-extends Node2D
+extends Plant
 
 
 @export var bullet_direction:Bullet.Direction: set = set_bullet_direction

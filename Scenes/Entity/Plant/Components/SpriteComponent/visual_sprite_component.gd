@@ -8,9 +8,9 @@ class_name VisualSpriteComponent
 
 var blink_tween:Tween
 @export_range(0,1) var end_blink_intensity:float = 1.0
-@export var bline_time:float = 0.1
-@export var blink_all_time:float = 0.3
-@export var blink_fade_time:float = 0.2
+@export var bline_time:float = 0.15
+@export var blink_all_time:float = 0.35
+@export var blink_fade_time:float = 0.25
 @export var gap_time:float = 2
 @export var is_blinking:bool = false:set = set_is_blinking
 var visual_material:ShaderMaterial

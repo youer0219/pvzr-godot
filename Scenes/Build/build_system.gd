@@ -6,6 +6,7 @@ class_name BuildSystem
 # TODO:建造系统等待进一步的完善。
 
 const POT = preload("res://Scenes/Entity/Plant/pot/pot.tscn")
+
 @onready var grid_system:GridSystem = $GridSystem
 
 @export var is_planting:bool:set = set_is_planting

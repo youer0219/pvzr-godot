@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
 [ext_resource type="PackedScene" uid="uid://bg85hnqhyeg8w" path="res://Scenes/Entity/Plant/pot/pot.tscn" id="7_524xp"]
-[ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://2onpvdu1k7f4" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="8_7j1cg"]
 [ext_resource type="PackedScene" uid="uid://cn85cvhwupsah" path="res://Scenes/Entity/Plant/flower/Marigold.tscn" id="8_g6syv"]
+[ext_resource type="PackedScene" uid="uid://bus0l6dvfanty" path="res://Scenes/Entity/Plant/Peashooter/PeaShooter.tscn" id="8_n2oln"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 [ext_resource type="PackedScene" uid="uid://brehvk0nymobe" path="res://Scenes/Build/build_system.tscn" id="9_uis2g"]
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
@@ -83,14 +83,6 @@ position = Vector2(-142, 81)
 
 [node name="Plants" type="Node2D" parent="Entities"]
 
-[node name="Peashooter" parent="Entities/Plants" instance=ExtResource("7_iytiv")]
-position = Vector2(-40, 92)
-bullet_direction = 1
-
-[node name="Peashooter2" parent="Entities/Plants" instance=ExtResource("7_iytiv")]
-position = Vector2(-152, 92)
-bullet_direction = 1
-
 [node name="Pot" parent="Entities/Plants" instance=ExtResource("7_524xp")]
 position = Vector2(7, 24)
 
@@ -99,6 +91,10 @@ position = Vector2(40, 40)
 
 [node name="Marigold" parent="Entities/Plants" instance=ExtResource("8_g6syv")]
 position = Vector2(24, 40)
+
+[node name="PeaShooter" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
+position = Vector2(-10, 88)
+bullet_direction = 1
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
