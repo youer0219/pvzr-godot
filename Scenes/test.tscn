@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dfr14f6a5jqkv" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="5_o8a3s"]
 [ext_resource type="PackedScene" uid="uid://c5ui78de8t4ex" path="res://Scenes/Entity/Plant/flower/Marigold.tscn" id="6_4utpj"]
 [ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雨.tres" id="6_bqdrj"]
-[ext_resource type="PackedScene" uid="uid://3ddlvfk8j20o" path="res://Scenes/Func/GridSystem/Grids/base_grid.tscn" id="6_k1jcg"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
@@ -17,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
+[ext_resource type="PackedScene" uid="uid://cc1q7bx6itmg6" path="res://Scenes/Func/GridSystem/grid_system.tscn" id="9_waq30"]
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
 [ext_resource type="Script" path="res://Scenes/BackGroud/Rain/rain_rect.gd" id="14_edywy"]
 [ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
@@ -110,9 +110,8 @@ position = Vector2(-168, 89)
 position = Vector2(-32, 59.5)
 shape = SubResource("RectangleShape2D_qr0tc")
 
-[node name="BlackGrid" parent="Entities/ComponentTest" instance=ExtResource("6_k1jcg")]
-z_index = 30
-position = Vector2(-8, 40)
+[node name="GridSystem" parent="Entities/ComponentTest" instance=ExtResource("9_waq30")]
+z_index = 10
 
 [node name="Map" type="Node2D" parent="."]
 
