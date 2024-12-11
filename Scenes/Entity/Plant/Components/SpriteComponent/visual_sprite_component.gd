@@ -20,7 +20,16 @@ func _ready() -> void:
 	visual_material = material
 	ready_blink()
 
-#region blink部分
+#region CornCannon Blink部分
+var cannon_ball_tween:Tween
+func cannon_ball_blink():
+	cannon_ball_tween = create_tween().set_loops().bind_node(self)
+	cannon_ball_tween.tween_method(set_blink_intensity,0,1,0.15)
+	cannon_ball_tween.tween_method(set_blink_intensity,1,0,0.15)
+	cannon_ball_tween.tween_interval(0.3)
+
+#endregion
+#region Flower Blink部分
 func ready_blink():
 	blink_tween = get_tree().create_tween().set_loops().bind_node(self)
 	blink_tween.stop()

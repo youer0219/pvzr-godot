@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=33 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bg85hnqhyeg8w" path="res://Scenes/Entity/Plant/pot/pot.tscn" id="7_524xp"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://2onpvdu1k7f4" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="8_7j1cg"]
+[ext_resource type="PackedScene" uid="uid://dvwarxcfv3bts" path="res://Scenes/Entity/Plant/CornCannon/corn_cannon.tscn" id="8_77xoy"]
 [ext_resource type="PackedScene" uid="uid://cn85cvhwupsah" path="res://Scenes/Entity/Plant/flower/Marigold.tscn" id="8_g6syv"]
 [ext_resource type="PackedScene" uid="uid://bus0l6dvfanty" path="res://Scenes/Entity/Plant/Peashooter/PeaShooter.tscn" id="8_n2oln"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
@@ -95,6 +96,9 @@ position = Vector2(24, 40)
 [node name="PeaShooter" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
 position = Vector2(-10, 88)
 bullet_direction = 1
+
+[node name="CornCannon" parent="Entities/Plants" instance=ExtResource("8_77xoy")]
+position = Vector2(24, 89)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
