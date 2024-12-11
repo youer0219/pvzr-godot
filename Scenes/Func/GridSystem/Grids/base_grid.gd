@@ -19,14 +19,16 @@ enum ColorType {BLACK,YELLOW,GREEN,RED}
 @export var is_highlight:bool = false:set = set_is_highlight
 
 func _ready() -> void:
-	#color_type = ColorType.YELLOW
+	#set_is_highlight(true)
 	#await get_tree().create_timer(5).timeout
-	#color_type = ColorType.GREEN
-	#await get_tree().create_timer(5).timeout
-	#color_type = ColorType.RED
+	#set_is_highlight(false)
+	#await get_tree().create_timer(3).timeout
+	#grid_fade()
 	pass
 
-# 消散函数
+# 消散动画
+func grid_fade():
+	animation_player.play("fade")
 
 func set_is_highlight(value:bool):
 	is_highlight = value
