@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b7dipaip41uyt" path="res://Scenes/Entity/Plant/Peashooter/peashooter.tscn" id="7_iytiv"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="8_0j2bm"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
-[ext_resource type="PackedScene" uid="uid://cc1q7bx6itmg6" path="res://Scenes/Func/GridSystem/grid_system.tscn" id="9_waq30"]
+[ext_resource type="PackedScene" uid="uid://brehvk0nymobe" path="res://Scenes/Build/build_system.tscn" id="9_uis2g"]
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
 [ext_resource type="Script" path="res://Scenes/BackGroud/Rain/rain_rect.gd" id="14_edywy"]
 [ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
@@ -110,8 +110,7 @@ position = Vector2(-168, 89)
 position = Vector2(-32, 59.5)
 shape = SubResource("RectangleShape2D_qr0tc")
 
-[node name="GridSystem" parent="Entities/ComponentTest" instance=ExtResource("9_waq30")]
-z_index = 10
+[node name="BuildSystem" parent="Entities/ComponentTest" instance=ExtResource("9_uis2g")]
 
 [node name="Map" type="Node2D" parent="."]
 

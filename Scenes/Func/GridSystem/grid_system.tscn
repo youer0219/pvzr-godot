@@ -5,7 +5,6 @@
 
 [node name="GridSystem" type="Node2D"]
 script = ExtResource("1_y54p7")
-grid_state = 1
 
 [node name="BaseGrid" parent="." instance=ExtResource("2_jcflp")]
 is_highlight = true

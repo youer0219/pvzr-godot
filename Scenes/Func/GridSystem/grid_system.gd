@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name GridSystem
 
 ## 作用：显示/不显示 不同形态的 网格
 

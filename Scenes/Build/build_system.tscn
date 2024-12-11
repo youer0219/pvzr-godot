@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://brehvk0nymobe"]
+
+[ext_resource type="Script" path="res://Scenes/Build/build_system.gd" id="1_s0k4j"]
+[ext_resource type="PackedScene" uid="uid://cc1q7bx6itmg6" path="res://Scenes/Func/GridSystem/grid_system.tscn" id="2_dv68o"]
+
+[node name="BuildSystem" type="Node2D"]
+script = ExtResource("1_s0k4j")
+is_planting = true
+
+[node name="GridSystem" parent="." instance=ExtResource("2_dv68o")]

@@ -15,6 +15,7 @@ shader_parameter/blink_intensity = 0.0
 shader_parameter/is_vertical = false
 
 [node name="Pot" type="Node2D"]
+position = Vector2(0, 1)
 script = ExtResource("1_e74k7")
 
 [node name="VisualSpriteComponent" parent="." instance=ExtResource("2_ijhwi")]
