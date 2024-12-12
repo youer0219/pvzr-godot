@@ -3,7 +3,8 @@ class_name Hurtbox
 
 enum Type {PLANT=64,ZOOM=16,DAVE=32}
 
-@export var type:Type = Type.PLANT:set = set_type
+@export var type:Type = Type.PLANT
+var _type:Type:set = set_type
 
 func set_type(value:Type):
 	type = value
@@ -13,4 +14,8 @@ func set_box_layer(layer:int):
 	collision_layer = layer
 
 
-signal under_attack
+func _ready() -> void:
+	_type = type
+
+func take_damage(damage:int):
+	print(owner.name," under attack :",damage)

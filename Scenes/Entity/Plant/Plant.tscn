@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://1ohjj3upri0k"]
+[gd_scene load_steps=4 format=3 uid="uid://1ohjj3upri0k"]
 
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/plant.gd" id="1_o0cp2"]
-[ext_resource type="PackedScene" uid="uid://olgcoi4w8upi" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/PlantCheckArea.tscn" id="2_5pnr6"]
+[ext_resource type="PackedScene" uid="uid://x8xxtpm5bi0q" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/hurtbox.tscn" id="4_o0mi1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjc8g"]
+size = Vector2(15, 15)
 
 [node name="Plant" type="Node2D"]
 script = ExtResource("1_o0cp2")
 
-[node name="PlantCheckArea" parent="." instance=ExtResource("2_5pnr6")]
+[node name="Hurtbox" parent="." instance=ExtResource("4_o0mi1")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_yjc8g")

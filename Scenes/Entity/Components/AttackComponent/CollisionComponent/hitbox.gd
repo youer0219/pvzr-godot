@@ -5,12 +5,15 @@ var damage:int = 1
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hurtbox:
-		area.under_attack.emit.bind(damage)
+		area.take_damage(damage)
 
-
+#TODO: 将这个改成多选.不然以后就需要多个组件一起工作。
 enum Type {PLANT=64,ZOOM=16,DAVE=32}
+@export var type:Type = Type.PLANT
 
-@export var type:Type = Type.PLANT:set = set_type
+var _type:Type:set = set_type
+func _ready() -> void:
+	_type = type
 
 func set_type(value:Type):
 	type = value
