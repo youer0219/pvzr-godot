@@ -1,19 +1,17 @@
 extends GPUParticles2D
 class_name PixelParticle
 
-@export var color_source_texture:Texture:set = set_color_source_texture
-@export var num:int = 30
+
 @export var angle_spread:float = 15
 @export var value_spread:float = 15
 
 
-func set_color_source_texture(value:Texture):
-	color_source_texture = value
-	process_material.set_shader_parameter("color_source_texture",color_source_texture)
+func emit_particles_with_texture(num:int,normal:Vector2,source_texture:Texture,pos:Vector2 = global_position):
+	process_material.set_shader_parameter("color_source_texture",source_texture)
+	emit_particles(num,normal,pos)
 
-func emit_particles(normal:Vector2,pos:Vector2 = global_position):
+func emit_particles(num:int,normal:Vector2,pos:Vector2 = global_position):
 	var xform = Transform2D(0,pos)
-	amount = num
 	for i in num:
 		var direction:int = 1 if i%2==0 else -1
 		var velocity:Vector2

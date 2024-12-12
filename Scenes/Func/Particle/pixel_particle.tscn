@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://beggmcmx0ppur"]
 
 [ext_resource type="Material" uid="uid://r2rdib8uc7ft" path="res://Common/Shader/Particles_PVZR.tres" id="1_rui6v"]
-[ext_resource type="Script" path="res://Scenes/Entity/Components/Particle/pixel_particle.gd" id="2_5k0ps"]
+[ext_resource type="Script" path="res://Scenes/Func/Particle/pixel_particle.gd" id="2_5k0ps"]
 
 [node name="PixelParticle" type="GPUParticles2D"]
 emitting = false
+amount = 500
 process_material = ExtResource("1_rui6v")
 lifetime = 337.58
 script = ExtResource("2_5k0ps")
