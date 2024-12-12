@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2gxcyprhd8qn"
-path="res://.godot/imported/双子向日葵.png-bfc7432555de889b1af733139edf9ea6.ctex"
+uid="uid://da4ilf3ys83q5"
+path="res://.godot/imported/向日葵.png-3c51c8ca0e9ce70ecfc5b1e56e0fff7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/双子向日葵.png"
-dest_files=["res://.godot/imported/双子向日葵.png-bfc7432555de889b1af733139edf9ea6.ctex"]
+source_file="res://Scenes/Entity/Components/FlowerHeadComponent/assets/向日葵.png"
+dest_files=["res://.godot/imported/向日葵.png-3c51c8ca0e9ce70ecfc5b1e56e0fff7b.ctex"]
 
 [params]
 

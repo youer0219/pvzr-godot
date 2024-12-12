@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cb82t4vxmc0cd"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/plant_head_component.gd" id="1_bvika"]
-[ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/assets/豌豆射手.png" id="2_12bwt"]
-[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Plant/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_gejue"]
+[ext_resource type="Script" path="res://Scenes/Entity/Components/PlantHeadComponent/plant_head_component.gd" id="1_bvika"]
+[ext_resource type="Texture2D" uid="uid://busy4820e8yhk" path="res://Scenes/Entity/Components/PlantHeadComponent/assets/豌豆射手.png" id="2_12bwt"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_gejue"]
 [ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_j62th"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_yo1dl"]
 [ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="6_si1jw"]

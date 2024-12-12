@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_nhq3h"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="2_27k2p"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/flower/flower.gd" id="2_xi0iv"]
-[ext_resource type="Texture2D" uid="uid://b4cpv4vpsill" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/金盏花.png" id="3_0dkw1"]
-[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="3_6vaxb"]
-[ext_resource type="PackedScene" uid="uid://7ikq7x856va5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/flower_head_component.tscn" id="4_nygc6"]
+[ext_resource type="Texture2D" uid="uid://b4cpv4vpsill" path="res://Scenes/Entity/Components/FlowerHeadComponent/assets/金盏花.png" id="3_0dkw1"]
+[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Components/RootComponent/RootComponent.tscn" id="3_6vaxb"]
+[ext_resource type="PackedScene" uid="uid://7ikq7x856va5" path="res://Scenes/Entity/Components/FlowerHeadComponent/flower_head_component.tscn" id="4_nygc6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kbvhi"]
 resource_local_to_scene = true

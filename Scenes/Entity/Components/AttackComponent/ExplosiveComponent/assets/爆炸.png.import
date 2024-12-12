@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m402hajdi132"
-path="res://.godot/imported/爆炸印.png-ffab9b1ece000f5dd343e4e14fe41ba1.ctex"
+uid="uid://cqe2yl3my70qg"
+path="res://.godot/imported/爆炸.png-7f2286c93c9579a2d94f489beedbd8fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Entity/Plant/Components/ExplosiveComponent/assets/爆炸印.png"
-dest_files=["res://.godot/imported/爆炸印.png-ffab9b1ece000f5dd343e4e14fe41ba1.ctex"]
+source_file="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/assets/爆炸.png"
+dest_files=["res://.godot/imported/爆炸.png-7f2286c93c9579a2d94f489beedbd8fd.ctex"]
 
 [params]
 

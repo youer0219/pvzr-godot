@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4xgfqxcv2qmu"]
 
-[ext_resource type="Texture2D" uid="uid://dspixwlcqktr5" path="res://Scenes/Entity/Plant/Components/RootComponent/assets/根茎叶.png" id="1_xdjda"]
-[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Plant/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_1m2jo"]
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/RootComponent/root_component.gd" id="2_4gj4m"]
+[ext_resource type="Texture2D" uid="uid://dspixwlcqktr5" path="res://Scenes/Entity/Components/RootComponent/assets/根茎叶.png" id="1_xdjda"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_1m2jo"]
+[ext_resource type="Script" path="res://Scenes/Entity/Components/RootComponent/root_component.gd" id="2_4gj4m"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_itd4r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pj0c4"]

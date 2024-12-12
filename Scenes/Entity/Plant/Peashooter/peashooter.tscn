@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bus0l6dvfanty"]
 
 [ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_8vp16"]
-[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Plant/Components/RootComponent/RootComponent.tscn" id="2_oopwd"]
+[ext_resource type="PackedScene" uid="uid://b4xgfqxcv2qmu" path="res://Scenes/Entity/Components/RootComponent/RootComponent.tscn" id="2_oopwd"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/Peashooter/pea_shooter.gd" id="2_oxt53"]
-[ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Plant/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="3_wukvn"]
+[ext_resource type="PackedScene" uid="uid://cb82t4vxmc0cd" path="res://Scenes/Entity/Components/PlantHeadComponent/PlantHeadComponent.tscn" id="3_wukvn"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="4_juobx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fxnvk"]

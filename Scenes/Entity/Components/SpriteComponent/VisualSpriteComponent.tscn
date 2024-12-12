@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="1_qwui7"]
 [ext_resource type="Texture2D" uid="uid://bjl4griqe8ths" path="res://Scenes/Entity/Plant/CornCannon/assets/玉米炮.png" id="2_wpcyt"]
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/visual_sprite_component.gd" id="3_6h0qh"]
+[ext_resource type="Script" path="res://Scenes/Entity/Components/SpriteComponent/visual_sprite_component.gd" id="3_6h0qh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pcduh"]
 resource_local_to_scene = true

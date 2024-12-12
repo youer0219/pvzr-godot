@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://busy4820e8yhk"
-path="res://.godot/imported/豌豆射手.png-e9da74dcbbe2869e640f59b7d058ac4e.ctex"
+path="res://.godot/imported/豌豆射手.png-8d3e2dc26acda41e8e8d17a025a7570a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Entity/Plant/Components/PlantHeadComponent/assets/豌豆射手.png"
-dest_files=["res://.godot/imported/豌豆射手.png-e9da74dcbbe2869e640f59b7d058ac4e.ctex"]
+source_file="res://Scenes/Entity/Components/PlantHeadComponent/assets/豌豆射手.png"
+dest_files=["res://.godot/imported/豌豆射手.png-8d3e2dc26acda41e8e8d17a025a7570a.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dvwarxcfv3bts"]
 
 [ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_vkasy"]
-[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Plant/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_24lqw"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_24lqw"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/CornCannon/corn_cannon.gd" id="2_ej56w"]
 [ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_44a6q"]
 [ext_resource type="Texture2D" uid="uid://hiokr0ch52of" path="res://Scenes/Entity/Plant/CornCannon/assets/玉米加农炮-车.png" id="4_juvcs"]

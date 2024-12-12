@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://drgfjptf1bekx"]
 
 [ext_resource type="Shader" path="res://Common/Shader/blink.gdshader" id="1_7aob3"]
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/SpriteComponent/BlinkSpriteComponent/blink_sprite_component.gd" id="1_7o1nv"]
-[ext_resource type="Texture2D" uid="uid://da4ilf3ys83q5" path="res://Scenes/Entity/Plant/Components/FlowerHeadComponent/assets/向日葵.png" id="2_0bdts"]
+[ext_resource type="Script" path="res://Scenes/Entity/Components/SpriteComponent/BlinkSpriteComponent/blink_sprite_component.gd" id="1_7o1nv"]
+[ext_resource type="Texture2D" uid="uid://da4ilf3ys83q5" path="res://Scenes/Entity/Components/FlowerHeadComponent/assets/向日葵.png" id="2_0bdts"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adyc1"]
 shader = ExtResource("1_7aob3")
