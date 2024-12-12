@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-@onready var image: VisualSpriteComponent = $VisualSpriteComponent
 @onready var hurtbox: Hurtbox = $Hurtbox
+@onready var image: Node2D = $image
 
 func _ready() -> void:
 	hurtbox.under_damage.connect(under_damage_effect_apply)
@@ -16,6 +16,6 @@ func under_damage_effect_apply():
 	#move_and_slide()
 	# 模拟击退效果
 	# TODO:这个效果需要优化。原作中的击退更像是一种状态/BUFF。
-	position.x -= 10
+	position.x -= 4
 	position.y -= 1
-	velocity.x = 0
+	velocity.x *= 0.1
