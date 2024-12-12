@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://chghtyrbqnama"]
+
+[ext_resource type="Texture2D" uid="uid://cqe2yl3my70qg" path="res://Scenes/Entity/Plant/Components/ExplosiveComponent/assets/爆炸.png" id="1_ue2kq"]
+
+[sub_resource type="Curve" id="Curve_5cfda"]
+_data = [Vector2(0, 0.394014), 0.0, 0.0, 0, 0, Vector2(0.31202, 0.770363), 0.0, 0.0, 0, 0, Vector2(0.787724, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="CherryBombParticle" type="CPUParticles2D"]
+texture = ExtResource("1_ue2kq")
+emission_shape = 2
+emission_sphere_radius = 8.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_5cfda")
