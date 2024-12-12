@@ -10,6 +10,7 @@
 radius = 8.0
 
 [node name="Bullet" type="Node2D" node_paths=PackedStringArray("bullet_move")]
+z_index = 1
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_lh8mi")
 bullet_move = NodePath("BulletStraightMove")

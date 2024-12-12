@@ -30,6 +30,38 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
 
+[sub_resource type="Gradient" id="Gradient_omo0e"]
+offsets = PackedFloat32Array(0, 0.126615, 0.808786, 0.992248)
+colors = PackedColorArray(0.0937343, 0.0298141, 0.158393, 1, 0.12549, 0.0470588, 0.203922, 1, 0.192157, 0.113725, 0.270588, 1, 0.230501, 0.140229, 0.32087, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_68lj4"]
+gradient = SubResource("Gradient_omo0e")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
+shader = ExtResource("1_n8kdf")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_of7mj"]
+shader = ExtResource("1_n8kdf")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 4.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0ex2"]
+shader = ExtResource("1_n8kdf")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
 [sub_resource type="Shader" id="Shader_ra474"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's ParticleProcessMaterial.
 
@@ -464,8 +496,8 @@ shader_parameter/damping_min = 0.0
 shader_parameter/damping_max = 0.0
 shader_parameter/initial_angle_min = 0.0
 shader_parameter/initial_angle_max = 0.0
-shader_parameter/scale_min = 3.0
-shader_parameter/scale_max = 3.0
+shader_parameter/scale_min = 2.0
+shader_parameter/scale_max = 2.0
 shader_parameter/hue_variation_min = 0.0
 shader_parameter/hue_variation_max = 0.0
 shader_parameter/anim_speed_min = 0.0
@@ -483,38 +515,6 @@ shader_parameter/collision_friction = 1.0
 shader_parameter/collision_bounce = 0.0
 shader_parameter/is_custom_colors = true
 shader_parameter/color_source_texture = ExtResource("12_0uwhu")
-
-[sub_resource type="Gradient" id="Gradient_omo0e"]
-offsets = PackedFloat32Array(0, 0.126615, 0.808786, 0.992248)
-colors = PackedColorArray(0.0937343, 0.0298141, 0.158393, 1, 0.12549, 0.0470588, 0.203922, 1, 0.192157, 0.113725, 0.270588, 1, 0.230501, 0.140229, 0.32087, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_68lj4"]
-gradient = SubResource("Gradient_omo0e")
-fill_to = Vector2(0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
-shader = ExtResource("1_n8kdf")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 3.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_of7mj"]
-shader = ExtResource("1_n8kdf")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 4.0
-shader_parameter/pattern = 0
-shader_parameter/inside = true
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0ex2"]
-shader = ExtResource("1_n8kdf")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 3.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
 
 [sub_resource type="Resource" id="Resource_l7vra"]
 script = ExtResource("20_7n4fl")
@@ -576,9 +576,6 @@ shape = SubResource("RectangleShape2D_qr0tc")
 
 [node name="BuildSystem" parent="Entities/ComponentTest" instance=ExtResource("9_uis2g")]
 
-[node name="PixelParticle" parent="." groups=["PixelParticle"] instance=ExtResource("11_e1co1")]
-process_material = SubResource("ShaderMaterial_0o0bi")
-
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Background" type="ParallaxBackground" parent="Map"]
@@ -637,6 +634,10 @@ is_show_debug_graph = false
 
 [node name="TestTimer" type="Timer" parent="."]
 process_callback = 0
+
+[node name="PixelParticle" parent="." groups=["PixelParticle"] instance=ExtResource("11_e1co1")]
+z_index = 1
+process_material = SubResource("ShaderMaterial_0o0bi")
 
 [node name="WeatherLayer" type="CanvasLayer" parent="."]
 layer = -10

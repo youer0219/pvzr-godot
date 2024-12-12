@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://h17utawmy0c0"]
+[gd_scene load_steps=71 format=3 uid="uid://h17utawmy0c0"]
 
 [ext_resource type="Texture2D" uid="uid://db5oykn5cfnsv" path="res://Scenes/Map/Water/assets/水.png" id="1_u1gf7"]
 [ext_resource type="Script" path="res://Scenes/Map/Water/scene/anima_water.gd" id="2_k8hmr"]
@@ -468,6 +468,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r8pjf"]
+polygon = PackedVector2Array(-9, -8, 9, -8, 9, 0, -9, 0)
+
 [node name="AnimaWater" type="Node2D"]
 script = ExtResource("2_k8hmr")
 
@@ -483,3 +486,6 @@ unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_sy4em")
 animation = &"night"
 autoplay = "night"
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_r8pjf")

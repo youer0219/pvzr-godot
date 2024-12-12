@@ -7,5 +7,5 @@
 emitting = false
 amount = 500
 process_material = ExtResource("1_rui6v")
-lifetime = 337.58
+lifetime = 1.2
 script = ExtResource("2_5k0ps")
