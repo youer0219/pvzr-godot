@@ -15,6 +15,7 @@ uniform vec4 rain_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
 uniform float base_rain_speed : hint_range(0.1, 1.0) = 0.5;
 uniform float additional_rain_speed : hint_range(0.1, 1.0) = 0.5;
 uniform float slant : hint_range(-1.0, 1.0) = 0.2;
+uniform bool is_rain = true;
 
 void fragment() {
 // To control the rainfall from your program comment out the below line and add a new uniform above as:
@@ -30,10 +31,15 @@ void fragment() {
 	uv.x = (UV.x - UV.y * slant) - remainder;
 	float rn = fract(sin(uv.x * rain_amount));
 	uv.y = fract((UV.y + rn));
+	
+	if (is_rain){
+		// Blurred trail. Works well for rain:
+		COLOR = mix(COLOR, rain_color, smoothstep(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), 1.0, fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+	}
+	else{
+		// No trail. Works well for snow:
+		COLOR = mix(COLOR, rain_color, step(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+	}
 
-// Blurred trail. Works well for rain:
-	COLOR = mix(COLOR, rain_color, smoothstep(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), 1.0, fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
-
-// No trail. Works well for snow:
-	//COLOR = mix(COLOR, rain_color, step(1.0 - (far_rain_length + (near_rain_length - far_rain_length) * rn), fract(uv.y - time * (base_rain_speed + additional_rain_speed * rn))) * (far_rain_transparency + (near_rain_transparency - far_rain_transparency) * rn) * step(remainder * rain_amount, far_rain_width + (near_rain_width - far_rain_width) * rn));
+		
 }

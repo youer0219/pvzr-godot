@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=38 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bqhasrchtqug2" path="res://Scenes/Map/TestMap/外层地图.tscn" id="1_whx1j"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
-[ext_resource type="Material" uid="uid://dvk5ocwj3fct2" path="res://Scenes/BackGroud/细雨.tres" id="6_bqdrj"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
@@ -26,6 +25,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="18_1yx3n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
+[ext_resource type="Shader" path="res://Common/Shader/雨和雪.gdshader" id="22_byryf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0tc"]
 size = Vector2(84, 139)
@@ -516,6 +516,21 @@ shader_parameter/collision_bounce = 0.0
 shader_parameter/is_custom_colors = true
 shader_parameter/color_source_texture = ExtResource("12_0uwhu")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ek0o"]
+shader = ExtResource("22_byryf")
+shader_parameter/rain_amount = 500.0
+shader_parameter/near_rain_length = 0.02
+shader_parameter/far_rain_length = 0.01
+shader_parameter/near_rain_width = 0.4
+shader_parameter/far_rain_width = 0.2
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(0.929412, 0.929412, 0.929412, 1)
+shader_parameter/base_rain_speed = 1.0
+shader_parameter/additional_rain_speed = 0.551
+shader_parameter/slant = 0.4
+shader_parameter/is_rain = true
+
 [sub_resource type="Resource" id="Resource_l7vra"]
 script = ExtResource("20_7n4fl")
 duration = 1.0
@@ -643,7 +658,7 @@ process_material = SubResource("ShaderMaterial_0o0bi")
 layer = -10
 
 [node name="RainRect" type="ColorRect" parent="WeatherLayer"]
-material = ExtResource("6_bqdrj")
+material = SubResource("ShaderMaterial_2ek0o")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
