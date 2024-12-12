@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddoesw45kq0gc"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Components/AttackComponent/CollisionComponent/hitbox.gd" id="1_vbj1s"]
+
+[node name="Hitbox" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_vbj1s")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
