@@ -97,6 +97,14 @@ position = Vector2(24, 40)
 position = Vector2(-10, 88)
 bullet_direction = 1
 
+[node name="PeaShooter2" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
+position = Vector2(7, 87)
+bullet_direction = 1
+
+[node name="PeaShooter3" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
+position = Vector2(40, 88)
+bullet_direction = 1
+
 [node name="CornCannon" parent="Entities/Plants" instance=ExtResource("8_77xoy")]
 position = Vector2(24, 89)
 

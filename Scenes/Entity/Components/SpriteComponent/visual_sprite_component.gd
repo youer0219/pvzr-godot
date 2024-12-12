@@ -20,6 +20,13 @@ func _ready() -> void:
 	visual_material = material
 	ready_blink()
 
+#region ZOOM部分
+func zoom_under_attack_blink():
+	var zoom_tween:Tween = create_tween().bind_node(self)
+	zoom_tween.tween_method(set_blink_intensity,0,0.55,0.1)
+	zoom_tween.tween_method(set_blink_intensity,0.55,0,0.2)
+
+#endregion
 #region CornCannon Blink部分
 var cannon_ball_tween:Tween
 func cannon_ball_blink():

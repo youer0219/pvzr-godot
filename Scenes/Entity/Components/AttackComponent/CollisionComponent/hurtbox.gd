@@ -13,9 +13,11 @@ func set_type(value:Type):
 func set_box_layer(layer:int):
 	collision_layer = layer
 
+signal under_damage
 
 func _ready() -> void:
 	_type = type
 
 func take_damage(damage:int):
-	print(owner.name," under attack :",damage)
+	#print(owner.name," under attack :",damage)
+	under_damage.emit()
