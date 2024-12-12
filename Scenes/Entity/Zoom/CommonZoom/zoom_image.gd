@@ -14,5 +14,7 @@ func set_flip_h(value:bool):
 	flip_h = value
 	if !is_node_ready():
 		await ready
-	body.flip_h = flip_h
-	head.flip_h = flip_h
+	if flip_h:
+		scale.x = -1
+	else:
+		scale.x = 1

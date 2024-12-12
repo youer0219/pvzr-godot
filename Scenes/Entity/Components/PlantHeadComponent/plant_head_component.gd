@@ -41,3 +41,5 @@ func start_attack():
 
 func stop_attack():
 	attack_tween.stop()
+	var tween:Tween = create_tween()
+	tween.tween_property(visual_sprite_component,"rotation_degrees",0, gap_time)

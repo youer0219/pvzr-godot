@@ -1,14 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwe1uryq8vi2q"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://r2rdib8uc7ft"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Bullet/bullet.gd" id="1_lh8mi"]
-[ext_resource type="Texture2D" uid="uid://b8rqh5qnsxobm" path="res://assets/实体/植物/豌豆家族/豌豆.png" id="1_uxvyc"]
-[ext_resource type="PackedScene" uid="uid://dymig5sxwqlbn" path="res://Scenes/Func/Move/BulletMove/BulletStraightMove/BulletStraightMove.tscn" id="3_pil1p"]
-[ext_resource type="PackedScene" uid="uid://ddoesw45kq0gc" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/Hitbox.tscn" id="4_ay0dj"]
-[ext_resource type="PackedScene" uid="uid://beggmcmx0ppur" path="res://Scenes/Entity/Components/Particle/pixel_particle.tscn" id="5_60a4y"]
-[ext_resource type="Texture2D" uid="uid://dvfg358qwm0vl" path="res://Scenes/Entity/Zoom/CommonZoom/assest/尸首.png" id="6_35oci"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_68vb6"]
-radius = 8.0
+[ext_resource type="Texture2D" uid="uid://dvfg358qwm0vl" path="res://Scenes/Entity/Zoom/CommonZoom/assest/尸首.png" id="1_644jd"]
 
 [sub_resource type="Shader" id="Shader_ra474"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's ParticleProcessMaterial.
@@ -417,7 +409,7 @@ void process() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gkpr"]
+[resource]
 resource_local_to_scene = true
 shader = SubResource("Shader_ra474")
 shader_parameter/direction = Vector3(1, -1, 0)
@@ -462,23 +454,4 @@ shader_parameter/is_collision_stop = true
 shader_parameter/collision_friction = 1.0
 shader_parameter/collision_bounce = 0.0
 shader_parameter/is_custom_colors = true
-shader_parameter/color_source_texture = ExtResource("6_35oci")
-
-[node name="Bullet" type="Node2D" node_paths=PackedStringArray("bullet_move")]
-scale = Vector2(0.8, 0.8)
-script = ExtResource("1_lh8mi")
-bullet_move = NodePath("BulletStraightMove")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_uxvyc")
-
-[node name="BulletStraightMove" parent="." instance=ExtResource("3_pil1p")]
-
-[node name="Hitbox" parent="." instance=ExtResource("4_ay0dj")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_68vb6")
-
-[node name="PixelParticle" parent="." instance=ExtResource("5_60a4y")]
-process_material = SubResource("ShaderMaterial_3gkpr")
-lifetime = 1.2
+shader_parameter/color_source_texture = ExtResource("1_644jd")
