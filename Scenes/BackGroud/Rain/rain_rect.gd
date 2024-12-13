@@ -1,4 +1,5 @@
 extends ColorRect
+class_name RainRect
 
 @export var is_raining:bool = false:set = set_is_raining
 @export var max_slant:float = 0.4

@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name LightningCurtain
 
 @onready var mask_color: ColorRect = $MaskColor
 
@@ -36,3 +37,4 @@ func set_is_runing(value:bool):
 	else:
 		self.visible = false
 		light_tween.stop()
+		mask_color.color = Color(1,1,1,0)
