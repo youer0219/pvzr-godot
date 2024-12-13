@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b42fs28jqysrp"]
+
+[ext_resource type="Texture2D" uid="uid://2mksyr8chupl" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/assets/炸雷.png" id="1_qfad7"]
+
+[node name="PotatoMineEffect" type="Node2D"]
+scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qfad7")

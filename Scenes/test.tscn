@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=42 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="18_1yx3n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
+[ext_resource type="PackedScene" uid="uid://b42fs28jqysrp" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/PotatoMineEffect.tscn" id="20_n8og7"]
 [ext_resource type="Shader" path="res://Common/Shader/雨和雪.gdshader" id="22_byryf"]
 [ext_resource type="PackedScene" uid="uid://cj8tchd3wjc37" path="res://Scenes/UI/slot.tscn" id="30_u1rhd"]
 
@@ -634,6 +635,9 @@ position = Vector2(-142, 81)
 position = Vector2(-32, 59.5)
 shape = SubResource("RectangleShape2D_qr0tc")
 
+[node name="PotatoMineEffect" parent="Entities/ComponentTest" instance=ExtResource("20_n8og7")]
+position = Vector2(-167, 92)
+
 [node name="BuildSystem" parent="." instance=ExtResource("9_uis2g")]
 
 [node name="FrontendMap" type="Node2D" parent="."]
@@ -679,6 +683,7 @@ z_index = 1
 process_material = SubResource("ShaderMaterial_0o0bi")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Slot" parent="UILayer" instance=ExtResource("30_u1rhd")]
 
