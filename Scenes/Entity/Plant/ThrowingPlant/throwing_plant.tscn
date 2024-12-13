@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://dl56351yivnoe"]
+
+[ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_gbk04"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/ThrowingPlant/throwing_plant.gd" id="2_pmuxl"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Components/SpriteComponent/VisualSpriteComponent.tscn" id="3_lu6qt"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="4_mlw0q"]
+[ext_resource type="Texture2D" uid="uid://qerij4i1i7cu" path="res://Scenes/Entity/Plant/ThrowingPlant/卷心菜投手/卷心菜投手-投空.png" id="5_eiti3"]
+[ext_resource type="Texture2D" uid="uid://d1a506kncyil8" path="res://Scenes/Entity/Plant/ThrowingPlant/卷心菜投手/卷心菜投手.png" id="6_vftyy"]
+[ext_resource type="Texture2D" uid="uid://b1go7rmyqhik5" path="res://Scenes/Entity/Plant/ThrowingPlant/卷心菜投手/卷心菜.png" id="7_jj8wd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s01i5"]
+resource_local_to_scene = true
+shader = ExtResource("4_mlw0q")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.0
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0.956863, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_at8no"]
+resource_local_to_scene = true
+shader = ExtResource("4_mlw0q")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.0
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0.956863, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
+
+[node name="ThrowingPlant" instance=ExtResource("1_gbk04")]
+script = ExtResource("2_pmuxl")
+
+[node name="Arm" parent="." index="1" instance=ExtResource("3_lu6qt")]
+material = SubResource("ShaderMaterial_s01i5")
+position = Vector2(-3, 1)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("5_eiti3")
+
+[node name="Body" parent="." index="2" instance=ExtResource("3_lu6qt")]
+material = SubResource("ShaderMaterial_at8no")
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("6_vftyy")
+
+[node name="卷心菜" type="Sprite2D" parent="." index="3"]
+position = Vector2(-11, 0)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("7_jj8wd")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1go7rmyqhik5"
-path="res://.godot/imported/卷心菜.png-0826f4c76feb1161352dd94c5bf7ecc3.ctex"
+uid="uid://d1a506kncyil8"
+path="res://.godot/imported/卷心菜投手.png-52b68837e3ea4353c686f8829682097f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/实体/植物/投手家族/卷心菜投手/卷心菜.png"
-dest_files=["res://.godot/imported/卷心菜.png-0826f4c76feb1161352dd94c5bf7ecc3.ctex"]
+source_file="res://Scenes/Entity/Plant/ThrowingPlant/卷心菜投手/卷心菜投手.png"
+dest_files=["res://.godot/imported/卷心菜投手.png-52b68837e3ea4353c686f8829682097f.ctex"]
 
 [params]
 
