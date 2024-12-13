@@ -15,8 +15,6 @@ func _ready() -> void:
 	world_collision_check.body_entered.connect(dead.unbind(1))
 	if is_wall_passing:
 		world_collision_check.collision_mask = 0
-	await get_tree().create_timer(10.0).timeout
-	queue_free()
 
 func set_direction(value):
 	direction = value

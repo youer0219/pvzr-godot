@@ -1,10 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://dc3sen65h6kuw"]
 
 [ext_resource type="Script" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/explosive_component.gd" id="1_0xwxl"]
-[ext_resource type="PackedScene" uid="uid://ddoesw45kq0gc" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/Hitbox.tscn" id="2_rl1gs"]
+[ext_resource type="PackedScene" uid="uid://b42fs28jqysrp" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/effects/PotatoMineEffect.tscn" id="2_bk41m"]
 
 [node name="ExplosiveComponent" type="Node2D"]
 script = ExtResource("1_0xwxl")
-
-[node name="Hitbox" parent="." instance=ExtResource("2_rl1gs")]
-position = Vector2(1, 0)
+explosive_effect = ExtResource("2_bk41m")

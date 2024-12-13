@@ -1,11 +1,11 @@
 extends Node2D
+class_name ExplosiveComponent
+
+@export var explosive_effect:PackedScene
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func get_explosive_effect_scene()->Node2D:
+	var new_effect:Node2D = explosive_effect.instantiate()
+	new_effect.global_position = global_position
+	return new_effect

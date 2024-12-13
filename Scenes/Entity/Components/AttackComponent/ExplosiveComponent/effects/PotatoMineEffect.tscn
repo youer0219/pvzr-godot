@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b42fs28jqysrp"]
+
+[ext_resource type="Texture2D" uid="uid://2mksyr8chupl" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/assets/炸雷.png" id="1_qfad7"]
+[ext_resource type="PackedScene" uid="uid://ddoesw45kq0gc" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/Hitbox.tscn" id="2_cfu6v"]
+[ext_resource type="PackedScene" uid="uid://2p14cfrkrle4" path="res://Scenes/Entity/Components/NodeLifecycleComponent/TimedDeletionComponent.tscn" id="3_00nju"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qjcfs"]
+radius = 9.0
+
+[node name="PotatoMineEffect" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("1_qfad7")
+
+[node name="Hitbox" parent="." instance=ExtResource("2_cfu6v")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_qjcfs")
+
+[node name="TimedDeletionComponent" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("3_00nju")]
+target_node = NodePath("..")
+time = 1.0

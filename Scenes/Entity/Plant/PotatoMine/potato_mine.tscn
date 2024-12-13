@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkqvf2gk5iqim"]
+[gd_scene load_steps=12 format=3 uid="uid://dkqvf2gk5iqim"]
 
 [ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_1lb8q"]
 [ext_resource type="Script" path="res://Scenes/Entity/Plant/PotatoMine/potato_mine.gd" id="2_nob26"]
 [ext_resource type="Texture2D" uid="uid://vdeyw83q1na5" path="res://Scenes/Entity/Plant/PotatoMine/assets/土豆地雷.png" id="3_2myep"]
 [ext_resource type="Texture2D" uid="uid://c25nh5ulxa7yb" path="res://Scenes/Entity/Plant/PotatoMine/assets/土豆地雷-亮.png" id="4_vga2n"]
+[ext_resource type="PackedScene" uid="uid://dc3sen65h6kuw" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/ExplosiveComponent.tscn" id="5_p4mme"]
+[ext_resource type="PackedScene" uid="uid://he2b26ykwxqa" path="res://Scenes/Func/CheckArea/check_area_component.tscn" id="6_an6f2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dbymo"]
 atlas = ExtResource("3_2myep")
@@ -39,9 +41,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yjc8g"]
+size = Vector2(16, 16)
+
 [node name="PotatoMine" instance=ExtResource("1_1lb8q")]
 script = ExtResource("2_nob26")
-active_time = 10.0
+active_time = 5.0
 time_fator = 1.0
 is_active = false
 
@@ -50,3 +55,14 @@ position = Vector2(0, 6)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_yqf2b")
 autoplay = "default"
+
+[node name="ExplosiveComponent" parent="." index="2" instance=ExtResource("5_p4mme")]
+
+[node name="CheckAreaComponent" parent="." index="3" instance=ExtResource("6_an6f2")]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CheckAreaComponent" index="0"]
+shape = SubResource("RectangleShape2D_yjc8g")
+debug_color = Color(0, 0.231373, 0.701961, 0.419608)
+
+[node name="Timer" type="Timer" parent="." index="4"]
+one_shot = true
