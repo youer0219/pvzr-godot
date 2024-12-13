@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://cj8tchd3wjc37"]
+
+[ext_resource type="Texture2D" uid="uid://q0e4kv6t0qff" path="res://assets/UI/阳光板.png" id="1_mo4kw"]
+[ext_resource type="Texture2D" uid="uid://dtlfvw476h8f4" path="res://assets/UI/卡槽.png" id="2_5ygsc"]
+[ext_resource type="Texture2D" uid="uid://ceqcavmhvt6hd" path="res://assets/实体/卡牌/1.jpg" id="3_jhc8g"]
+[ext_resource type="Texture2D" uid="uid://n7vg8a016h0s" path="res://assets/UI/铲子槽.png" id="4_jf83q"]
+[ext_resource type="Texture2D" uid="uid://bwsnquvt7yafq" path="res://assets/UI/铲子.png" id="5_2e2yj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_83am3"]
+texture = ExtResource("2_5ygsc")
+texture_margin_top = 3.39893
+texture_margin_right = 5.16095
+texture_margin_bottom = 3.06331
+region_rect = Rect2(0, -0.21558, 35.2921, 40.3016)
+
+[node name="Slot" type="HBoxContainer"]
+offset_right = 141.0
+offset_bottom = 80.0
+scale = Vector2(1.4, 1.4)
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("1_mo4kw")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_83am3")
+
+[node name="Cards" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect4" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect5" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect6" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect7" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect8" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="TextureRect9" type="TextureRect" parent="PanelContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("3_jhc8g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_jf83q")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TextureRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_2e2yj")

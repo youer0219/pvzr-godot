@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=40 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
 [ext_resource type="Shader" path="res://Common/Shader/雨和雪.gdshader" id="22_byryf"]
+[ext_resource type="PackedScene" uid="uid://cj8tchd3wjc37" path="res://Scenes/UI/slot.tscn" id="30_u1rhd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdnqj"]
 shader = ExtResource("1_n8kdf")
@@ -540,7 +541,7 @@ script = ExtResource("1_y4jx2")
 
 [node name="BackGroundManager" type="Node2D" parent="."]
 script = ExtResource("2_ol673")
-sky_state = 3
+sky_state = 1
 
 [node name="Background" type="ParallaxBackground" parent="BackGroundManager"]
 layer = -20
@@ -673,14 +674,20 @@ process_callback = 0
 z_index = 1
 process_material = SubResource("ShaderMaterial_0o0bi")
 
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="Slot" parent="UILayer" instance=ExtResource("30_u1rhd")]
+
 [node name="Debug" type="CanvasLayer" parent="."]
+layer = 15
 script = ExtResource("15_4wjpy")
 
 [node name="frames" type="Label" parent="Debug"]
-offset_left = 795.0
-offset_top = 89.0
-offset_right = 835.0
-offset_bottom = 112.0
+offset_left = 1265.0
+offset_top = 65.0
+offset_right = 1328.0
+offset_bottom = 88.0
+scale = Vector2(1.5, 1.5)
 text = "frames :"
 
 [node name="CamaraNodes" type="Node2D" parent="."]
