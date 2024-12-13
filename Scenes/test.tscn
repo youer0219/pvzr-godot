@@ -545,7 +545,7 @@ script = ExtResource("1_y4jx2")
 
 [node name="BackGroundManager" type="Node2D" parent="."]
 script = ExtResource("2_ol673")
-sky_state = 1
+sky_state = 3
 
 [node name="Background" type="ParallaxBackground" parent="BackGroundManager"]
 layer = -20

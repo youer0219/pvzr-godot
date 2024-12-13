@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw14rd4ocfgwj"]
+
+[ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="1_lgd5a"]
+[ext_resource type="PackedScene" uid="uid://dymig5sxwqlbn" path="res://Scenes/Func/Move/BulletMove/BulletStraightMove/BulletStraightMove.tscn" id="2_5xjfp"]
+
+[node name="Pea" node_paths=PackedStringArray("bullet_move") instance=ExtResource("1_lgd5a")]
+bullet_move = NodePath("BulletStraightMove")
+
+[node name="BulletStraightMove" parent="." index="4" instance=ExtResource("2_5xjfp")]

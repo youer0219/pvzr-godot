@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cijj4ep5ketux"]
+[gd_scene load_steps=4 format=3 uid="uid://cijj4ep5ketux"]
 
 [ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="1_gg5b5"]
 [ext_resource type="Texture2D" uid="uid://dmkw0gjoj07ki" path="res://Scenes/Entity/Bullet/1437/星星.png" id="2_4hklr"]
+[ext_resource type="PackedScene" uid="uid://dymig5sxwqlbn" path="res://Scenes/Func/Move/BulletMove/BulletStraightMove/BulletStraightMove.tscn" id="3_mqn6i"]
 
-[node name="StarBullet" instance=ExtResource("1_gg5b5")]
+[node name="StarBullet" node_paths=PackedStringArray("bullet_move") instance=ExtResource("1_gg5b5")]
+bullet_move = NodePath("BulletStraightMove")
 is_wall_passing = true
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_4hklr")
+
+[node name="BulletStraightMove" parent="." index="4" instance=ExtResource("3_mqn6i")]
