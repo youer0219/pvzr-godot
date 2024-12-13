@@ -1,0 +1,29 @@
+[gd_scene load_steps=9 format=3 uid="uid://bn26v8l6qvyjw"]
+
+[ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_p0lvk"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Shooter/1437/starfruit.gd" id="2_heump"]
+[ext_resource type="Texture2D" uid="uid://v384tf0vyths" path="res://Scenes/Entity/Plant/Shooter/1437/assets/杨桃.png" id="3_7tk03"]
+[ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_j4f1y"]
+[ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Components/SpriteComponent/VisualSpriteComponent.tscn" id="3_lh5dt"]
+[ext_resource type="PackedScene" uid="uid://cijj4ep5ketux" path="res://Scenes/Entity/Bullet/1437/star_bullet.tscn" id="4_dmcwe"]
+[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="4_prnsk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwenm"]
+resource_local_to_scene = true
+shader = ExtResource("4_prnsk")
+shader_parameter/strength = 2.0
+shader_parameter/speed = 3.0
+shader_parameter/blink_color = Color(0.952941, 0.913725, 0.956863, 1)
+shader_parameter/blink_intensity = 0.0
+shader_parameter/is_vertical = false
+
+[node name="Starfruit" instance=ExtResource("1_p0lvk")]
+script = ExtResource("2_heump")
+
+[node name="VisualSpriteComponent" parent="." index="0" instance=ExtResource("3_lh5dt")]
+material = SubResource("ShaderMaterial_rwenm")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_7tk03")
+
+[node name="FireBulletComponent" parent="." index="2" instance=ExtResource("3_j4f1y")]
+bullet_scene = ExtResource("4_dmcwe")

@@ -6,7 +6,7 @@ signal hit_target
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hurtbox:
 		area.take_damage(damage)
-		hit_target.emit()
+	hit_target.emit()
 
 #TODO: 将这个改成多选.不然以后就需要多个组件一起工作。
 enum Type {PLANT=64,ZOOM=16,DAVE=32}

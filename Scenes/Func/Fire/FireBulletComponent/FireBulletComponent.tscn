@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://duonhdt2h2x22"]
+[gd_scene load_steps=3 format=3 uid="uid://duonhdt2h2x22"]
 
 [ext_resource type="Script" path="res://Scenes/Func/Fire/FireBulletComponent/fire_bullet_component.gd" id="1_wkloq"]
+[ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="2_tcnkh"]
 
 [node name="FireBulletComponent" type="Marker2D"]
 script = ExtResource("1_wkloq")
+bullet_scene = ExtResource("2_tcnkh")

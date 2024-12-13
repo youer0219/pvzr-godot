@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=43 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://Scenes/BackGroud/Rain/rain_rect.gd" id="14_edywy"]
 [ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
 [ext_resource type="PackedScene" uid="uid://dkqvf2gk5iqim" path="res://Scenes/Entity/Plant/PotatoMine/potato_mine.tscn" id="16_5ir4d"]
+[ext_resource type="PackedScene" uid="uid://bn26v8l6qvyjw" path="res://Scenes/Entity/Plant/Shooter/1437/starfruit.tscn" id="17_yjeyn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="18_1yx3n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
@@ -523,7 +524,7 @@ shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
 shader_parameter/velocity_pivot = Vector3(0, 0, 0)
 shader_parameter/color_value = Color(1, 1, 1, 1)
 shader_parameter/gravity = Vector3(0, 120, 0)
-shader_parameter/is_collision_stop = true
+shader_parameter/is_collision_stop = false
 shader_parameter/collision_friction = 1.0
 shader_parameter/collision_bounce = 0.0
 shader_parameter/is_custom_colors = true
@@ -604,21 +605,21 @@ position = Vector2(24, 40)
 
 [node name="PeaShooter" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
 position = Vector2(-10, 88)
-bullet_direction = 1
 
 [node name="PeaShooter2" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
 position = Vector2(7, 87)
-bullet_direction = 1
 
 [node name="PeaShooter3" parent="Entities/Plants" instance=ExtResource("8_n2oln")]
 position = Vector2(40, 88)
-bullet_direction = 1
 
 [node name="CornCannon" parent="Entities/Plants" instance=ExtResource("8_77xoy")]
 position = Vector2(24, 89)
 
 [node name="PotatoMine" parent="Entities/Plants" instance=ExtResource("16_5ir4d")]
 position = Vector2(-167, 91)
+
+[node name="Starfruit" parent="Entities/Plants" instance=ExtResource("17_yjeyn")]
+position = Vector2(71, 89)
 
 [node name="Zooms" type="Node2D" parent="Entities"]
 
@@ -681,6 +682,7 @@ process_callback = 0
 [node name="PixelParticle" parent="." groups=["PixelParticle"] instance=ExtResource("11_e1co1")]
 z_index = 1
 process_material = SubResource("ShaderMaterial_0o0bi")
+fixed_fps = 90
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 visible = false
