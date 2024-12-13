@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://q0e4kv6t0qff" path="res://assets/UI/阳光板.png" id="1_mo4kw"]
 [ext_resource type="Texture2D" uid="uid://dtlfvw476h8f4" path="res://assets/UI/卡槽.png" id="2_5ygsc"]
-[ext_resource type="Texture2D" uid="uid://ceqcavmhvt6hd" path="res://assets/实体/卡牌/1.jpg" id="3_jhc8g"]
+[ext_resource type="Texture2D" uid="uid://ceqcavmhvt6hd" path="res://Scenes/Entity/Card/cards/assets/1.jpg" id="3_jhc8g"]
 [ext_resource type="Texture2D" uid="uid://n7vg8a016h0s" path="res://assets/UI/铲子槽.png" id="4_jf83q"]
 [ext_resource type="Texture2D" uid="uid://bwsnquvt7yafq" path="res://assets/UI/铲子.png" id="5_2e2yj"]
 

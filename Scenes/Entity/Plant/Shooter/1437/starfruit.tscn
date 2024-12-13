@@ -18,6 +18,7 @@ shader_parameter/blink_intensity = 0.0
 shader_parameter/is_vertical = false
 
 [node name="Starfruit" instance=ExtResource("1_p0lvk")]
+scale = Vector2(-1, 1)
 script = ExtResource("2_heump")
 
 [node name="VisualSpriteComponent" parent="." index="0" instance=ExtResource("3_lh5dt")]

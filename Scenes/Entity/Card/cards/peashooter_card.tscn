@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://di53tofnruevm"]
+
+[ext_resource type="PackedScene" uid="uid://dcmslx0hxv7vc" path="res://Scenes/Entity/Card/card_textrue.tscn" id="1_3jr58"]
+
+[node name="PeashooterCard" instance=ExtResource("1_3jr58")]

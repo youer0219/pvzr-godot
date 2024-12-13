@@ -31,6 +31,8 @@ func plant():
 			var new_plant = card_system.get_curr_plant_scene().instantiate()
 			new_plant.position = grid_system.get_mouse_cell_center()
 			add_child(new_plant)
+			card_system.card_delate()
+
 
 func set_is_planting(value:bool):
 	is_planting = value
@@ -74,8 +76,15 @@ func can_plant():
 		return true
 	return false
 
+## 测试使用
 
+const PEASHOOTER_CARD = preload("res://Scenes/Entity/Card/cards/peashooter_card.tscn")
+const STAR_FRUIT_CARD = preload("res://Scenes/Entity/Card/cards/star_fruit_card.tscn")
 
+var cards = [PEASHOOTER_CARD,STAR_FRUIT_CARD]
+
+func add_random_card():
+	card_system.card_add(cards.pick_random())
 
 
 
