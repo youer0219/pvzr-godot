@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=44 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bn26v8l6qvyjw" path="res://Scenes/Entity/Plant/Shooter/1437/starfruit.tscn" id="17_yjeyn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="18_1yx3n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
+[ext_resource type="PackedScene" uid="uid://ceow8xlktq6yv" path="res://Scenes/Entity/Bullet/CatnipBullet/catnip_bullet.tscn" id="19_miecf"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
 [ext_resource type="Shader" path="res://Common/Shader/雨和雪.gdshader" id="22_byryf"]
 [ext_resource type="Script" path="res://Scenes/UI/debug/get_card_button.gd" id="30_2217t"]
@@ -627,6 +628,8 @@ position = Vector2(71, 89)
 position = Vector2(-142, 81)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
+
+[node name="CatnipBullet" parent="Entities/Bullets" instance=ExtResource("19_miecf")]
 
 [node name="ComponentTest" type="Node2D" parent="Entities"]
 
