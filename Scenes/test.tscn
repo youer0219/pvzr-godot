@@ -694,6 +694,7 @@ visible = false
 custom_minimum_size = Vector2(40, 20)
 offset_right = 8.0
 offset_bottom = 8.0
+focus_mode = 0
 text = " 获取植物卡牌"
 script = ExtResource("30_2217t")
 

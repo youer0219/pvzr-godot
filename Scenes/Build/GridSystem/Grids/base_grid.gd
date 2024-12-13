@@ -1,10 +1,10 @@
 extends Node2D
 class_name BaseGrid
 
-const black_frame = preload("res://Scenes/Func/GridSystem/Grids/assets/不适宜种植.png")
-const yellow_frame = preload("res://Scenes/Func/GridSystem/Grids/assets/适宜开炮.png")
-const green_frame = preload("res://Scenes/Func/GridSystem/Grids/assets/适宜种植.png")
-const red_frame = preload("res://Scenes/Func/GridSystem/Grids/assets/适宜铲除.png")
+const black_frame = preload("res://Scenes/Build/GridSystem/Grids/assets/不适宜种植.png")
+const yellow_frame = preload("res://Scenes/Build/GridSystem/Grids/assets/适宜开炮.png")
+const green_frame = preload("res://Scenes/Build/GridSystem/Grids/assets/适宜种植.png")
+const red_frame = preload("res://Scenes/Build/GridSystem/Grids/assets/适宜铲除.png")
 
 @onready var up_left_frame: Sprite2D = $UpLeftFrame
 @onready var up_right_frame: Sprite2D = $UpRightFrame
