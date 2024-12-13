@@ -521,13 +521,13 @@ shader = ExtResource("22_byryf")
 shader_parameter/rain_amount = 500.0
 shader_parameter/near_rain_length = 0.02
 shader_parameter/far_rain_length = 0.01
-shader_parameter/near_rain_width = 0.4
-shader_parameter/far_rain_width = 0.2
-shader_parameter/near_rain_transparency = 1.0
+shader_parameter/near_rain_width = 0.3
+shader_parameter/far_rain_width = 0.15
+shader_parameter/near_rain_transparency = 0.8
 shader_parameter/far_rain_transparency = 0.5
 shader_parameter/rain_color = Color(0.929412, 0.929412, 0.929412, 1)
-shader_parameter/base_rain_speed = 1.0
-shader_parameter/additional_rain_speed = 0.551
+shader_parameter/base_rain_speed = 0.5
+shader_parameter/additional_rain_speed = 0.5
 shader_parameter/slant = 0.4
 shader_parameter/is_rain = true
 
@@ -547,11 +547,6 @@ script = ExtResource("1_y4jx2")
 
 [node name="Dave" parent="Entities" instance=ExtResource("6_k6k4w")]
 position = Vector2(-9.00001, 28)
-
-[node name="Zooms" type="Node2D" parent="Entities"]
-
-[node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
-position = Vector2(-142, 81)
 
 [node name="Plants" type="Node2D" parent="Entities"]
 
@@ -578,6 +573,11 @@ bullet_direction = 1
 
 [node name="CornCannon" parent="Entities/Plants" instance=ExtResource("8_77xoy")]
 position = Vector2(24, 89)
+
+[node name="Zooms" type="Node2D" parent="Entities"]
+
+[node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
+position = Vector2(-142, 81)
 
 [node name="Bullets" type="Node2D" parent="Entities" groups=["Bullets"]]
 
