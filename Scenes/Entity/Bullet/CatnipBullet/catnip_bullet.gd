@@ -1,6 +1,6 @@
 extends Bullet
 
-
+ 
 func _ready() -> void:
 	super()
 	if bullet_move is BulletTrackingMove:

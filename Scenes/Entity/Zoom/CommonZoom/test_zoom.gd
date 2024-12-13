@@ -15,7 +15,7 @@ func under_damage_effect_apply():
 	#velocity.y -= 20
 	#move_and_slide()
 	# 模拟击退效果
-	# TODO:这个效果需要优化。原作中的击退更像是一种状态/BUFF。
-	position.x -= 4
+	# TODO:还行。但也存在优化空间。
+	position.x -= 8
 	position.y -= 1
-	velocity.x *= 0.1
+	velocity.x *= 0.05

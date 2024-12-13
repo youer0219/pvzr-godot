@@ -6,3 +6,4 @@
 [node name="BulletTrackingMove" instance=ExtResource("1_saxpm")]
 script = ExtResource("2_b6stp")
 turn_speed = 200.0
+no_target_speed_fator = 0.05
