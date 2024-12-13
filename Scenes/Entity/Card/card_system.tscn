@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://hahpdv27i6tq"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Card/card_system.gd" id="1_rt7kt"]
+
+[node name="CardSystem" type="Node2D"]
+script = ExtResource("1_rt7kt")

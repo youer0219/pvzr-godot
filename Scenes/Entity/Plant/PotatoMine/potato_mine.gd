@@ -8,8 +8,6 @@ extends Plant
 
 @export var is_active:bool:set = set_is_active
 
-func _ready() -> void:
-	is_active 
 
 func set_is_active(value:bool):
 	var is_same:bool = true if value == is_active else false

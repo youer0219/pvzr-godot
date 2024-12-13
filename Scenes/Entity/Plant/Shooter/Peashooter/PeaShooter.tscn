@@ -17,7 +17,7 @@ shader_parameter/is_vertical = false
 
 [node name="PeaShooter" instance=ExtResource("1_8vp16")]
 script = ExtResource("2_oxt53")
-bullet_direction = 0
+bullet_direction = 1
 
 [node name="RootComponent" parent="." index="1" instance=ExtResource("2_oopwd")]
 position = Vector2(0, 5)

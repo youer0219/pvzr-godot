@@ -7,7 +7,7 @@ class_name BuildSystem
 
 const POT = preload("res://Scenes/Entity/Plant/pot/pot.tscn")
 
-
+@onready var card_system: CardSystem = $CardSystem
 @onready var grid_system:GridSystem = $GridSystem
 @export var is_planting:bool:set = set_is_planting
 
@@ -21,14 +21,16 @@ func _physics_process(delta: float) -> void:
 
 func plant():
 	var can_plant = can_plant()
-	if can_plant:
+	if can_plant and card_system.has_curr_card():
 		grid_system.grid_state = GridSystem.GridState.PlantableState
 	else:
 		grid_system.grid_state = GridSystem.GridState.DisabledState
-	if can_plant and Input.is_action_just_pressed("chick"):
-		var new_plant = POT.instantiate()
-		new_plant.position = grid_system.get_mouse_cell_center()
-		add_child(new_plant)
+	if Input.is_action_just_pressed("chick"):
+		if can_plant and card_system.has_curr_card():
+			#var new_plant = POT.instantiate()
+			var new_plant = card_system.get_curr_plant_scene().instantiate()
+			new_plant.position = grid_system.get_mouse_cell_center()
+			add_child(new_plant)
 
 func set_is_planting(value:bool):
 	is_planting = value
