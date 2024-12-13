@@ -11,7 +11,7 @@ uniform float blink_intensity :hint_range(0.0, 1.0) = 0.0;
 // 控制摇摆方向的布尔值：
 // 如果为 true，则进行上下摇摆；
 // 如果为 false，则进行左右摇摆。
-uniform bool is_vertical = false; 
+uniform bool is_vertical = false;
 
 // 顶点着色器部分
 void vertex() {
@@ -31,7 +31,7 @@ void vertex() {
 void fragment() {
     // 获取当前纹理颜色
     vec4 color = texture(TEXTURE, UV);
-    
+
     // 根据闪烁强度将纹理颜色与闪烁颜色进行混合
     color = mix(color, blink_color, blink_intensity * color.a);
 

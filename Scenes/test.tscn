@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="Script" path="res://Scenes/BackGroud/back_ground_manager.gd" id="2_ol673"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
-[ext_resource type="Material" uid="uid://du1ihkujlml44" path="res://Common/Shader/Fantasy/wave.tres" id="3_omesp"]
+[ext_resource type="Material" uid="uid://c0ym748ee6ytg" path="res://Common/Shader/Fantasy/sunset.tres" id="3_rrdn6"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
@@ -540,12 +540,13 @@ script = ExtResource("1_y4jx2")
 
 [node name="BackGroundManager" type="Node2D" parent="."]
 script = ExtResource("2_ol673")
+sky_state = 3
 
 [node name="Background" type="ParallaxBackground" parent="BackGroundManager"]
 layer = -20
 
 [node name="BackgroundColor" type="TextureRect" parent="BackGroundManager/Background"]
-material = ExtResource("3_omesp")
+material = ExtResource("3_rrdn6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

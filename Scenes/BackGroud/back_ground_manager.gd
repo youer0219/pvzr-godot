@@ -18,6 +18,9 @@ const BLUE = preload("res://Scenes/BackGroud/Blue.tres")
 const NIGHT = preload("res://Scenes/BackGroud/Night.tres")
 const RED = preload("res://Scenes/BackGroud/Red.tres")
 const SUNSET = preload("res://Common/Shader/Fantasy/sunset.tres")
+const WAVE = preload("res://Common/Shader/Fantasy/wave.tres")
+const CLOUD = preload("res://Common/Shader/Fantasy/cloud.tres")
+
 
 func _ready() -> void:
 	sky_state = SkyState.values().pick_random()
@@ -53,7 +56,10 @@ func set_sky_state(value:SkyState):
 		SkyState.Fantasy:
 			#background_map.self_modulate = Color(1,1,1,1)
 			background_map_canvas_group.modulate = Color(1,1,1,1)
-			background_color.material = SUNSET 
+			background_color.material = SUNSET
+			background_color.material.set_shader_parameter("total_phases",randi_range(5,7))
+			background_color.material.set_shader_parameter("beam_height",randf_range(0.01,0.025))
+			background_color.material.set_shader_parameter("beam_width",randf_range(0.28,0.40))
 
 
 	
