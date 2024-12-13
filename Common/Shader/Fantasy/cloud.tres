@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b1w26ypvrnt03"]
+
+[ext_resource type="Shader" path="res://Common/Shader/Fantasy/resources/shaders/DiscreteClouds.gdshader" id="1_h1myp"]
+[ext_resource type="Texture2D" uid="uid://ee1ls66t42uc" path="res://Common/Shader/Fantasy/resources/textures/bubbles.png" id="2_w4ao8"]
+
+[resource]
+shader = ExtResource("1_h1myp")
+shader_parameter/bottom_color = Color(0.978253, 0.212489, 0.712126, 1)
+shader_parameter/top_color = Color(0.274051, 0.0515879, 0.378001, 1)
+shader_parameter/layer_count = 40
+shader_parameter/time_scale = 0.144
+shader_parameter/base_intensity = 0.08
+shader_parameter/size = 0.87101
+shader_parameter/tex = ExtResource("2_w4ao8")
