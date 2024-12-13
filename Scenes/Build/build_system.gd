@@ -7,6 +7,7 @@ class_name BuildSystem
 
 const POT = preload("res://Scenes/Entity/Plant/pot/pot.tscn")
 
+
 @onready var grid_system:GridSystem = $GridSystem
 @export var is_planting:bool:set = set_is_planting
 
@@ -45,9 +46,6 @@ func start_cast_collision():
 func stop_cast_collision():
 	cast_collision.collide_with_bodies = false
 	cast_collision.collide_with_areas = false
-
-#func _physics_process(delta: float) -> void:
-	#print(can_plant())
 
 func ready_cast_collision():
 	cast_collision = ShapeCast2D.new()

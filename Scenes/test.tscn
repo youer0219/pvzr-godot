@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=41 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://2onpvdu1k7f4" path="res://Scenes/Entity/Plant/flower/SunFlower.tscn" id="8_7j1cg"]
 [ext_resource type="PackedScene" uid="uid://dvwarxcfv3bts" path="res://Scenes/Entity/Plant/CornCannon/corn_cannon.tscn" id="8_77xoy"]
 [ext_resource type="PackedScene" uid="uid://cn85cvhwupsah" path="res://Scenes/Entity/Plant/flower/Marigold.tscn" id="8_g6syv"]
-[ext_resource type="PackedScene" uid="uid://bus0l6dvfanty" path="res://Scenes/Entity/Plant/Peashooter/PeaShooter.tscn" id="8_n2oln"]
+[ext_resource type="PackedScene" uid="uid://bus0l6dvfanty" path="res://Scenes/Entity/Plant/Shooter/Peashooter/PeaShooter.tscn" id="8_n2oln"]
 [ext_resource type="PackedScene" uid="uid://bsdedraxldsao" path="res://Scenes/Func/PathFinder/MapPathFinder/map_path_finder.tscn" id="9_73auh"]
 [ext_resource type="PackedScene" uid="uid://brehvk0nymobe" path="res://Scenes/Build/build_system.tscn" id="9_uis2g"]
 [ext_resource type="PackedScene" uid="uid://beggmcmx0ppur" path="res://Scenes/Func/Particle/pixel_particle.tscn" id="11_e1co1"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dcihuvq2hlh0p" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.tscn" id="13_ce573"]
 [ext_resource type="Script" path="res://Scenes/BackGroud/Rain/rain_rect.gd" id="14_edywy"]
 [ext_resource type="Script" path="res://Scenes/Debug/debug_layer.gd" id="15_4wjpy"]
+[ext_resource type="PackedScene" uid="uid://dkqvf2gk5iqim" path="res://Scenes/Entity/Plant/PotatoMine/potato_mine.tscn" id="16_5ir4d"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="18_1yx3n"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="19_7ur37"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
@@ -615,6 +616,9 @@ bullet_direction = 1
 [node name="CornCannon" parent="Entities/Plants" instance=ExtResource("8_77xoy")]
 position = Vector2(24, 89)
 
+[node name="PotatoMine" parent="Entities/Plants" instance=ExtResource("16_5ir4d")]
+position = Vector2(-167, 91)
+
 [node name="Zooms" type="Node2D" parent="Entities"]
 
 [node name="Zoom" parent="Entities/Zooms" instance=ExtResource("3_5yuv8")]
@@ -630,7 +634,7 @@ position = Vector2(-142, 81)
 position = Vector2(-32, 59.5)
 shape = SubResource("RectangleShape2D_qr0tc")
 
-[node name="BuildSystem" parent="Entities/ComponentTest" instance=ExtResource("9_uis2g")]
+[node name="BuildSystem" parent="." instance=ExtResource("9_uis2g")]
 
 [node name="FrontendMap" type="Node2D" parent="."]
 

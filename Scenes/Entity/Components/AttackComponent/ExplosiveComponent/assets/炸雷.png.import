@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2mksyr8chupl"
-path="res://.godot/imported/炸雷.png-bc2166ee2522a18f0f51489542ae63ca.ctex"
+path="res://.godot/imported/炸雷.png-7347b424b5fdd9883d44e9c10f865549.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/实体/植物/土豆地雷/炸雷.png"
-dest_files=["res://.godot/imported/炸雷.png-bc2166ee2522a18f0f51489542ae63ca.ctex"]
+source_file="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/assets/炸雷.png"
+dest_files=["res://.godot/imported/炸雷.png-7347b424b5fdd9883d44e9c10f865549.ctex"]
 
 [params]
 
