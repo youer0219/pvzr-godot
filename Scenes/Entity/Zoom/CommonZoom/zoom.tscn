@@ -57,16 +57,18 @@ texture = ExtResource("6_7odb3")
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_17vah")
 
-[node name="CharMoveControl" type="Node2D" parent="." node_paths=PackedStringArray("char_move", "entity_path_finder")]
+[node name="CharMoveControl" type="Node2D" parent="." node_paths=PackedStringArray("char_move")]
 script = ExtResource("4_7wjia")
 char_move = NodePath("CharMove")
-entity_path_finder = NodePath("EntityPathFinder")
 
 [node name="CharMove" parent="CharMoveControl" node_paths=PackedStringArray("char_body") instance=ExtResource("5_j24xr")]
 char_body = NodePath("../..")
 lateral_speed = 35.0
 lateral_speed_acceleration = 100.0
 lateral_move_jump = 50.0
+jump_times = 1
+jump_lateral_move = 80.0
+jump_velocity = 80.0
 
 [node name="EntityPathFinder" type="Node" parent="CharMoveControl"]
 script = ExtResource("5_imnoj")
@@ -74,6 +76,16 @@ script = ExtResource("5_imnoj")
 [node name="PathFindGapTimer" type="Timer" parent="CharMoveControl"]
 unique_name_in_owner = true
 wait_time = 0.2
+
+[node name="WallCheck01" type="RayCast2D" parent="CharMoveControl"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, -7)
+target_position = Vector2(10, 0)
+
+[node name="WallCheck02" type="RayCast2D" parent="CharMoveControl"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, -7)
+target_position = Vector2(-10, 0)
 
 [node name="Hurtbox" parent="." instance=ExtResource("6_uenvo")]
 type = 16
