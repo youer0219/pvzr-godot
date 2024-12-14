@@ -33,7 +33,8 @@ func _process(delta: float) -> void:
 
 func explosive():
 	var explosive_effect = explosive_component.get_explosive_effect_scene()
-	owner.add_child(explosive_effect)
+	var node = get_tree().get_first_node_in_group("BuildSystem")
+	node.add_child(explosive_effect)
 	queue_free()
 
 
@@ -45,10 +46,10 @@ func set_is_active(value:bool):
 	if !is_same:
 		if is_active:
 			animated_sprite_2d.play("activate")
-			active_animation(-6)
+			active_animation(-5)
 		else:
 			animated_sprite_2d.play("default")
-			active_animation(6)
+			active_animation(5)
 
 
 func active_animation(distance:float):

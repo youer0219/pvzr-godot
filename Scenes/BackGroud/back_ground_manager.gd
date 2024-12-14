@@ -23,14 +23,16 @@ const CLOUD = preload("res://Common/Shader/Fantasy/cloud.tres")
 
 
 func _ready() -> void:
-	sky_state = SkyState.values().pick_random()
+	#sky_state = SkyState.values().pick_random()
 	#sky_state = SkyState.Nighttime
+	pass
 
 
 func set_sky_state(value:SkyState):
 	sky_state = value
 	if !is_node_ready():
 		await ready
+	
 	lightning_curtain.is_runing = false
 	rain_rect.is_raining = false
 	match sky_state:

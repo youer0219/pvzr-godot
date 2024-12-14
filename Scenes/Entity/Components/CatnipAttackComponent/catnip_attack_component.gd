@@ -8,7 +8,7 @@ var attack_tween:Tween
 @export var attack_gap_time:float = 3
 
 func _ready() -> void:
-	attack_tween = create_tween().set_loops().bind_node(self)
+	attack_tween = create_tween().set_loops().bind_node(self).set_ease(Tween.EASE_IN_OUT)
 	attack_tween.tween_property(cat_tail,"rotation_degrees",25,0.1)
 	attack_tween.tween_callback(fire)
 	attack_tween.tween_property(cat_tail,"rotation_degrees",0,0.1)

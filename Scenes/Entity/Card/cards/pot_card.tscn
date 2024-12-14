@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccwpkly37oevo"]
+
+[ext_resource type="PackedScene" uid="uid://dcmslx0hxv7vc" path="res://Scenes/Entity/Card/card_textrue.tscn" id="1_boadj"]
+[ext_resource type="Texture2D" uid="uid://b2wv62gyreqaj" path="res://Scenes/Entity/Card/cards/assets/34.jpg" id="2_1diu1"]
+[ext_resource type="PackedScene" uid="uid://bg85hnqhyeg8w" path="res://Scenes/Entity/Plant/pot/pot.tscn" id="3_8im6x"]
+
+[node name="PotCard" instance=ExtResource("1_boadj")]
+texture = ExtResource("2_1diu1")
+plant_scene = ExtResource("3_8im6x")

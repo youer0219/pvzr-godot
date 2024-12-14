@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y4jx2"]
 [ext_resource type="Script" path="res://Scenes/BackGroud/back_ground_manager.gd" id="2_ol673"]
 [ext_resource type="PackedScene" uid="uid://urmmehrexiu8" path="res://Scenes/Entity/Zoom/CommonZoom/zoom.tscn" id="3_5yuv8"]
-[ext_resource type="Material" uid="uid://c0ym748ee6ytg" path="res://Common/Shader/Fantasy/sunset.tres" id="3_rrdn6"]
+[ext_resource type="Material" uid="uid://bq8tt7yt1dqk0" path="res://Scenes/BackGroud/grey_blue_wave.tres" id="3_8h00l"]
 [ext_resource type="PackedScene" uid="uid://bd0aauk3m14w5" path="res://Scenes/Entity/Dave/Dave.tscn" id="6_k6k4w"]
 [ext_resource type="PackedScene" uid="uid://bhdgkxhyss35t" path="res://Scenes/Map/Water/scene/water_layer.tscn" id="6_mf0wt"]
 [ext_resource type="PackedScene" uid="uid://dbv7yl18pjb60" path="res://Scenes/Map/Ladder/LadderLayer.tscn" id="6_wg3l6"]
@@ -577,7 +577,7 @@ sky_state = 3
 layer = -20
 
 [node name="BackgroundColor" type="TextureRect" parent="BackGroundManager/Background"]
-material = ExtResource("3_rrdn6")
+material = ExtResource("3_8h00l")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -606,12 +606,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 script = ExtResource("14_edywy")
+is_raining = true
 
 [node name="LightningCurtain" parent="BackGroundManager" instance=ExtResource("13_ce573")]
 layer = 10
 visible = false
 
 [node name="MaskColor" parent="BackGroundManager/LightningCurtain" index="0"]
+mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="BuildSystem" parent="." groups=["BuildSystem"] instance=ExtResource("9_uis2g")]
@@ -696,19 +698,59 @@ position = Vector2(-185, 107)
 position = Vector2(-32, 59.5)
 shape = SubResource("RectangleShape2D_qr0tc")
 
-[node name="PathFinder" parent="." node_paths=PackedStringArray("outer_tilemap_layer", "water_tilemap_layer") groups=["path_finder"] instance=ExtResource("9_73auh")]
+[node name="Func" type="Node2D" parent="."]
+
+[node name="PixelParticle" parent="Func" groups=["PixelParticle"] instance=ExtResource("11_e1co1")]
+z_index = 1
+process_material = SubResource("ShaderMaterial_0o0bi")
+fixed_fps = 90
+
+[node name="CamaraNodes" type="Node2D" parent="Func"]
+
+[node name="Camera2D" type="Camera2D" parent="Func/CamaraNodes"]
+physics_interpolation_mode = 1
+position = Vector2(89, 110)
+zoom = Vector2(4.6, 4.6)
+process_callback = 0
+limit_left = -699
+limit_top = -219
+limit_right = 693
+limit_bottom = 218
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.24
+drag_top_margin = 0.24
+drag_right_margin = 0.24
+drag_bottom_margin = 0.24
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Func/CamaraNodes/Camera2D"]
+script = ExtResource("18_1yx3n")
+
+[node name="PhantomCamera2D" type="Node2D" parent="Func/CamaraNodes" node_paths=PackedStringArray("follow_target")]
+position = Vector2(89, 110)
+script = ExtResource("19_7ur37")
+follow_mode = 2
+follow_target = NodePath("../../../Entities/Dave")
+zoom = Vector2(4.6, 4.6)
+tween_resource = SubResource("Resource_l7vra")
+draw_limits = true
+limit_target = NodePath("../CameraLimitShape")
+
+[node name="CameraLimitShape" type="CollisionShape2D" parent="Func/CamaraNodes"]
+visible = false
+position = Vector2(-3, -0.5)
+shape = SubResource("RectangleShape2D_mvsda")
+
+[node name="PathFinder" parent="Func" node_paths=PackedStringArray("outer_tilemap_layer", "water_tilemap_layer") groups=["path_finder"] instance=ExtResource("9_73auh")]
 unique_name_in_owner = true
-outer_tilemap_layer = NodePath("../FrontendMap/Outer/外层地图")
-water_tilemap_layer = NodePath("../FrontendMap/water/Water/WaterLayer")
+outer_tilemap_layer = NodePath("../../FrontendMap/Outer/外层地图")
+water_tilemap_layer = NodePath("../../FrontendMap/water/Water/WaterLayer")
 is_show_debug_graph = false
 
 [node name="TestTimer" type="Timer" parent="."]
 process_callback = 0
-
-[node name="PixelParticle" parent="." groups=["PixelParticle"] instance=ExtResource("11_e1co1")]
-z_index = 1
-process_material = SubResource("ShaderMaterial_0o0bi")
-fixed_fps = 90
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -734,43 +776,6 @@ offset_right = 1328.0
 offset_bottom = 88.0
 scale = Vector2(1.5, 1.5)
 text = "frames :"
-
-[node name="CamaraNodes" type="Node2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="CamaraNodes"]
-physics_interpolation_mode = 1
-position = Vector2(89, 110)
-zoom = Vector2(4.6, 4.6)
-process_callback = 0
-limit_left = -699
-limit_top = -219
-limit_right = 693
-limit_bottom = 218
-position_smoothing_speed = 6.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.24
-drag_top_margin = 0.24
-drag_right_margin = 0.24
-drag_bottom_margin = 0.24
-editor_draw_limits = true
-
-[node name="PhantomCameraHost" type="Node" parent="CamaraNodes/Camera2D"]
-script = ExtResource("18_1yx3n")
-
-[node name="PhantomCamera2D" type="Node2D" parent="CamaraNodes" node_paths=PackedStringArray("follow_target")]
-position = Vector2(89, 110)
-script = ExtResource("19_7ur37")
-follow_mode = 2
-follow_target = NodePath("../../Entities/Dave")
-zoom = Vector2(4.6, 4.6)
-tween_resource = SubResource("Resource_l7vra")
-draw_limits = true
-limit_target = NodePath("../CameraLimitShape")
-
-[node name="CameraLimitShape" type="CollisionShape2D" parent="CamaraNodes"]
-position = Vector2(-3, -0.5)
-shape = SubResource("RectangleShape2D_mvsda")
 
 [connection signal="child_order_changed" from="FrontendMap/Ladder/LadderLayer" to="FrontendMap/Ladder/LadderLayer" method="_on_child_order_changed"]
 [connection signal="child_order_changed" from="FrontendMap/water/Water/WaterLayer" to="FrontendMap/water/Water/WaterLayer" method="_on_child_order_changed"]

@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://du1ihkujlml44"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bq8tt7yt1dqk0"]
 
-[sub_resource type="Shader" id="Shader_petby"]
+[sub_resource type="Shader" id="Shader_hb55r"]
 code = "shader_type canvas_item;
 
 uniform vec4 bottom_color: source_color;
@@ -49,10 +49,10 @@ void fragment() {
 }"
 
 [resource]
-shader = SubResource("Shader_petby")
-shader_parameter/bottom_color = Color(0.713206, 0.758693, 0.935632, 1)
-shader_parameter/top_color = Color(0.360659, 0.187416, 0.360168, 1)
-shader_parameter/wave_amp = 0.145
-shader_parameter/wave_size = 1.23
-shader_parameter/wave_time_mul = 0.15
+shader = SubResource("Shader_hb55r")
+shader_parameter/bottom_color = Color(0.658824, 0.756863, 0.937255, 1)
+shader_parameter/top_color = Color(0.368627, 0.360784, 0.368627, 1)
+shader_parameter/wave_amp = 0.121
+shader_parameter/wave_size = 1.0
+shader_parameter/wave_time_mul = 0.735
 shader_parameter/total_phases = 9

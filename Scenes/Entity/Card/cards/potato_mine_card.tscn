@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://q0bsgltavny8"]
+
+[ext_resource type="PackedScene" uid="uid://dcmslx0hxv7vc" path="res://Scenes/Entity/Card/card_textrue.tscn" id="1_athes"]
+[ext_resource type="Texture2D" uid="uid://5wym8yhc1bnb" path="res://Scenes/Entity/Card/cards/assets/5.jpg" id="2_jjgdo"]
+[ext_resource type="PackedScene" uid="uid://dkqvf2gk5iqim" path="res://Scenes/Entity/Plant/PotatoMine/potato_mine.tscn" id="3_4rqod"]
+
+[node name="PotatoMineCard" instance=ExtResource("1_athes")]
+texture = ExtResource("2_jjgdo")
+plant_scene = ExtResource("3_4rqod")

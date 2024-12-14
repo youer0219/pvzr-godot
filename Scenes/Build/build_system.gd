@@ -80,8 +80,9 @@ func can_plant():
 
 const PEASHOOTER_CARD = preload("res://Scenes/Entity/Card/cards/peashooter_card.tscn")
 const STAR_FRUIT_CARD = preload("res://Scenes/Entity/Card/cards/star_fruit_card.tscn")
-
-var cards = [PEASHOOTER_CARD,STAR_FRUIT_CARD]
+const POT_CARD = preload("res://Scenes/Entity/Card/cards/pot_card.tscn")
+const POTATO_MINE_CARD = preload("res://Scenes/Entity/Card/cards/potato_mine_card.tscn")
+var cards = [PEASHOOTER_CARD,STAR_FRUIT_CARD,POT_CARD,POTATO_MINE_CARD]
 
 func add_random_card():
 	card_system.card_add(cards.pick_random())

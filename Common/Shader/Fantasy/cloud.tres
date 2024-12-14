@@ -5,8 +5,8 @@
 
 [resource]
 shader = ExtResource("1_h1myp")
-shader_parameter/bottom_color = Color(0.978253, 0.212489, 0.712126, 1)
-shader_parameter/top_color = Color(0.274051, 0.0515879, 0.378001, 1)
+shader_parameter/bottom_color = Color(0.997133, 0.898931, 0.947462, 1)
+shader_parameter/top_color = Color(0.562361, 0.649868, 0.696698, 1)
 shader_parameter/layer_count = 40
 shader_parameter/time_scale = 0.03
 shader_parameter/base_intensity = 0.2

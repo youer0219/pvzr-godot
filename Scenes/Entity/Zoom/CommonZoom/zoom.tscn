@@ -36,7 +36,7 @@ height = 26.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mx0bi"]
 radius = 4.0
 
-[node name="Zoom" type="CharacterBody2D"]
+[node name="Zoom" type="CharacterBody2D" groups=["Zoom"]]
 collision_layer = 16
 script = ExtResource("1_q660q")
 
