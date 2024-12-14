@@ -16,6 +16,6 @@ func under_damage_effect_apply():
 	#move_and_slide()
 	# 模拟击退效果
 	# TODO:还行。但也存在优化空间。
-	position.x -= 8
+	position.x -= 6
 	position.y -= 1
 	velocity.x *= 0.05

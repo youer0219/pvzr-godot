@@ -484,8 +484,8 @@ shape = SubResource("RectangleShape2D_tg81q")
 [node name="Image" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_sy4em")
-animation = &"night"
-autoplay = "night"
+animation = &"day"
+autoplay = "day"
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_r8pjf")
