@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://2qpfoihb34em"]
+[gd_scene load_steps=52 format=4 uid="uid://2qpfoihb34em"]
 
 [ext_resource type="PackedScene" uid="uid://bq20xiahi11xh" path="res://Scenes/Map/TestMap/背景地图.tscn" id="1_2al3t"]
 [ext_resource type="PackedScene" uid="uid://cy3xilxuhhnw0" path="res://Scenes/Map/TestMap/内层地图.tscn" id="1_f0sft"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://ceow8xlktq6yv" path="res://Scenes/Entity/Bullet/CatnipBullet/catnip_bullet.tscn" id="19_miecf"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="20_7n4fl"]
 [ext_resource type="Shader" path="res://Common/Shader/雨和雪.gdshader" id="22_byryf"]
+[ext_resource type="PackedScene" uid="uid://b557ag1bhu4hw" path="res://Scenes/Entity/Plant/Catnip/catnip.tscn" id="25_wacfp"]
 [ext_resource type="Script" path="res://Scenes/UI/debug/get_card_button.gd" id="30_2217t"]
 [ext_resource type="PackedScene" uid="uid://cj8tchd3wjc37" path="res://Scenes/UI/slot.tscn" id="30_u1rhd"]
 
@@ -570,7 +571,7 @@ script = ExtResource("1_y4jx2")
 
 [node name="BackGroundManager" type="Node2D" parent="."]
 script = ExtResource("2_ol673")
-sky_state = 2
+sky_state = 3
 
 [node name="Background" type="ParallaxBackground" parent="BackGroundManager"]
 layer = -20
@@ -674,6 +675,9 @@ position = Vector2(-233, 138)
 
 [node name="Starfruit" parent="Entities/Plants" instance=ExtResource("17_yjeyn")]
 position = Vector2(87, 103)
+
+[node name="Catnip" parent="Entities/Plants" instance=ExtResource("25_wacfp")]
+position = Vector2(-279, 141)
 
 [node name="Zooms" type="Node2D" parent="Entities"]
 

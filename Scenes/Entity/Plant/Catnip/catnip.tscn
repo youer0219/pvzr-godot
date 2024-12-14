@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b557ag1bhu4hw"]
+
+[ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_wxi82"]
+[ext_resource type="Script" path="res://Scenes/Entity/Plant/Catnip/catnip.gd" id="2_1uav6"]
+[ext_resource type="PackedScene" uid="uid://dep555bcml6cr" path="res://Scenes/Entity/Components/CatnipAttackComponent/catnip_attack_component.tscn" id="2_5t4nd"]
+[ext_resource type="Texture2D" uid="uid://cq7ajugfoui1g" path="res://Scenes/Entity/Plant/Catnip/香蒲/香蒲.png" id="3_2yfyf"]
+
+[node name="Catnip" instance=ExtResource("1_wxi82")]
+script = ExtResource("2_1uav6")
+
+[node name="CatnipAttackComponent" parent="." index="1" instance=ExtResource("2_5t4nd")]
+position = Vector2(-3, 2)
+scale = Vector2(0.75, 0.75)
+attack_gap_time = 0.75
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_2yfyf")

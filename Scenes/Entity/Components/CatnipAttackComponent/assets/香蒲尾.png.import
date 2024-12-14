@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cml667jpbilum"
-path="res://.godot/imported/香蒲尾.png-07035dc85db76e418e599d47e868185d.ctex"
+path="res://.godot/imported/香蒲尾.png-10eb0de05e93b657f03c144a9e9af768.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/实体/植物/香蒲/香蒲尾.png"
-dest_files=["res://.godot/imported/香蒲尾.png-07035dc85db76e418e599d47e868185d.ctex"]
+source_file="res://Scenes/Entity/Components/CatnipAttackComponent/assets/香蒲尾.png"
+dest_files=["res://.godot/imported/香蒲尾.png-10eb0de05e93b657f03c144a9e9af768.ctex"]
 
 [params]
 
