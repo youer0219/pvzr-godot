@@ -23,7 +23,7 @@ const CLOUD = preload("res://Common/Shader/Fantasy/cloud.tres")
 
 
 func _ready() -> void:
-	#sky_state = SkyState.values().pick_random()
+	sky_state = SkyState.values().pick_random()
 	#sky_state = SkyState.Nighttime
 	pass
 

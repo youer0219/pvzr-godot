@@ -571,7 +571,7 @@ script = ExtResource("1_y4jx2")
 
 [node name="BackGroundManager" type="Node2D" parent="."]
 script = ExtResource("2_ol673")
-sky_state = 3
+sky_state = 1
 
 [node name="Background" type="ParallaxBackground" parent="BackGroundManager"]
 layer = -20
@@ -611,6 +611,7 @@ is_raining = true
 [node name="LightningCurtain" parent="BackGroundManager" instance=ExtResource("13_ce573")]
 layer = 10
 visible = false
+is_runing = true
 
 [node name="MaskColor" parent="BackGroundManager/LightningCurtain" index="0"]
 mouse_filter = 2
