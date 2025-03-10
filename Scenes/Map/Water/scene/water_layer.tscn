@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhdgkxhyss35t"]
 
 [ext_resource type="PackedScene" uid="uid://h17utawmy0c0" path="res://Scenes/Map/Water/scene/anima_water.tscn" id="1_p6cy8"]
-[ext_resource type="Script" path="res://Scenes/Map/Water/scene/water_layer.gd" id="2_q6bvd"]
+[ext_resource type="Script" uid="uid://teidhvmf861x" path="res://Scenes/Map/Water/scene/water_layer.gd" id="2_q6bvd"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yj8bx"]
 scenes/1/scene = ExtResource("1_p6cy8")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://he2b26ykwxqa"]
 
-[ext_resource type="Script" path="res://Scenes/Func/CheckArea/check_area_component.gd" id="1_6d223"]
+[ext_resource type="Script" uid="uid://dfnv3po5kmyfc" path="res://Scenes/Func/CheckArea/check_area_component.gd" id="1_6d223"]
 
 [node name="CheckAreaComponent" type="Area2D"]
 collision_layer = 0

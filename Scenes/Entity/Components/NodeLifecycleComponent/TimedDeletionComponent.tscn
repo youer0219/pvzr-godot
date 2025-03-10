@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://2p14cfrkrle4"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Components/NodeLifecycleComponent/timed_deletion_component.gd" id="1_5uwgj"]
+[ext_resource type="Script" uid="uid://4tkaqr2vxris" path="res://Scenes/Entity/Components/NodeLifecycleComponent/timed_deletion_component.gd" id="1_5uwgj"]
 
 [node name="TimedDeletionComponent" type="Timer"]
 script = ExtResource("1_5uwgj")

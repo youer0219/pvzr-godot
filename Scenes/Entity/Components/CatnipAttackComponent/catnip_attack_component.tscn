@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dep555bcml6cr"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Components/CatnipAttackComponent/catnip_attack_component.gd" id="1_c3si4"]
+[ext_resource type="Script" uid="uid://qhcwwp1r00so" path="res://Scenes/Entity/Components/CatnipAttackComponent/catnip_attack_component.gd" id="1_c3si4"]
 [ext_resource type="Texture2D" uid="uid://cml667jpbilum" path="res://Scenes/Entity/Components/CatnipAttackComponent/assets/香蒲尾.png" id="2_05to7"]
 [ext_resource type="PackedScene" uid="uid://duonhdt2h2x22" path="res://Scenes/Func/Fire/FireBulletComponent/FireBulletComponent.tscn" id="3_of0qq"]
 [ext_resource type="PackedScene" uid="uid://ceow8xlktq6yv" path="res://Scenes/Entity/Bullet/CatnipBullet/catnip_bullet.tscn" id="4_ute2e"]

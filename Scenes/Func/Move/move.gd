@@ -147,8 +147,6 @@ func climb_ladder(delta:float):
 	if clamp_jump_timer.time_left == 0:
 		char_velocity.y = -clamp_velocity
 		clamp_jump_timer.start(clamp_gap_time)
-	else:
-		char_velocity.y += delta * length_down_speed
 
 func big_jump(delta:float):
 	char_velocity.y = -jump_velocity
@@ -257,11 +255,7 @@ func get_move_factor():
 	return move_factor
 
 func is_meet_wall()->bool:
-	if wall_right_down_check.is_colliding() or wall_right_up_check.is_colliding():
-		return true
-	if wall_left_down_check.is_colliding() or wall_left_up_check.is_colliding():
-		return true
-	return false
+	return char_body.is_on_wall()
 
 func is_in_water()->bool:
 	return water_check.is_colliding()
@@ -270,7 +264,7 @@ func is_just_in_water()->bool:
 	return !top_water and is_in_water()
 
 func is_in_air_without_clamp_and_water()->bool:
-	return !is_on_floor() and !is_clamping and !is_in_water()
+	return !is_on_floor() and !is_in_water()
 
 func is_on_floor()->bool:
 	return char_body.is_on_floor()

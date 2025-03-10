@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cwe1uryq8vi2q"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Bullet/bullet.gd" id="1_lh8mi"]
+[ext_resource type="Script" uid="uid://dmlcd3k1qq7r3" path="res://Scenes/Entity/Bullet/bullet.gd" id="1_lh8mi"]
 [ext_resource type="Texture2D" uid="uid://b8rqh5qnsxobm" path="res://assets/实体/植物/豌豆家族/豌豆.png" id="1_uxvyc"]
 [ext_resource type="PackedScene" uid="uid://ddoesw45kq0gc" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/Hitbox.tscn" id="4_ay0dj"]
 [ext_resource type="PackedScene" uid="uid://b0q1gs4fua20m" path="res://Scenes/Entity/Components/ParticleComponent/pixel_particle_emit_component.tscn" id="5_3rcj5"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cc1q7bx6itmg6"]
 
-[ext_resource type="Script" path="res://Scenes/Build/GridSystem/grid_system.gd" id="1_y54p7"]
+[ext_resource type="Script" uid="uid://ong6caxsbng1" path="res://Scenes/Build/GridSystem/grid_system.gd" id="1_y54p7"]
 [ext_resource type="PackedScene" uid="uid://3ddlvfk8j20o" path="res://Scenes/Build/GridSystem/Grids/base_grid.tscn" id="2_jcflp"]
 
 [node name="GridSystem" type="Node2D"]

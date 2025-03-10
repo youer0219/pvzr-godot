@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://3ddlvfk8j20o"]
 
 [ext_resource type="Texture2D" uid="uid://d3ujkltb5wgyd" path="res://Scenes/Build/GridSystem/Grids/assets/不适宜种植.png" id="1_iw012"]
-[ext_resource type="Script" path="res://Scenes/Build/GridSystem/Grids/base_grid.gd" id="1_tsmn6"]
+[ext_resource type="Script" uid="uid://b5o110s6iwh4u" path="res://Scenes/Build/GridSystem/Grids/base_grid.gd" id="1_tsmn6"]
 
 [sub_resource type="Animation" id="Animation_q73tc"]
 length = 0.001
@@ -199,9 +199,9 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yajyr"]
 _data = {
-"RESET": SubResource("Animation_q73tc"),
-"fade": SubResource("Animation_mt2s1"),
-"highlight": SubResource("Animation_jyfyd")
+&"RESET": SubResource("Animation_q73tc"),
+&"fade": SubResource("Animation_mt2s1"),
+&"highlight": SubResource("Animation_jyfyd")
 }
 
 [node name="BaseGird" type="Node2D"]

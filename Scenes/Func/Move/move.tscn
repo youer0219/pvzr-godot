@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bb6kp00inaup1"]
 
-[ext_resource type="Script" path="res://Scenes/Func/Move/move.gd" id="1_7itvk"]
-[ext_resource type="Script" path="res://Scenes/Func/Move/move_control/move_control.gd" id="2_ya3rg"]
-[ext_resource type="Script" path="res://Scenes/Func/PathFinder/EntityPathFinder/entity_path_finder.gd" id="3_3nysb"]
+[ext_resource type="Script" uid="uid://cdy4ntxtfxjt8" path="res://Scenes/Func/Move/move.gd" id="1_7itvk"]
+[ext_resource type="Script" uid="uid://dvtpd8s5vo0qh" path="res://Scenes/Func/Move/move_control/move_control.gd" id="2_ya3rg"]
+[ext_resource type="Script" uid="uid://chu5sr47853g6" path="res://Scenes/Func/PathFinder/EntityPathFinder/entity_path_finder.gd" id="3_3nysb"]
 
 [node name="Move" type="Node2D"]
 script = ExtResource("1_7itvk")

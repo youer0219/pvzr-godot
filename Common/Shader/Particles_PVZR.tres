@@ -453,5 +453,5 @@ shader_parameter/gravity = Vector3(0, 120, 0)
 shader_parameter/is_collision_stop = false
 shader_parameter/collision_friction = 1.0
 shader_parameter/collision_bounce = 0.0
-shader_parameter/is_custom_colors = true
 shader_parameter/color_source_texture = ExtResource("1_644jd")
+shader_parameter/is_custom_colors = true

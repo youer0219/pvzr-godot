@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://1ohjj3upri0k"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/plant.gd" id="1_o0cp2"]
+[ext_resource type="Script" uid="uid://csooa2aajwj00" path="res://Scenes/Entity/Plant/plant.gd" id="1_o0cp2"]
 [ext_resource type="PackedScene" uid="uid://x8xxtpm5bi0q" path="res://Scenes/Entity/Components/AttackComponent/CollisionComponent/hurtbox.tscn" id="4_o0mi1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjc8g"]

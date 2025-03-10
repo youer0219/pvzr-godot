@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dp0bhbgw2i86b"]
 
-[ext_resource type="Script" path="res://Scenes/Func/Move/CharMove/char_move.gd" id="1_y1b2g"]
+[ext_resource type="Script" uid="uid://bhu8ohw74mgif" path="res://Scenes/Func/Move/CharMove/char_move.gd" id="1_y1b2g"]
 
 [node name="CharMove" type="Node2D"]
 script = ExtResource("1_y1b2g")

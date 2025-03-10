@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0q1gs4fua20m"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Components/ParticleComponent/pixel_particle_emit_component.gd" id="1_04fao"]
+[ext_resource type="Script" uid="uid://d3pe2n64vfylc" path="res://Scenes/Entity/Components/ParticleComponent/pixel_particle_emit_component.gd" id="1_04fao"]
 
 [node name="PixelParticleEmitComponent" type="Node2D"]
 script = ExtResource("1_04fao")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dc3sen65h6kuw"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/explosive_component.gd" id="1_0xwxl"]
+[ext_resource type="Script" uid="uid://bgrql124at04f" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/explosive_component.gd" id="1_0xwxl"]
 [ext_resource type="PackedScene" uid="uid://b42fs28jqysrp" path="res://Scenes/Entity/Components/AttackComponent/ExplosiveComponent/effects/PotatoMineEffect.tscn" id="2_bk41m"]
 
 [node name="ExplosiveComponent" type="Node2D"]

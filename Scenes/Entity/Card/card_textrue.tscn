@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcmslx0hxv7vc"]
 
 [ext_resource type="Texture2D" uid="uid://bxab51cqxgt3h" path="res://Scenes/Entity/Card/cards/assets/30.jpg" id="1_cbchk"]
-[ext_resource type="Script" path="res://Scenes/Entity/Card/card_textrue.gd" id="2_8alt4"]
+[ext_resource type="Script" uid="uid://bidtbn7khkplb" path="res://Scenes/Entity/Card/card_textrue.gd" id="2_8alt4"]
 [ext_resource type="PackedScene" uid="uid://bn26v8l6qvyjw" path="res://Scenes/Entity/Plant/Shooter/1437/starfruit.tscn" id="3_fvl3c"]
 
 [node name="CardTextrue" type="Sprite2D"]

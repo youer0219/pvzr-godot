@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bg85hnqhyeg8w"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Plant/pot/pot.gd" id="1_e74k7"]
+[ext_resource type="Script" uid="uid://bjlkw4c8682ua" path="res://Scenes/Entity/Plant/pot/pot.gd" id="1_e74k7"]
 [ext_resource type="PackedScene" uid="uid://1ohjj3upri0k" path="res://Scenes/Entity/Plant/Plant.tscn" id="1_ufloj"]
 [ext_resource type="PackedScene" uid="uid://cfeswouo02xfa" path="res://Scenes/Entity/Components/SpriteComponent/VisualSpriteComponent.tscn" id="2_ijhwi"]
-[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="3_c3m3e"]
+[ext_resource type="Shader" uid="uid://c7s3vk8011tbt" path="res://Common/Shader/visual.gdshader" id="3_c3m3e"]
 [ext_resource type="Texture2D" uid="uid://nh2c0gewgp5a" path="res://Scenes/Entity/Plant/pot/assets/花盆块.png" id="4_v30i0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28taf"]

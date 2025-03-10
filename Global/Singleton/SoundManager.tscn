@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgbv8og1hps3d"]
 
-[ext_resource type="Script" path="res://Global/Singleton/sound_manager.gd" id="1_liira"]
+[ext_resource type="Script" uid="uid://c55o16qggghia" path="res://Global/Singleton/sound_manager.gd" id="1_liira"]
 [ext_resource type="AudioStream" uid="uid://b6od3ayecxqp1" path="res://assets/声音/音乐/雨夜.mp3" id="2_0l56s"]
 
 [node name="SoundManager" type="Node"]

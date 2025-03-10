@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://duonhdt2h2x22"]
 
-[ext_resource type="Script" path="res://Scenes/Func/Fire/FireBulletComponent/fire_bullet_component.gd" id="1_wkloq"]
+[ext_resource type="Script" uid="uid://c5fsmecc7w72p" path="res://Scenes/Func/Fire/FireBulletComponent/fire_bullet_component.gd" id="1_wkloq"]
 [ext_resource type="PackedScene" uid="uid://cw14rd4ocfgwj" path="res://Scenes/Entity/Bullet/pea/pea.tscn" id="2_eva2e"]
 
 [node name="FireBulletComponent" type="Marker2D"]

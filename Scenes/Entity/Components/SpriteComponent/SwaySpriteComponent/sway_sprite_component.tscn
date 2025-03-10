@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://domms2uncg2b2"]
 
-[ext_resource type="Script" path="res://Scenes/Entity/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.gd" id="1_6p80i"]
-[ext_resource type="Shader" path="res://Common/Shader/visual.gdshader" id="1_bajp4"]
+[ext_resource type="Script" uid="uid://baairrr2od82s" path="res://Scenes/Entity/Components/SpriteComponent/SwaySpriteComponent/sway_sprite_component.gd" id="1_6p80i"]
+[ext_resource type="Shader" uid="uid://c7s3vk8011tbt" path="res://Common/Shader/visual.gdshader" id="1_bajp4"]
 [ext_resource type="Texture2D" uid="uid://da4ilf3ys83q5" path="res://Scenes/Entity/Components/FlowerHeadComponent/assets/向日葵.png" id="2_obc4e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lwvat"]

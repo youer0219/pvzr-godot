@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ceow8xlktq6yv"]
 
 [ext_resource type="PackedScene" uid="uid://cwe1uryq8vi2q" path="res://Scenes/Entity/Bullet/bullet.tscn" id="1_ikto0"]
-[ext_resource type="Script" path="res://Scenes/Entity/Bullet/CatnipBullet/catnip_bullet.gd" id="2_cim8a"]
+[ext_resource type="Script" uid="uid://ql6k08rlgx6h" path="res://Scenes/Entity/Bullet/CatnipBullet/catnip_bullet.gd" id="2_cim8a"]
 [ext_resource type="Texture2D" uid="uid://d1v0rfxmhfyci" path="res://Scenes/Entity/Bullet/CatnipBullet/尖刺.png" id="3_5oeg8"]
 [ext_resource type="PackedScene" uid="uid://c5271470p4qln" path="res://Scenes/Func/Move/BulletMove/BulletTrackingMove/bullet_tracking_move.tscn" id="3_w115a"]
 

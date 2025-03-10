@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dcihuvq2hlh0p"]
 
-[ext_resource type="Script" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.gd" id="1_1didt"]
+[ext_resource type="Script" uid="uid://d02mytxibqnrq" path="res://Scenes/BackGroud/LightningCurtain/lightning_curtain.gd" id="1_1didt"]
 
 [node name="LightningCurtain" type="CanvasLayer"]
 script = ExtResource("1_1didt")

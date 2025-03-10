@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dbv7yl18pjb60"]
 
 [ext_resource type="TileSet" uid="uid://bw31yf68r6w6g" path="res://Scenes/Map/Ladder/ladder_layer.tres" id="1_0va8l"]
-[ext_resource type="Script" path="res://Scenes/Map/Ladder/ladder_layer.gd" id="2_ruqp2"]
+[ext_resource type="Script" uid="uid://cqxissqdy0wta" path="res://Scenes/Map/Ladder/ladder_layer.gd" id="2_ruqp2"]
 
 [node name="LadderLayer" type="TileMapLayer"]
 tile_set = ExtResource("1_0va8l")
